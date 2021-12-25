@@ -6,11 +6,11 @@ import java.util.Map;
 public class EquipamentoLNFacade implements IEquipamentoLN {
 
     //Map<codEquipamento, Equipamento>
-    Map<String, Equipamento> andamento;
-    Map<String, Equipamento> abandonados;
-    Map<String, Equipamento> porPagar;
-    Map<String, Equipamento> pagos;
-    Map<String, Equipamento> recusados;
+    private Map<String, Equipamento> andamento;
+    private Map<String, Equipamento> abandonados;
+    private Map<String, Equipamento> porPagar;
+    private Map<String, Equipamento> pagos;
+    private Map<String, Equipamento> recusados;
 
 
     //List<codEquipamento> getEquipamentosDoCliente(String nif);
