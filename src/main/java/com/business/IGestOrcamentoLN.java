@@ -3,7 +3,7 @@ package main.java.com.business;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface IGestOrcamento {
+public interface IGestOrcamentoLN {
     public List<String> getOrcamentosDoTecnico(String codTecnico);
     public List<String> getOrcamentos();
     public Orcamento getOrcamento(String codOrcamento);

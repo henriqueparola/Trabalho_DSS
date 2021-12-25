@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-public class GestOrcamentoFacade {
+public class GestOrcamentoLNFacade implements IGestOrcamentoLN {
 
     //Map<codOrcamento, Orcamento>
     private Map<String, Orcamento> andamento;
