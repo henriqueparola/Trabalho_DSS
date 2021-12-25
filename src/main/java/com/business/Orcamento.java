@@ -1,4 +1,7 @@
 package main.java.com.business;
 
-public class Orcamento {
+public abstract class Orcamento {
+    private String codTecnico;
+    private String codCliente;
+    private String codEquipamento;
 }
