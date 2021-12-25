@@ -3,8 +3,14 @@ package main.java.com.business;
 import main.java.com.business.Excecoes.FuncionarioNaoValidoException;
 
 import java.util.List;
+import java.util.Map;
 
 public class FuncionarioLNFacade implements IFuncionarioLN {
+
+    //Map<codFuncionario, Funcionario>
+    private Map<String, Funcionario> funcionarios;
+
+
     //public List<codFunc> getTecnicos();
     public List<String> getTecnicos() {
         //TODO getTecnicos
