@@ -55,14 +55,8 @@
                   </SplitMenuButton>
                </left>
             </BorderPane>
-            <TableView prefHeight="233.0" prefWidth="550.0">
+            <TableView fx:id="table" prefHeight="233.0" prefWidth="550.0">
               <columns>
-                <TableColumn prefWidth="72.66666412353516" text="Codigo do Tecnico" />
-                <TableColumn prefWidth="107.33334350585938" text="Codigo do Cliente" />
-                  <TableColumn prefWidth="87.0" text="Codigo do Equipamento" />
-                  <TableColumn minWidth="0.0" prefWidth="135.0" text="Prazo" />
-                  <TableColumn prefWidth="66.0" text="Preço" />
-                  <TableColumn text="Tipo" />
               </columns>
             </TableView>
          </children>
