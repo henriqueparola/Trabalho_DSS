@@ -1,4 +1,4 @@
-package main.java.com.business;
+package main.java.com.business.SubsistemaFuncionarios;
 
 import main.java.com.business.Excecoes.FuncionarioNaoValidoException;
 

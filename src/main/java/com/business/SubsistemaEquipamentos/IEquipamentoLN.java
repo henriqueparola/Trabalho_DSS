@@ -1,4 +1,4 @@
-package main.java.com.business;
+package main.java.com.business.SubsistemaEquipamentos;
 
 import java.util.List;
 

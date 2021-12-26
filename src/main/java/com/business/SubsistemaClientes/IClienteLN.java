@@ -1,4 +1,4 @@
-package main.java.com.business;
+package main.java.com.business.SubsistemaClientes;
 
 public interface IClienteLN {
     public boolean validarCliente(String nif);

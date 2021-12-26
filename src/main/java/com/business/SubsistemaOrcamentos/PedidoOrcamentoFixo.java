@@ -1,4 +1,4 @@
-package main.java.com.business;
+package main.java.com.business.SubsistemaOrcamentos;
 
 public class PedidoOrcamentoFixo extends PedidoOrcamento {
     private String responsavel;
