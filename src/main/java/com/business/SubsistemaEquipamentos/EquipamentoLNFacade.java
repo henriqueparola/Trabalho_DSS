@@ -29,4 +29,22 @@ public class EquipamentoLNFacade implements IEquipamentoLN {
         //TODO getEquipamento
         return null;
     }
+
+    //public codEquipamento registarEquipamento(String codEquipamento);
+    public String registarEquipamento(String codEquipamento) {
+        //TODO registarEquipamento
+        return null;
+    }
+
+    public void registarEquipamentoPago(String codEquipamento) {
+        //TODO registarEquipamentoPago
+    }
+
+    public void registarEquipamentoPorPagar(String codEquipamento) {
+        //TODO  registarEquipamentoPorPagar
+    }
+    public void registarEquipamentoRecusado(String codEquipamento) {
+        //TODO  registarEquipamentoRecusado
+    }
+
 }

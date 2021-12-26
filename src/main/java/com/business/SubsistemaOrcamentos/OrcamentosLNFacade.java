@@ -1,10 +1,15 @@
-package main.java.com.business;
+package main.java.com.business.SubsistemaOrcamentos;
+
+import main.java.com.business.Orcamento;
+import main.java.com.business.PedidoOrcamento;
+import main.java.com.business.PlanoTrabalho;
+import main.java.com.business.SubsistemaOrcamentos.IOrcamentosLN;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-public class GestOrcamentoLNFacade implements IGestOrcamentoLN {
+public class OrcamentosLNFacade implements IOrcamentosLN {
 
     //Map<codOrcamento, Orcamento>
     private Map<String, Orcamento> andamento;
@@ -38,7 +43,7 @@ public class GestOrcamentoLNFacade implements IGestOrcamentoLN {
         //TODO arquivarOrcamentosSemConfirmacao
     }
     // public codOrcamento registarOrcamento(...);
-    public String registarOrcamento(String nif, String codTecnico, String codPlano, String PedidoOrcamento) {
+    public String registarOrcamentoProgramado(String nif, String codTecnico, String PedidoOrcamento) {
         //TODO  registarOrcamento
         return null;
     }
@@ -59,18 +64,19 @@ public class GestOrcamentoLNFacade implements IGestOrcamentoLN {
         //TODO  registarOrcamentoFixoConcluido
     }
     // public codPlano registarPlanoTrabalho();
+    // TODO Verificar este método
     public String registarPlanoTrabalho() {
         //TODO registarPlanoTrabalho
         return null;
     }
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codPlano) {
+    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo) {
         //TODO  adicionarPasso
     }
     // Tinhamos concordado que os noPasso era uma String certo?
-    public void assinalarPasso(LocalDateTime duracao, double custo, String noPasso, String codPlanoTrabalho) {
+    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamento) {
         //TODO assinalarPasso
     }
-    public PlanoTrabalho getPlanoTrabalho(String codPlanoTrabalho) {
+    public PlanoTrabalho getPlanoTrabalho(String codOrcamento) {
         //TODO getPlanoTrabalho
         return null;
     }
