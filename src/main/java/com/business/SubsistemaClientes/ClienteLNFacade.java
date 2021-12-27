@@ -9,10 +9,11 @@ public class ClienteLNFacade implements IClienteLN {
 
 
     public boolean validarCliente(String nif) {
-        //TODO validarCliente
-        return true;
+        Cliente c = clientes.get(nif);
+        return (c != null);
     }
-    public void registarCliente(String nif, String email, String telemovel) {
-        //TODO registrarCliente
+    public void registarCliente(String nif, String nome, String email, String telemovel) {
+        Cliente c = new Cliente(nif, nome, email, telemovel);
+        clientes.put(nif, c);
     }
 }
