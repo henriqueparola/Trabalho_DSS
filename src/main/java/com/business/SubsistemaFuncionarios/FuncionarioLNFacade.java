@@ -25,7 +25,8 @@ public class FuncionarioLNFacade implements IFuncionarioLN {
         Funcionario f = funcionarios.get(codTecnico);
         if (f == null || !(f instanceof Tecnico)) throw new FuncionarioInvalidoException();
 
-        Tecnico res = (Tecnico) f;
+        Funcionario cloned = f.clone();
+        Tecnico res = (Tecnico) cloned;
         return res;
     }
     //public List<codFunc> getFuncionariosBalcao();
@@ -49,7 +50,8 @@ public class FuncionarioLNFacade implements IFuncionarioLN {
         Funcionario f = funcionarios.get(codFunc);
         if (f == null || !(f instanceof FuncBalcao)) throw new FuncionarioInvalidoException();
 
-        FuncBalcao res = (FuncBalcao) f;
+        Funcionario cloned = f.clone();
+        FuncBalcao res = (FuncBalcao) cloned;
         return res;
     }
 }

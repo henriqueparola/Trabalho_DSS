@@ -7,4 +7,8 @@ public class Tecnico extends Funcionario {
         super.setCodFunc(codFunc);
         super.setNome(nome);
     }
+
+    public Funcionario clone() {
+        return new Tecnico(super.getCodFunc(), super.getNome());
+    }
 }

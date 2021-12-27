@@ -19,4 +19,6 @@ public abstract class Funcionario {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public abstract Funcionario clone();
 }
