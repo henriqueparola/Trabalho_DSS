@@ -1,6 +1,6 @@
-package main.java.com.business.SubsistemaFuncionarios;
+package com.business.SubsistemaFuncionarios;
 
-import main.java.com.business.Excecoes.FuncionarioInvalidoException;
+import com.business.Excecoes.FuncionarioInvalidoException;
 
 import java.util.List;
 

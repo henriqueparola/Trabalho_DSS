@@ -1,4 +1,4 @@
-package main.java.com.business.SubsistemaFuncionarios;
+package com.business.SubsistemaFuncionarios;
 
 public class FuncBalcao extends Funcionario {
     public FuncBalcao(String codFunc, String nome) {

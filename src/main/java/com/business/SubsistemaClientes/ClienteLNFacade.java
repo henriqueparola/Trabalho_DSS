@@ -1,4 +1,4 @@
-package main.java.com.business.SubsistemaClientes;
+package com.business.SubsistemaClientes;
 
 import java.util.Map;
 

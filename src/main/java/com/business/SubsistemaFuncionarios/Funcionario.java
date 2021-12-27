@@ -1,4 +1,4 @@
-package main.java.com.business.SubsistemaFuncionarios;
+package com.business.SubsistemaFuncionarios;
 
 public abstract class Funcionario {
     private String codFunc;

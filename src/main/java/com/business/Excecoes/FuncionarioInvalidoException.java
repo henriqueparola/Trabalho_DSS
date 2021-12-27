@@ -1,4 +1,4 @@
-package main.java.com.business.Excecoes;
+package com.business.Excecoes;
 
 public class FuncionarioInvalidoException extends Exception {
     public FuncionarioInvalidoException() {

@@ -1,4 +1,4 @@
-package main.java.com.business.SubsistemaClientes;
+package com.business.SubsistemaClientes;
 
 public class Cliente {
     private String nif;

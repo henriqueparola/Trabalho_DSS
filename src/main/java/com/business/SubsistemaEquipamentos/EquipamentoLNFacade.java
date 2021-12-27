@@ -1,5 +1,6 @@
-package main.java.com.business.SubsistemaEquipamentos;
+package com.business.SubsistemaEquipamentos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,8 +15,9 @@ public class EquipamentoLNFacade implements IEquipamentoLN {
 
 
     //List<codEquipamento> getEquipamentosDoCliente(String nif);
-    public List<String> getEquipamentosDoCliente(String nif) {
-        //TODO getEquipamentosDoCliente
+    // Provavelmente faz sentido levantar uma exceção
+    public List<String> getEquipamentosDoCliente(String nif){
+        List<String> equipamentos = new ArrayList<>();
         return null;
     }
     public void arquivarEquipamento(String codEquipamento) {

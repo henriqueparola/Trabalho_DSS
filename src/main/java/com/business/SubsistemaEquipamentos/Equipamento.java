@@ -1,4 +1,4 @@
-package main.java.com.business.SubsistemaEquipamentos;
+package com.business.SubsistemaEquipamentos;
 
 public class Equipamento {
     private String codEquipamento;
