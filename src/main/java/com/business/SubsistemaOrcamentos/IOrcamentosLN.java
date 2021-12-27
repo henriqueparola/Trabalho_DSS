@@ -12,7 +12,7 @@ public interface IOrcamentosLN {
     public void arquivarOrcamentoRecusado(String codOrcamento);
     public void arquivarOrcamentosSemConfirmacao();
     // public codOrcamento registarOrcamento(...);
-    public String registarOrcamentoProgramado(String nif, String codTecnico, String PedidoOrcamento);
+    public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento);
     public void registarOrcamentoConcluido(String codOrcamento);
     // Não me lembro do contexto desta função
     // Mas ela não deveria retornar alguma coisa?
@@ -36,6 +36,11 @@ public interface IOrcamentosLN {
     public String getEquipamentoPedido(String codPedidoOrcamento);
     public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento);
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico);
+    //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
+    public String getCodEquipamentoOrcamento(String codOrcamento);
+    public void registarOrcamentoAndamento(String codOrcamento);
+    public void removePedidoOrcamento(String codPedidoOrcamento);
+    public boolean validarPedidoOrcamento(String codPedidoOrcamento);
 
 
 }

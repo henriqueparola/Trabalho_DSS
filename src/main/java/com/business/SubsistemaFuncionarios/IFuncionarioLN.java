@@ -13,4 +13,5 @@ public interface IFuncionarioLN {
     //public List<codPedidoOrcamento>
     public List<String> getDadosEntregaDoFuncionario(String codFuncionario) throws FuncionarioInvalidoException;
     public FuncBalcao getFuncBalcao(String codFunc) throws FuncionarioInvalidoException;
+    public boolean validarTecnico(String codTecnico);
 }

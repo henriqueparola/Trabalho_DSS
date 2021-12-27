@@ -7,6 +7,7 @@ import java.util.Map;
 public class OrcamentosLNFacade implements IOrcamentosLN {
 
     //Map<codOrcamento, Orcamento>
+    private Map<String, Orcamento> porConfirmar;
     private Map<String, Orcamento> andamento;
     private Map<String, Orcamento> porPagar;
     private Map<String, Orcamento> pagos;
@@ -14,6 +15,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
 
     //Map<codPedidoOrcamento, PedidoOrcamento>
     private Map<String, PedidoOrcamento> pedidos;
+    int nextId = 0;
 
 
     public List<String> getOrcamentosDoTecnico(String codTecnico) {
@@ -38,9 +40,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO arquivarOrcamentosSemConfirmacao
     }
     // public codOrcamento registarOrcamento(...);
-    public String registarOrcamentoProgramado(String nif, String codTecnico, String PedidoOrcamento) {
-        //TODO  registarOrcamento
-        return null;
+    public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento) {
+        Orcamento o = new OrcamentoProgramado(codTecnico, nif, codEquipamento);
+        this.porConfirmar.put(o.getCodOrcamento(), o);
+        return o.getCodOrcamento();
     }
     public void registarOrcamentoConcluido(String codOrcamento) {
         //TODO  registarOrcamentoConcluido
@@ -96,5 +99,23 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico) {
         //TODO registarPedidoOrcamentoExpresso
+    }
+
+    //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
+    public String getCodEquipamentoOrcamento(String codOrcamento) {
+        //TODO getCodEquipamentoOrcamento
+        return null;
+    }
+    public void registarOrcamentoAndamento(String codOrcamento) {
+        //TODO registarOrcamentoAndamento
+    }
+    public void removePedidoOrcamento(String codPedidoOrcamento) {
+        //TODO removePedidoOrcamento
+    }
+
+    @Override
+    public boolean validarPedidoOrcamento(String codPedidoOrcamento) {
+        PedidoOrcamento po = this.pedidos.get(codPedidoOrcamento);
+        return (po != null);
     }
 }

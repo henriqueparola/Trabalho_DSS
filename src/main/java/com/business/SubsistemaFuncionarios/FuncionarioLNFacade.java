@@ -54,4 +54,10 @@ public class FuncionarioLNFacade implements IFuncionarioLN {
         FuncBalcao res = (FuncBalcao) cloned;
         return res;
     }
+
+    @Override
+    public boolean validarTecnico(String codTecnico) {
+        Funcionario f = this.funcionarios.get(codTecnico);
+        return (f != null && f instanceof Tecnico);
+    }
 }
