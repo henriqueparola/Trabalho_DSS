@@ -1,5 +1,7 @@
 package com.business.SubsistemaOrcamentos;
 
+import com.business.Excecoes.OrcamentoInvalidoException;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
@@ -67,8 +69,12 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO registarPlanoTrabalho
         return null;
     }
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo) {
-        //TODO  adicionarPasso
+    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo) throws OrcamentoInvalidoException {
+        Orcamento orcamento = this.porConfirmar.get(codOrcamento);
+        if (orcamento instanceof OrcamentoProgramado) {
+            OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
+            //orcamentoP.adicionarPasso(descricao,previsaoTempo, custoPecas, passo);
+        } else throw new OrcamentoInvalidoException();
     }
     // Tinhamos concordado que os noPasso era uma String certo?
     public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamento) {
