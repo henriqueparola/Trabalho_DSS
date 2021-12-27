@@ -1,4 +1,4 @@
-package main.java.com.business.SubsistemaOrcamentos;
+package com.business.SubsistemaOrcamentos;
 
 public abstract class Orcamento {
     private String codTecnico;
