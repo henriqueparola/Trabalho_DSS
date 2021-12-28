@@ -52,9 +52,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
 
         throw new OrcamentoInvalidoException();
     }
-    public void registarPagamento(String codOrcamento) {
-
-        //TODO registarPagamento
+    public void registarPagamento(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = this.porPagar.remove(codOrcamento);
+        if (o == null) throw new OrcamentoInvalidoException();
+        this.pagos.put(o.getCodOrcamento(), o);
     }
     public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException {
         Orcamento o = this.porConfirmar.remove(codOrcamento);
@@ -159,9 +160,9 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
 
     //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
-    public String getCodEquipamentoOrcamento(String codOrcamento) {
-        //TODO getCodEquipamentoOrcamento
-        return null;
+    public String getCodEquipamentoOrcamento(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = getOrcamento(codOrcamento);
+        return o.getCodEquipamento();
     }
     public void registarOrcamentoAndamento(String codOrcamento) {
         //TODO registarOrcamentoAndamento

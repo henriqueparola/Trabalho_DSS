@@ -1,6 +1,7 @@
 package com.business.SubsistemaEquipamentos;
 
 import com.business.Excecoes.EquipamentoInvalidoException;
+import com.business.Excecoes.PedidoOrcamentoInvalidoException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,8 +58,10 @@ public class EquipamentoLNFacade implements IEquipamentoLN {
         return p.getCodEquipamento();
     }
 
-    public void registarEquipamentoPago(String codEquipamento) {
-        //TODO registarEquipamentoPago
+    public void registarEquipamentoPago(String codEquipamento) throws EquipamentoInvalidoException {
+        Equipamento e = this.porPagar.remove(codEquipamento);
+        if (e == null) throw new EquipamentoInvalidoException();
+        this.pagos.put(e.getCodEquipamento(), e);
     }
 
     public void registarEquipamentoPorPagar(String codEquipamento) {
