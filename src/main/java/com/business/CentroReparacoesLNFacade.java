@@ -25,7 +25,6 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public boolean isTecnicoDisponivel() {
         return false;
     }
-
     //returns codOrcamento
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codPedidoOrcamento)
             throws ClienteInvalidoException, FuncionarioInvalidoException, PedidoOrcamentoInvalidoException {
@@ -46,29 +45,23 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
             else throw new PedidoOrcamentoInvalidoException();
         }
     }
-
     @Override
     public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double custoPecas, String codOrcamento, String passo)
             throws OrcamentoInvalidoException {
         orcamentosLN.adicionarPasso(descricao, previsaoTempo, custoPecas, codOrcamento, passo);
     }
-
     @Override
     public void assinalarPasso(LocalDateTime duracao, double custoReal, String passo, String codOrcamento)
             throws OrcamentoInvalidoException, PassoInvalidoException {
         orcamentosLN.assinalarPasso(duracao,custoReal,passo,codOrcamento);
     }
-
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException {
         return orcamentosLN.getPasso(codOrcamento, passo);
     }
-
-
     public List<Passo> getSubPassos(String codOrcamento, String passo)
             throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException {
         return null;
     }
-
     @Override
     public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc) throws ClienteInvalidoException {
         if (!validarCliente(nif)) throw new ClienteInvalidoException();
@@ -77,12 +70,10 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     }
 
     // Clientes
-
     @Override
     public boolean validarCliente(String nif) {
         return clienteLN.validarCliente(nif);
     }
-
     public void registarCliente(String nif, String nome, String email, String telemovel) {
         clienteLN.registarCliente(nif, nome, email, telemovel);
     }
@@ -112,6 +103,13 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     }
     public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException {
         return equipamentoLN.getEquipamento(codEquipamento);
+    }
+
+    private static CentroReparacoesLNFacade single_instance = null;
+    public static CentroReparacoesLNFacade getInstance() {
+        if (single_instance == null)
+            single_instance = new CentroReparacoesLNFacade();
+        return single_instance;
     }
 }
 
