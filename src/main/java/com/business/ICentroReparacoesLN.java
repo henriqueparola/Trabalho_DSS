@@ -19,6 +19,8 @@ public interface ICentroReparacoesLN {
     //public codOrcamento registarOrcamentoProgramado(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codPedidoOrcamento)
         throws ClienteInvalidoException, FuncionarioInvalidoException, PedidoOrcamentoInvalidoException;
+    public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
+            throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
     public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double custoPecas, String codOrcamento, String passo)
         throws OrcamentoInvalidoException;
     public void assinalarPasso(LocalDateTime duracao, double custoReal, String passo, String codOrcamento)

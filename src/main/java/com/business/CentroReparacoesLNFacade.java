@@ -38,7 +38,7 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
 
         if (nifValido && tecnicoValido && pedidoOrcamentoValido) {
         String codEquipamento = orcamentosLN.getEquipamentoPedido(codPedidoOrcamento);
-
+        orcamentosLN.removePedidoOrcamento(codPedidoOrcamento);
         return orcamentosLN.registarOrcamentoProgramado(nif, codTecnico, codEquipamento);
         }
         else {
@@ -200,6 +200,12 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         if (!validarProduto(nomeEquipamento)) throw new ProdutoInvalidoException();
         String codEquipamento = equipamentoLN.registarEquipamento(nif, nomeEquipamento);
         orcamentosLN.registarPedidoOrcamentoExpresso(nif, codEquipamento, codFunc, codTecnico);
+    }
+
+    @Override
+    public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
+            throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException {
+        return orcamentosLN.registarOrcamentoExpresso(nif, produto,codPedidoOrcamento);
     }
 }
 

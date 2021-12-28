@@ -24,7 +24,7 @@ public interface IOrcamentosLN {
     // Mas ela não deveria retornar alguma coisa?
     public void verificarCustoUltrapassado(String codOrcamento);
     // public codOrcamento registarOrcamentoFixo(...);
-    public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
+    public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
     public void registarOrcamentoFixoConcluido(String codOrcamento);
     // public void registarPlanoTrabalho();
     // TODO verificar este método está na interface mais genérica

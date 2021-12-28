@@ -68,7 +68,6 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
     // public codOrcamento registarOrcamento(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento) {
-        //TODO remover do pedido
         Orcamento o = new OrcamentoProgramado(codTecnico, nif, codEquipamento);
         this.porConfirmar.put(o.getCodOrcamento(), o);
         return o.getCodOrcamento();
@@ -83,8 +82,8 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     public void verificarCustoUltrapassado(String codOrcamennto) {
         //TODO  verificarCustoUltrapassado
     }
-    // public codOrcamento registarOrcamentoFixo(...);
-    public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento)
+    // public codOrcamento txo(...);
+    public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
             throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException {
 
         if (!this.precoFixos.containsKey(produto)) throw new ProdutoInvalidoException();
@@ -97,6 +96,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
             double precoFixo = this.precoFixos.get(produto);
             Orcamento o = new OrcamentoFixo(codTecnico, nif, codEquipamento, precoFixo ,produto);
             this.andamento.put(o.getCodOrcamento(), o);
+            this.pedidos.remove(codPedidoOrcamento);
 
             return o.getCodOrcamento();
         } else throw new PedidoOrcamentoInvalidoException();
