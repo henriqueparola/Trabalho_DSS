@@ -1,8 +1,10 @@
 package com.controllers.PedidosDeOrcamento;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -17,6 +19,10 @@ public class PedidosDeOrcamentoController {
         showModal("/view/pedidosDeOrcamento/adicionarPedidoProgramado.fxml","Centro de Reparações");
     }
 
+    @FXML
+    void registarPagamentoForm(ActionEvent actionEvent){
+        showModal("/view/pedidosDeOrcamento/registarPagamento.fxml","Centro de Reparações");
+    }
     private void showModal(String fxmlName,String title){
         try {
             Stage stage = new Stage();
