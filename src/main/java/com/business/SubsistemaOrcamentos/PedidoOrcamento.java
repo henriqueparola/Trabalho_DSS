@@ -1,5 +1,7 @@
 package com.business.SubsistemaOrcamentos;
 
+import com.business.SubsistemaClientes.Cliente;
+
 import java.time.LocalDateTime;
 
 public class PedidoOrcamento {
@@ -34,7 +36,6 @@ public class PedidoOrcamento {
         return codPedidoOrcamento;
     }
 
-
     public LocalDateTime getData() {
         return data;
     }
@@ -47,5 +48,16 @@ public class PedidoOrcamento {
         return codEquipamento;
     }
 
+    public PedidoOrcamento(PedidoOrcamento p) {
+        this.codCliente = p.codCliente;
+        this.codPedidoOrcamento = p.codPedidoOrcamento;
+        this.codEquipamento = p.codEquipamento;
+        this.registoBalcao = p.registoBalcao;
+        this.data = p.data;
+    }
+
+    public PedidoOrcamento clone() {
+        return new PedidoOrcamento(this);
+    }
 }
 
