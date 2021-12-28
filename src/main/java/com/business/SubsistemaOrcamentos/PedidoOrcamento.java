@@ -1,5 +1,7 @@
 package com.business.SubsistemaOrcamentos;
 
+import com.business.Excecoes.PedidoOrcamentoInvalidoException;
+
 import java.time.LocalDateTime;
 
 public class PedidoOrcamento {

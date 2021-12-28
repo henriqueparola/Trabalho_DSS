@@ -1,8 +1,6 @@
 package com.business.SubsistemaOrcamentos;
 
-import com.business.Excecoes.OrcamentoInvalidoException;
-import com.business.Excecoes.PassoInvalidoException;
-import com.business.Excecoes.SemSubPassosException;
+import com.business.Excecoes.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,6 +18,9 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
 
     //Map<codPedidoOrcamento, PedidoOrcamento>
     private Map<String, PedidoOrcamento> pedidos;
+
+    //Map<produto, precoFixo>
+    private Map<String, Double> precoFixos;
     int nextId = 0;
 
 
@@ -62,6 +63,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
     // public codOrcamento registarOrcamento(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento) {
+        //TODO remover do pedido
         Orcamento o = new OrcamentoProgramado(codTecnico, nif, codEquipamento);
         this.porConfirmar.put(o.getCodOrcamento(), o);
         return o.getCodOrcamento();
@@ -75,10 +77,26 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO  verificarCustoUltrapassado
     }
     // public codOrcamento registarOrcamentoFixo(...);
-    public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento) {
-        //TODO  registarOrcamentoFixo
-        return null;
+    public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento)
+            throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException {
+
+        if (!this.precoFixos.containsKey(produto)) throw new ProdutoInvalidoException();
+
+        PedidoOrcamento po = getPedidoOrcamento(codPedidoOrcamento);
+        if (po instanceof PedidoOrcamentoFixo) {
+            PedidoOrcamentoFixo pof = (PedidoOrcamentoFixo) po;
+            String codTecnico = pof.getResponsavel();
+            String codEquipamento = getEquipamentoPedido(codPedidoOrcamento);
+            double precoFixo = this.precoFixos.get(produto);
+            Orcamento o = new OrcamentoFixo(codTecnico, nif, codEquipamento, precoFixo ,produto);
+            this.andamento.put(o.getCodOrcamento(), o);
+
+            return o.getCodOrcamento();
+        } else throw new PedidoOrcamentoInvalidoException();
+
     }
+
+
     public void registarOrcamentoFixoConcluido(String codOrcamento) {
         //TODO  registarOrcamentoFixoConcluido
     }
@@ -122,9 +140,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         return this.pedidos.keySet().stream().collect(Collectors.toList());
     }
     // public codEquipamento getEquipamentoPedido(String codPedidoOrcamento);
-    public String getEquipamentoPedido(String codPedidoOrcamento) {
-        //TODO getEquipamentnosPedido
-        return null;
+    public String getEquipamentoPedido(String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException {
+        PedidoOrcamento po = this.pedidos.get(codPedidoOrcamento);
+        if (po == null) throw new PedidoOrcamentoInvalidoException();
+        return po.getCodEquipamento();
     }
     public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento) {
         //TODO getPedidoOrcamento

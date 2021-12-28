@@ -1,8 +1,6 @@
 package com.business.SubsistemaOrcamentos;
 
-import com.business.Excecoes.OrcamentoInvalidoException;
-import com.business.Excecoes.PassoInvalidoException;
-import com.business.Excecoes.SemSubPassosException;
+import com.business.Excecoes.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -22,7 +20,7 @@ public interface IOrcamentosLN {
     // Mas ela não deveria retornar alguma coisa?
     public void verificarCustoUltrapassado(String codOrcamennto);
     // public codOrcamento registarOrcamentoFixo(...);
-    public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento);
+    public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
     public void registarOrcamentoFixoConcluido(String codOrcamento);
     // public void registarPlanoTrabalho();
     // TODO verificar este método está na interface mais genérica
@@ -32,14 +30,14 @@ public interface IOrcamentosLN {
     // Tinhamos concordado que os noPasso era uma String certo?
     public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamente)
             throws OrcamentoInvalidoException, PassoInvalidoException;
-    public PlanoTrabalho getPlanoTrabalho(String codOrcamento);
+    public PlanoTrabalho getPlanoTrabalho(String codOrcamento) throws OrcamentoInvalidoException;
 
     // Métodos relativos aos pedidos de orçamento
     public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc);
     // public List<codPedidoOrcamento> getPedidosOrcamento();
     public List<String> getPedidosOrcamento();
     // public codEquipamento getEquipamentoPedido(String codPedidoOrcamento);
-    public String getEquipamentoPedido(String codPedidoOrcamento);
+    public String getEquipamentoPedido(String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException;
     public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento);
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico);
     //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
