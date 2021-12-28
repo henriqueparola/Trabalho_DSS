@@ -3,6 +3,7 @@ package com.business.SubsistemaEquipamentos;
 import com.business.Excecoes.EquipamentoInvalidoException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,12 +11,11 @@ import java.util.stream.Collectors;
 public class EquipamentoLNFacade implements IEquipamentoLN {
 
     //Map<codEquipamento, Equipamento>
-    private Map<String, Equipamento> andamento;
-    private Map<String, Equipamento> abandonados;
-    private Map<String, Equipamento> porPagar;
-    private Map<String, Equipamento> pagos;
-    private Map<String, Equipamento> recusados;
-
+    private Map<String, Equipamento> andamento = new HashMap<>();
+    private Map<String, Equipamento> abandonados = new HashMap<>();
+    private Map<String, Equipamento> porPagar = new HashMap<>();
+    private Map<String, Equipamento> pagos = new HashMap<>();
+    private Map<String, Equipamento> recusados = new HashMap<>();
 
     //List<codEquipamento> getEquipamentosDoCliente(String nif);
     // Provavelmente faz sentido levantar uma exceção
