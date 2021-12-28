@@ -4,6 +4,7 @@ import com.business.Excecoes.*;
 import com.business.SubsistemaClientes.Cliente;
 import com.business.SubsistemaEquipamentos.Equipamento;
 import com.business.SubsistemaOrcamentos.Passo;
+import com.business.SubsistemaOrcamentos.PedidoOrcamento;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,6 +13,8 @@ public interface ICentroReparacoesLN {
     boolean isTecnicoDisponivel();
 
     /// Orcamentos
+    public List<String> getPedidosOrcamento();
+    public PedidoOrcamento getPedidoOrcamento(String codPedido) throws PedidoOrcamentoInvalidoException;
     //public codOrcamento registarOrcamentoProgramado(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codPedidoOrcamento)
         throws ClienteInvalidoException, FuncionarioInvalidoException, PedidoOrcamentoInvalidoException;
