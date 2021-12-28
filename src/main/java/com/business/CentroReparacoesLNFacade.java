@@ -12,6 +12,7 @@ import com.business.SubsistemaFuncionarios.IFuncionarioLN;
 import com.business.SubsistemaOrcamentos.IOrcamentosLN;
 import com.business.SubsistemaOrcamentos.OrcamentosLNFacade;
 import com.business.SubsistemaOrcamentos.Passo;
+import com.business.SubsistemaOrcamentos.PedidoOrcamento;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -68,6 +69,10 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         String codEquipamento = equipamentoLN.registarEquipamento(nif, nomeEquipamento);
         orcamentosLN.registarPedidoOrcamento(nif, codEquipamento, codFunc);
     }
+    public List<String> getPedidosOrcamento(){
+        return orcamentosLN.getPedidosOrcamento();
+    }
+    public PedidoOrcamento getPedidoOrcamento(String codPedido) throws PedidoOrcamentoInvalidoException {return orcamentosLN.getPedidoOrcamento(codPedido);}
 
     // Clientes
     @Override
