@@ -104,9 +104,12 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
             orcamentoP.assinalarPasso(duracao,custo, passo);
         } else throw new OrcamentoInvalidoException();
     }
-    public PlanoTrabalho getPlanoTrabalho(String codOrcamento) {
-        //TODO getPlanoTrabalho
-        return null;
+    public PlanoTrabalho getPlanoTrabalho(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = getOrcamento(codOrcamento);
+        if (o instanceof OrcamentoProgramado) {
+            OrcamentoProgramado orcamentoP = (OrcamentoProgramado) o;
+            return orcamentoP.getPlano();
+        } else throw new OrcamentoInvalidoException();
     }
 
     // Métodos relativos aos pedidos de orçamento
