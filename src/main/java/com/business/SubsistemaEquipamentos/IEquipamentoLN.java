@@ -14,7 +14,7 @@ public interface IEquipamentoLN {
     public String registarEquipamento(String nif, String nomeEquipamento);
     public void registarEquipamentoPago(String codEquipamento) throws EquipamentoInvalidoException;
     public void registarEquipamentoPorPagar(String codEquipamento);
-    public void registarEquipamentoRecusado(String codEquipamento);
+    public void registarEquipamentoRecusado(String codEquipamento) throws EquipamentoInvalidoException;
     public List<String> getEquipamentosAndamento();
     public List<String> getEquipamentosPago();
     public List<String> getEquipamentosPorPagar();

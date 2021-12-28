@@ -67,8 +67,10 @@ public class EquipamentoLNFacade implements IEquipamentoLN {
     public void registarEquipamentoPorPagar(String codEquipamento) {
         //TODO  registarEquipamentoPorPagar
     }
-    public void registarEquipamentoRecusado(String codEquipamento) {
-        //TODO  registarEquipamentoRecusado
+    public void registarEquipamentoRecusado(String codEquipamento) throws EquipamentoInvalidoException {
+        Equipamento e = this.andamento.get(codEquipamento);
+        if (e == null) throw new EquipamentoInvalidoException();
+        this.recusados.put(e.getCodEquipamento(), e);
     }
 
     @Override

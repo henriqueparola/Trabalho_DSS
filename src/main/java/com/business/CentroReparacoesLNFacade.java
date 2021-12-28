@@ -151,5 +151,9 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         equipamentoLN.registarEquipamentoPago(codEquipamento);
         orcamentosLN.registarPagamento(codOrcamento);
     }
+
+    public void registarEquipamentoRecusado(String codEquipamento) throws EquipamentoInvalidoException {
+        equipamentoLN.registarEquipamentoRecusado(codEquipamento);
+    }
 }
 
