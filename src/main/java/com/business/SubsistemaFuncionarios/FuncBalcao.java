@@ -7,6 +7,6 @@ public class FuncBalcao extends Funcionario {
     }
 
     public Funcionario clone() {
-        return new Tecnico(super.getCodFunc(), super.getNome());
+        return new FuncBalcao(super.getCodFunc(), super.getNome());
     }
 }
