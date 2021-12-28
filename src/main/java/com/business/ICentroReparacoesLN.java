@@ -3,10 +3,12 @@ package com.business;
 import com.business.Excecoes.*;
 import com.business.SubsistemaClientes.Cliente;
 import com.business.SubsistemaEquipamentos.Equipamento;
+import com.business.SubsistemaOrcamentos.Orcamento;
 import com.business.SubsistemaOrcamentos.Passo;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public interface ICentroReparacoesLN {
     boolean isTecnicoDisponivel();
@@ -29,6 +31,14 @@ public interface ICentroReparacoesLN {
     // returns List<codCliente>
     public List<String> getClientes();
     public Cliente getCliente(String codCliente) throws ClienteInvalidoException;
+    public List<String> getOrcamentosPorConfirmar();
+    public List<String> getOrcamentosAndamento();
+    public List<String> getOrcamentosPorPagar();
+    public List<String> getOrcamentosPagos();
+    public List<String> getOrcamentosArquivados();
+    public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException;
+
+
 
     // Equipamentos
     public List<String> getEquipamentosAndamento();
@@ -37,6 +47,7 @@ public interface ICentroReparacoesLN {
     public List<String> getEquipamentosRecusado();
     public List<String> getEquipamentosAbandonado();
     public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException;
+
 
 
 
