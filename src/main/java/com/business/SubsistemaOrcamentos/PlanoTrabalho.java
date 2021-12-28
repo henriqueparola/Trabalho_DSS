@@ -19,7 +19,7 @@ public class PlanoTrabalho {
         Passo passo = this.passos.get(nextPasso);
 
         if (passo == null) {
-            passo = new Passo(previsaoTempo, previsaoCusto, descricao);
+            passo = new Passo(previsaoTempo, previsaoCusto, descricao, nextPasso);
             this.passos.put(nextPasso, passo);
         }
 

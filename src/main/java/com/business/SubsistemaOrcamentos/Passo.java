@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Passo {
+    private int noPasso;
     private boolean estadoConclusao;
     private LocalDateTime previsaoDuracao;
     private LocalDateTime duracao;
@@ -75,12 +76,17 @@ public class Passo {
         this.custoPecas = p.getCustoPecas();
         this.descricao = p.getDescricao();
         this.passos = new HashMap<>();
+        this.noPasso = p.getNoPasso();
     }
 
-    public Passo(LocalDateTime previsaoDuracao, double previsaoCustoPecas, String descricao) {
+    public int getNoPasso() {
+        return this.noPasso;
+    }
+    public Passo(LocalDateTime previsaoDuracao, double previsaoCustoPecas, String descricao, int noPasso) {
         this.previsaoDuracao = previsaoDuracao;
         this.previsaoCustoPecas = previsaoCustoPecas;
         this.descricao = descricao;
+        this.noPasso = noPasso;
     }
 
     public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCustoPecas,
@@ -90,7 +96,7 @@ public class Passo {
         Passo passo = this.passos.get(nextPasso);
 
         if (passo == null) {
-            passo = new Passo(previsaoTempo, previsaoCustoPecas, descricao);
+            passo = new Passo(previsaoTempo, previsaoCustoPecas, descricao, nextPasso);
             this.passos.put(nextPasso, passo);
         }
 
