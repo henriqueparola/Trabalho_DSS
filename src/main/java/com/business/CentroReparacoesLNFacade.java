@@ -9,6 +9,7 @@ import com.business.SubsistemaFuncionarios.FuncionarioLNFacade;
 import com.business.SubsistemaFuncionarios.IFuncionarioLN;
 import com.business.SubsistemaOrcamentos.IOrcamentosLN;
 import com.business.SubsistemaOrcamentos.OrcamentosLNFacade;
+import com.business.SubsistemaOrcamentos.Passo;
 
 import java.time.LocalDateTime;
 
@@ -53,6 +54,10 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public void assinalarPasso(LocalDateTime duracao, double custoReal, String passo, String codOrcamento)
             throws OrcamentoInvalidoException, PassoInvalidoException {
         orcamentosLN.assinalarPasso(duracao,custoReal,passo,codOrcamento);
+    }
+
+    public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException {
+        return orcamentosLN.getPasso(codOrcamento, passo);
     }
 }
 

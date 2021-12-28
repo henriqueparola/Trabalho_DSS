@@ -27,4 +27,8 @@ public class OrcamentoProgramado extends Orcamento {
         this.plano.assinalarPasso(duracao,custo,passo);
     }
 
+    public Passo getPasso(String passo) throws PassoInvalidoException {
+        return this.plano.getPasso(passo);
+    }
+
 }

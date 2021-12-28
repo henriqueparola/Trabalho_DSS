@@ -61,4 +61,12 @@ public class PlanoTrabalho {
         }
 
     }
+
+    public Passo getPasso(String passoUnparsed) throws PassoInvalidoException {
+        List<Integer> parsePassos = parsePasso(passoUnparsed);
+        if (!validarPasso(parsePassos)) throw new PassoInvalidoException();
+        int nextPasso = parsePassos.remove(0);
+        Passo passo = this.passos.get(nextPasso);
+        return passo.getPasso(parsePassos);
+    }
 }

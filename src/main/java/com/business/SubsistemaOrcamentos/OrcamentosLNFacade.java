@@ -130,4 +130,12 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         PedidoOrcamento po = this.pedidos.get(codPedidoOrcamento);
         return (po != null);
     }
+
+    public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException {
+        Orcamento orcamento = getOrcamento(codOrcamento);
+        if (orcamento != null && orcamento instanceof OrcamentoProgramado) {
+            OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
+            return orcamentoP.getPasso(passo);
+        } else throw new OrcamentoInvalidoException();
+    }
 }

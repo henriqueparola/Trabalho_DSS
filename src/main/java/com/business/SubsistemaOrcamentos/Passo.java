@@ -2,6 +2,7 @@ package com.business.SubsistemaOrcamentos;
 
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalField;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,63 @@ public class Passo {
     private String descricao;
     private Map<Integer, Passo> passos;
 
+    public boolean isEstadoConclusao() {
+        return estadoConclusao;
+    }
+
+    public void setEstadoConclusao(boolean estadoConclusao) {
+        this.estadoConclusao = estadoConclusao;
+    }
+
+    public LocalDateTime getPrevisaoDuracao() {
+        return previsaoDuracao;
+    }
+
+    public void setPrevisaoDuracao(LocalDateTime previsaoDuracao) {
+        this.previsaoDuracao = previsaoDuracao;
+    }
+
+    public LocalDateTime getDuracao() {
+        return duracao;
+    }
+
+    public void setDuracao(LocalDateTime duracao) {
+        this.duracao = duracao;
+    }
+
+    public double getPrevisaoCustoPecas() {
+        return previsaoCustoPecas;
+    }
+
+    public void setPrevisaoCustoPecas(double previsaoCustoPecas) {
+        this.previsaoCustoPecas = previsaoCustoPecas;
+    }
+
+    public double getCustoPecas() {
+        return custoPecas;
+    }
+
+    public void setCustoPecas(double custoPecas) {
+        this.custoPecas = custoPecas;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Passo(Passo p) {
+        this.estadoConclusao = p.isEstadoConclusao();
+        this.previsaoDuracao = p.getPrevisaoDuracao();
+        this.duracao = p.getDuracao();
+        this.previsaoCustoPecas = p.getPrevisaoCustoPecas();
+        this.custoPecas = p.getCustoPecas();
+        this.descricao = p.getDescricao();
+        this.passos = new HashMap<>();
+    }
 
     public Passo(LocalDateTime previsaoDuracao, double previsaoCustoPecas, String descricao) {
         this.previsaoDuracao = previsaoDuracao;
@@ -89,5 +147,15 @@ public class Passo {
         }
     }
 
+    public Passo getPasso(List<Integer> parsePassos) {
+        if (parsePassos.size() == 0) return clone();
+        int nextPasso = parsePassos.remove(0);
+        Passo passo = this.passos.get(nextPasso);
+        return passo.getPasso(parsePassos);
+    }
+
+    public Passo clone() {
+        return new Passo(this);
+    }
 
 }
