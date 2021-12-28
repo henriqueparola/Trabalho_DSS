@@ -144,5 +144,10 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException {
         orcamentosLN.arquivarOrcamentoRecusado(codOrcamento);
     }
+
+    @Override
+    public void registarOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException {
+        orcamentosLN.registarOrcamentoAndamento(codOrcamento);
+    }
 }
 
