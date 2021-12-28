@@ -3,13 +3,27 @@ package com.business.SubsistemaFuncionarios;
 import com.business.Excecoes.FuncionarioInvalidoException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FuncionarioLNFacade implements IFuncionarioLN {
 
     //Map<codFuncionario, Funcionario>
-    private Map<String, Funcionario> funcionarios;
+    private Map<String, Funcionario> funcionarios = new HashMap<>();
+
+    public FuncionarioLNFacade() {
+        Funcionario f1 = new Tecnico("1", "Henrique");
+        Funcionario f2 = new FuncBalcao("2", "Vasco");
+        Funcionario f3 = new Tecnico("3", "Catarina");
+        Funcionario f4 = new Tecnico("4", "Jose");
+        Funcionario f5 = new FuncBalcao("5", "Alex");
+        this.funcionarios.put(f1.getCodFunc(), f1);
+        this.funcionarios.put(f2.getCodFunc(), f2);
+        this.funcionarios.put(f3.getCodFunc(), f3);
+        this.funcionarios.put(f4.getCodFunc(), f4);
+        this.funcionarios.put(f5.getCodFunc(), f5);
+    }
 
 
     //public List<codFunc> getTecnicos();

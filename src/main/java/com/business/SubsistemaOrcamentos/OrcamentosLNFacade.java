@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 public class OrcamentosLNFacade implements IOrcamentosLN {
 
     //Map<codOrcamento, Orcamento>
-    private Map<String, Orcamento> porConfirmar;
-    private Map<String, Orcamento> andamento;
-    private Map<String, Orcamento> porPagar;
-    private Map<String, Orcamento> pagos;
-    private Map<String, Orcamento> arquivados;
+    private Map<String, Orcamento> porConfirmar = new HashMap<>();
+    private Map<String, Orcamento> andamento = new HashMap<>();
+    private Map<String, Orcamento> porPagar = new HashMap<>();
+    private Map<String, Orcamento> pagos = new HashMap<>();
+    private Map<String, Orcamento> arquivados = new HashMap<>();
 
     //Map<codPedidoOrcamento, PedidoOrcamento>
     private Map<String, PedidoOrcamento> pedidos = new HashMap<>();
