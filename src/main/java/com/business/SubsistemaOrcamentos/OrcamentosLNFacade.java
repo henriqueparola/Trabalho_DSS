@@ -1,4 +1,7 @@
-package main.java.com.business.SubsistemaOrcamentos;
+package com.business.SubsistemaOrcamentos;
+
+import com.business.Excecoes.OrcamentoInvalidoException;
+import com.business.Excecoes.PassoInvalidoException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -7,6 +10,7 @@ import java.util.Map;
 public class OrcamentosLNFacade implements IOrcamentosLN {
 
     //Map<codOrcamento, Orcamento>
+    private Map<String, Orcamento> porConfirmar;
     private Map<String, Orcamento> andamento;
     private Map<String, Orcamento> porPagar;
     private Map<String, Orcamento> pagos;
@@ -14,6 +18,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
 
     //Map<codPedidoOrcamento, PedidoOrcamento>
     private Map<String, PedidoOrcamento> pedidos;
+    int nextId = 0;
 
 
     public List<String> getOrcamentosDoTecnico(String codTecnico) {
@@ -38,9 +43,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO arquivarOrcamentosSemConfirmacao
     }
     // public codOrcamento registarOrcamento(...);
-    public String registarOrcamentoProgramado(String nif, String codTecnico, String PedidoOrcamento) {
-        //TODO  registarOrcamento
-        return null;
+    public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento) {
+        Orcamento o = new OrcamentoProgramado(codTecnico, nif, codEquipamento);
+        this.porConfirmar.put(o.getCodOrcamento(), o);
+        return o.getCodOrcamento();
     }
     public void registarOrcamentoConcluido(String codOrcamento) {
         //TODO  registarOrcamentoConcluido
@@ -64,12 +70,21 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO registarPlanoTrabalho
         return null;
     }
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo) {
-        //TODO  adicionarPasso
+    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo) throws OrcamentoInvalidoException {
+        Orcamento orcamento = this.porConfirmar.get(codOrcamento);
+        if (orcamento instanceof OrcamentoProgramado) {
+            OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
+            //orcamentoP.adicionarPasso(descricao,previsaoTempo, custoPecas, passo);
+        } else throw new OrcamentoInvalidoException();
     }
     // Tinhamos concordado que os noPasso era uma String certo?
-    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamento) {
-        //TODO assinalarPasso
+    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamento)
+            throws OrcamentoInvalidoException, PassoInvalidoException {
+        Orcamento orcamento = this.andamento.get(codOrcamento);
+        if (orcamento != null && orcamento instanceof OrcamentoProgramado) {
+            OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
+            orcamentoP.assinalarPasso(duracao,custo, passo);
+        } else throw new OrcamentoInvalidoException();
     }
     public PlanoTrabalho getPlanoTrabalho(String codOrcamento) {
         //TODO getPlanoTrabalho
@@ -96,5 +111,31 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico) {
         //TODO registarPedidoOrcamentoExpresso
+    }
+
+    //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
+    public String getCodEquipamentoOrcamento(String codOrcamento) {
+        //TODO getCodEquipamentoOrcamento
+        return null;
+    }
+    public void registarOrcamentoAndamento(String codOrcamento) {
+        //TODO registarOrcamentoAndamento
+    }
+    public void removePedidoOrcamento(String codPedidoOrcamento) {
+        //TODO removePedidoOrcamento
+    }
+
+    @Override
+    public boolean validarPedidoOrcamento(String codPedidoOrcamento) {
+        PedidoOrcamento po = this.pedidos.get(codPedidoOrcamento);
+        return (po != null);
+    }
+
+    public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException {
+        Orcamento orcamento = getOrcamento(codOrcamento);
+        if (orcamento != null && orcamento instanceof OrcamentoProgramado) {
+            OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
+            return orcamentoP.getPasso(passo);
+        } else throw new OrcamentoInvalidoException();
     }
 }

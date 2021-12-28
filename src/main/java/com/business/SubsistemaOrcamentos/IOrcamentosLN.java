@@ -1,4 +1,7 @@
-package main.java.com.business.SubsistemaOrcamentos;
+package com.business.SubsistemaOrcamentos;
+
+import com.business.Excecoes.OrcamentoInvalidoException;
+import com.business.Excecoes.PassoInvalidoException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -12,7 +15,7 @@ public interface IOrcamentosLN {
     public void arquivarOrcamentoRecusado(String codOrcamento);
     public void arquivarOrcamentosSemConfirmacao();
     // public codOrcamento registarOrcamento(...);
-    public String registarOrcamentoProgramado(String nif, String codTecnico, String PedidoOrcamento);
+    public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento);
     public void registarOrcamentoConcluido(String codOrcamento);
     // Não me lembro do contexto desta função
     // Mas ela não deveria retornar alguma coisa?
@@ -23,9 +26,11 @@ public interface IOrcamentosLN {
     // public void registarPlanoTrabalho();
     // TODO verificar este método está na interface mais genérica
     public String registarPlanoTrabalho();
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo);
+    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo)
+            throws OrcamentoInvalidoException;
     // Tinhamos concordado que os noPasso era uma String certo?
-    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamento);
+    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamente)
+            throws OrcamentoInvalidoException, PassoInvalidoException;
     public PlanoTrabalho getPlanoTrabalho(String codOrcamento);
 
     // Métodos relativos aos pedidos de orçamento
@@ -36,6 +41,12 @@ public interface IOrcamentosLN {
     public String getEquipamentoPedido(String codPedidoOrcamento);
     public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento);
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico);
+    //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
+    public String getCodEquipamentoOrcamento(String codOrcamento);
+    public void registarOrcamentoAndamento(String codOrcamento);
+    public void removePedidoOrcamento(String codPedidoOrcamento);
+    public boolean validarPedidoOrcamento(String codPedidoOrcamento);
+    public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException;
 
 
 }

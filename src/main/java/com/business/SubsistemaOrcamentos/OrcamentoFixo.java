@@ -1,4 +1,4 @@
-package main.java.com.business.SubsistemaOrcamentos;
+package com.business.SubsistemaOrcamentos;
 
 public class OrcamentoFixo extends Orcamento {
     private double precoFixo;
