@@ -31,11 +31,27 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO getOrcamentos
         return null;
     }
-    public Orcamento getOrcamento(String codOrcamento) {
-        //TODO getOrcamento
-        return null;
+    public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento r;
+        r = this.porConfirmar.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        r = this.andamento.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        r = this.porPagar.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        r = this.pagos.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        r = this.arquivados.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        throw new OrcamentoInvalidoException();
     }
     public void registarPagamento(String codOrcamento) {
+
         //TODO registarPagamento
     }
     public void arquivarOrcamentoRecusado(String codOrcamento) {
@@ -150,29 +166,19 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         } else throw new OrcamentoInvalidoException();
     }
 
-    public Orcamento getOrcamentoPorConfirmar(String codOrcamento) throws OrcamentoInvalidoException {
-        Orcamento orcamento = this.porConfirmar.get(codOrcamento);
-        if (orcamento == null) throw new OrcamentoInvalidoException();
-        return orcamento.clone();
+    public List<String> getOrcamentosPorConfirmar()  {
+        return this.porConfirmar.keySet().stream().collect(Collectors.toList());
     }
-    public Orcamento getOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException {
-        Orcamento orcamento = this.andamento.get(codOrcamento);
-        if (orcamento == null) throw new OrcamentoInvalidoException();
-        return orcamento.clone();
+    public List<String> getOrcamentosAndamento() {
+        return this.andamento.keySet().stream().collect(Collectors.toList());
     }
-    public Orcamento getOrcamentoPorPagar(String codOrcamento) throws OrcamentoInvalidoException {
-        Orcamento orcamento = this.porPagar.get(codOrcamento);
-        if (orcamento == null) throw new OrcamentoInvalidoException();
-        return orcamento.clone();
+    public List<String> getOrcamentosPorPagar() {
+        return this.pagos.keySet().stream().collect(Collectors.toList());
     }
-    public Orcamento getOrcamentoPagos(String codOrcamento) throws OrcamentoInvalidoException {
-        Orcamento orcamento = this.pagos.get(codOrcamento);
-        if (orcamento == null) throw new OrcamentoInvalidoException();
-        return orcamento.clone();
+    public List<String> getOrcamentosPagos() {
+        return this.pagos.keySet().stream().collect(Collectors.toList());
     }
-    public Orcamento getOrcamentoArquivados(String codOrcamento) throws OrcamentoInvalidoException {
-        Orcamento orcamento = this.arquivados.get(codOrcamento);
-        if (orcamento == null) throw new OrcamentoInvalidoException();
-        return orcamento.clone();
+    public List<String> getOrcamentosArquivados()  {
+        return this.arquivados.keySet().stream().collect(Collectors.toList());
     }
 }
