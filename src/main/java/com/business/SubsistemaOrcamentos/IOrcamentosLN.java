@@ -2,6 +2,7 @@ package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.OrcamentoInvalidoException;
 import com.business.Excecoes.PassoInvalidoException;
+import com.business.Excecoes.PedidoOrcamentoInvalidoException;
 import com.business.Excecoes.SemSubPassosException;
 
 import java.time.LocalDateTime;
@@ -40,7 +41,7 @@ public interface IOrcamentosLN {
     public List<String> getPedidosOrcamento();
     // public codEquipamento getEquipamentoPedido(String codPedidoOrcamento);
     public String getEquipamentoPedido(String codPedidoOrcamento);
-    public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento);
+    public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException;
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico);
     //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
     public String getCodEquipamentoOrcamento(String codOrcamento);
