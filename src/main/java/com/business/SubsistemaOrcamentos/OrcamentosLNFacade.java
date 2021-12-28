@@ -73,8 +73,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         this.porConfirmar.put(o.getCodOrcamento(), o);
         return o.getCodOrcamento();
     }
-    public void registarOrcamentoConcluido(String codOrcamento) {
-        //TODO  registarOrcamentoConcluido
+    public void registarOrcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = this.andamento.remove(codOrcamento);
+        if (o == null) throw new OrcamentoInvalidoException();
+        this.porPagar.put(o.getCodOrcamento(), o);
     }
     // Não me lembro do contexto desta função
     // Mas ela não deveria retornar alguma coisa?

@@ -19,10 +19,10 @@ public interface IOrcamentosLN {
     public void arquivarOrcamentosSemConfirmacao();
     // public codOrcamento registarOrcamento(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento);
-    public void registarOrcamentoConcluido(String codOrcamento);
+    public void registarOrcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException;
     // Não me lembro do contexto desta função
     // Mas ela não deveria retornar alguma coisa?
-    public void verificarCustoUltrapassado(String codOrcamennto);
+    public void verificarCustoUltrapassado(String codOrcamento);
     // public codOrcamento registarOrcamentoFixo(...);
     public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
     public void registarOrcamentoFixoConcluido(String codOrcamento);

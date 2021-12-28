@@ -35,6 +35,7 @@ public interface ICentroReparacoesLN {
     public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException;
     public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException;
     public void registarPagamento(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
+    public void registarOrcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
     public boolean validarCliente(String nif);
     public void registarCliente(String nif, String nome, String email, String telemovel);
     // returns List<codCliente>

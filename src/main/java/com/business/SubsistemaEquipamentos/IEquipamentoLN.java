@@ -13,7 +13,7 @@ public interface IEquipamentoLN {
     //public codEquipamento registarEquipamento(String codEquipamento);
     public String registarEquipamento(String nif, String nomeEquipamento);
     public void registarEquipamentoPago(String codEquipamento) throws EquipamentoInvalidoException;
-    public void registarEquipamentoPorPagar(String codEquipamento);
+    public void registarEquipamentoPorPagar(String codEquipamento) throws EquipamentoInvalidoException;
     public void registarEquipamentoRecusado(String codEquipamento) throws EquipamentoInvalidoException;
     public List<String> getEquipamentosAndamento();
     public List<String> getEquipamentosPago();

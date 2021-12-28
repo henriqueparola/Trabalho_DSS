@@ -64,8 +64,10 @@ public class EquipamentoLNFacade implements IEquipamentoLN {
         this.pagos.put(e.getCodEquipamento(), e);
     }
 
-    public void registarEquipamentoPorPagar(String codEquipamento) {
-        //TODO  registarEquipamentoPorPagar
+    public void registarEquipamentoPorPagar(String codEquipamento) throws EquipamentoInvalidoException {
+        Equipamento e = this.andamento.remove(codEquipamento);
+        if (e == null) throw new EquipamentoInvalidoException();
+        this.porPagar.put(e.getCodEquipamento(), e);
     }
     public void registarEquipamentoRecusado(String codEquipamento) throws EquipamentoInvalidoException {
         Equipamento e = this.andamento.get(codEquipamento);
