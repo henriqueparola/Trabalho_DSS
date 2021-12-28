@@ -18,6 +18,14 @@ public class Passo {
     private double previsaoCustoPecas;
     private double custoPecas;
     private String descricao;
+
+    public Map<Integer, Passo> getPassos() {
+        Map<Integer, Passo> r = new HashMap<>();
+        for(Passo p : this.passos.values())
+            r.put(p.getNoPasso(), p.clone());
+        return r;
+    }
+
     private Map<Integer, Passo> passos;
 
     public boolean isEstadoConclusao() {
@@ -75,7 +83,7 @@ public class Passo {
         this.previsaoCustoPecas = p.getPrevisaoCustoPecas();
         this.custoPecas = p.getCustoPecas();
         this.descricao = p.getDescricao();
-        this.passos = new HashMap<>();
+        this.passos = p.getPassos();
         this.noPasso = p.getNoPasso();
     }
 

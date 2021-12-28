@@ -1,7 +1,6 @@
 package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.*;
-import com.business.SubsistemaClientes.Cliente;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -20,6 +19,9 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
 
     //Map<codPedidoOrcamento, PedidoOrcamento>
     private Map<String, PedidoOrcamento> pedidos = new HashMap<>();
+
+    //Map<produto, precoFixo>
+    private Map<String, Double> precoFixos;
     int nextId = 0;
 
 
@@ -31,11 +33,27 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO getOrcamentos
         return null;
     }
-    public Orcamento getOrcamento(String codOrcamento) {
-        //TODO getOrcamento
-        return null;
+    public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento r;
+        r = this.porConfirmar.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        r = this.andamento.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        r = this.porPagar.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        r = this.pagos.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        r = this.arquivados.get(codOrcamento);
+        if (r != null) return r.clone();
+
+        throw new OrcamentoInvalidoException();
     }
     public void registarPagamento(String codOrcamento) {
+
         //TODO registarPagamento
     }
     public void arquivarOrcamentoRecusado(String codOrcamento) {
@@ -46,6 +64,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
     // public codOrcamento registarOrcamento(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento) {
+        //TODO remover do pedido
         Orcamento o = new OrcamentoProgramado(codTecnico, nif, codEquipamento);
         this.porConfirmar.put(o.getCodOrcamento(), o);
         return o.getCodOrcamento();
@@ -59,10 +78,26 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO  verificarCustoUltrapassado
     }
     // public codOrcamento registarOrcamentoFixo(...);
-    public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento) {
-        //TODO  registarOrcamentoFixo
-        return null;
+    public String registarOrcamentoFixo(String nif, String produto, String codPedidoOrcamento)
+            throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException {
+
+        if (!this.precoFixos.containsKey(produto)) throw new ProdutoInvalidoException();
+
+        PedidoOrcamento po = getPedidoOrcamento(codPedidoOrcamento);
+        if (po instanceof PedidoOrcamentoFixo) {
+            PedidoOrcamentoFixo pof = (PedidoOrcamentoFixo) po;
+            String codTecnico = pof.getResponsavel();
+            String codEquipamento = getEquipamentoPedido(codPedidoOrcamento);
+            double precoFixo = this.precoFixos.get(produto);
+            Orcamento o = new OrcamentoFixo(codTecnico, nif, codEquipamento, precoFixo ,produto);
+            this.andamento.put(o.getCodOrcamento(), o);
+
+            return o.getCodOrcamento();
+        } else throw new PedidoOrcamentoInvalidoException();
+
     }
+
+
     public void registarOrcamentoFixoConcluido(String codOrcamento) {
         //TODO  registarOrcamentoFixoConcluido
     }
@@ -88,9 +123,12 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
             orcamentoP.assinalarPasso(duracao,custo, passo);
         } else throw new OrcamentoInvalidoException();
     }
-    public PlanoTrabalho getPlanoTrabalho(String codOrcamento) {
-        //TODO getPlanoTrabalho
-        return null;
+    public PlanoTrabalho getPlanoTrabalho(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = getOrcamento(codOrcamento);
+        if (o instanceof OrcamentoProgramado) {
+            OrcamentoProgramado orcamentoP = (OrcamentoProgramado) o;
+            return orcamentoP.getPlano();
+        } else throw new OrcamentoInvalidoException();
     }
 
     // Métodos relativos aos pedidos de orçamento
@@ -103,9 +141,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         return this.pedidos.keySet().stream().collect(Collectors.toList());
     }
     // public codEquipamento getEquipamentoPedido(String codPedidoOrcamento);
-    public String getEquipamentoPedido(String codPedidoOrcamento) {
-        //TODO getEquipamentnosPedido
-        return null;
+    public String getEquipamentoPedido(String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException {
+        PedidoOrcamento po = this.pedidos.get(codPedidoOrcamento);
+        if (po == null) throw new PedidoOrcamentoInvalidoException();
+        return po.getCodEquipamento();
     }
     public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException {
         PedidoOrcamento p = this.pedidos.get(codPedidoOrcamento);
@@ -149,5 +188,21 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
             OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
             return orcamentoP.getSubPassos(passo);
         } else throw new OrcamentoInvalidoException();
+    }
+
+    public List<String> getOrcamentosPorConfirmar()  {
+        return this.porConfirmar.keySet().stream().collect(Collectors.toList());
+    }
+    public List<String> getOrcamentosAndamento() {
+        return this.andamento.keySet().stream().collect(Collectors.toList());
+    }
+    public List<String> getOrcamentosPorPagar() {
+        return this.pagos.keySet().stream().collect(Collectors.toList());
+    }
+    public List<String> getOrcamentosPagos() {
+        return this.pagos.keySet().stream().collect(Collectors.toList());
+    }
+    public List<String> getOrcamentosArquivados()  {
+        return this.arquivados.keySet().stream().collect(Collectors.toList());
     }
 }
