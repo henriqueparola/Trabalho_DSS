@@ -2,6 +2,7 @@ package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.OrcamentoInvalidoException;
 import com.business.Excecoes.PassoInvalidoException;
+import com.business.Excecoes.SemSubPassosException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -136,6 +137,15 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         if (orcamento != null && orcamento instanceof OrcamentoProgramado) {
             OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
             return orcamentoP.getPasso(passo);
+        } else throw new OrcamentoInvalidoException();
+    }
+
+    public List<Passo> getSubPassos(String codOrcamento, String passo)
+            throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException {
+        Orcamento orcamento = getOrcamento(codOrcamento);
+        if (orcamento != null && orcamento instanceof OrcamentoProgramado) {
+            OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
+            return orcamentoP.getSubPassos(passo);
         } else throw new OrcamentoInvalidoException();
     }
 }

@@ -5,6 +5,7 @@ import com.business.SubsistemaOrcamentos.Passo;
 import com.sun.istack.internal.localization.LocalizableMessageFactory;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface ICentroReparacoesLN {
     boolean isTecnicoDisponivel();
@@ -15,7 +16,9 @@ public interface ICentroReparacoesLN {
         throws OrcamentoInvalidoException;
     public void assinalarPasso(LocalDateTime duracao, double custoReal, String passo, String codOrcamento)
             throws OrcamentoInvalidoException, PassoInvalidoException;
-
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException;
+    public List<Passo> getSubPassos(String codOrcamento, String passo)
+            throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException;
+
 
 }

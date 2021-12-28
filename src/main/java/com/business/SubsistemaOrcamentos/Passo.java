@@ -1,10 +1,14 @@
 package com.business.SubsistemaOrcamentos;
 
+import com.business.Excecoes.SemSubPassosException;
+
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalField;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Passo {
     private boolean estadoConclusao;
@@ -152,6 +156,17 @@ public class Passo {
         int nextPasso = parsePassos.remove(0);
         Passo passo = this.passos.get(nextPasso);
         return passo.getPasso(parsePassos);
+    }
+
+    public List<Passo> getSubPassos(List<Integer> parsePassos) throws SemSubPassosException {
+        if (parsePassos.size() == 0) {
+            List<Passo> res = this.passos.values().stream().map(Passo::clone).collect(Collectors.toList());
+            if (res.size() == 0) throw new SemSubPassosException();
+            return res;
+        }
+        int nextPasso = parsePassos.remove(0);
+        Passo passo = this.passos.get(nextPasso);
+        return passo.getSubPassos(parsePassos);
     }
 
     public Passo clone() {

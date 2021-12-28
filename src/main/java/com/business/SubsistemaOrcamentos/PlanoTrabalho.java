@@ -1,6 +1,7 @@
 package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.PassoInvalidoException;
+import com.business.Excecoes.SemSubPassosException;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -68,5 +69,13 @@ public class PlanoTrabalho {
         int nextPasso = parsePassos.remove(0);
         Passo passo = this.passos.get(nextPasso);
         return passo.getPasso(parsePassos);
+    }
+
+    public List<Passo> getSubPassos(String passoUnparsed) throws PassoInvalidoException, SemSubPassosException {
+        List<Integer> parsePassos = parsePasso(passoUnparsed);
+        if (!validarPasso(parsePassos)) throw new PassoInvalidoException();
+        int nextPasso = parsePassos.remove(0);
+        Passo passo = this.passos.get(nextPasso);
+        return passo.getSubPassos(parsePassos);
     }
 }

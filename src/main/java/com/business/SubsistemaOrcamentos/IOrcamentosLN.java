@@ -2,6 +2,7 @@ package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.OrcamentoInvalidoException;
 import com.business.Excecoes.PassoInvalidoException;
+import com.business.Excecoes.SemSubPassosException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -47,6 +48,8 @@ public interface IOrcamentosLN {
     public void removePedidoOrcamento(String codPedidoOrcamento);
     public boolean validarPedidoOrcamento(String codPedidoOrcamento);
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException;
+    public List<Passo> getSubPassos(String codOrcamento, String passo)
+            throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException;
 
 
 }
