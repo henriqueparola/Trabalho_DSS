@@ -56,9 +56,12 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
 
         //TODO registarPagamento
     }
-    public void arquivarOrcamentoRecusado(String codOrcamento) {
-        //TODO arquivarOrcamentoRecusado
+    public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = this.porConfirmar.remove(codOrcamento);
+        if (o == null) throw new OrcamentoInvalidoException();
+        this.arquivados.put(codOrcamento, o);
     }
+
     public void arquivarOrcamentosSemConfirmacao() {
         //TODO arquivarOrcamentosSemConfirmacao
     }

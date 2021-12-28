@@ -15,7 +15,7 @@ public interface IOrcamentosLN {
     public List<String> getOrcamentos();
     public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException;
     public void registarPagamento(String codOrcamento);
-    public void arquivarOrcamentoRecusado(String codOrcamento);
+    public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException;
     public void arquivarOrcamentosSemConfirmacao();
     // public codOrcamento registarOrcamento(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codEquipamento);

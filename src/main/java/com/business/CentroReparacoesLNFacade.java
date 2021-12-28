@@ -139,5 +139,10 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
             single_instance = new CentroReparacoesLNFacade();
         return single_instance;
     }
+
+    @Override
+    public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException {
+        orcamentosLN.arquivarOrcamentoRecusado(codOrcamento);
+    }
 }
 
