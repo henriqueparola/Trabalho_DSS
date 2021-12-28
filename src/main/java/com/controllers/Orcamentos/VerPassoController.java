@@ -158,8 +158,8 @@ public class VerPassoController implements Initializable {
         }
     }
 
-    @FXML
-    void inserirPassoAction(ActionEvent e){
+    public void inserirPassoAction(ActionEvent e){
         System.out.println(custoEstimadoInput.getText() + "-" + tempoEstimadoInput.getText() + "-" + descricaoInput.getText());
+        data.add(new Passo(custoEstimadoInput.getText(),tempoEstimadoInput.getText(),descricaoInput.getText()));
     }
 }

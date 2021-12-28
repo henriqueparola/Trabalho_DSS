@@ -44,14 +44,18 @@ public class OrcamentosController implements Initializable {
         showModal("/view/orcamentos/adicionarOrcamentoProgramado.fxml","Centro de Reparações");
     }
 
+    public void arquivarOrcamentoRecusado(ActionEvent actionEvent) {
+        showModal("/view/orcamentos/arquivarOrcamentoRecusado.fxml","Centro de Reparações");
+    }
+
     private void showModal(String fxmlName,String title){
         try {
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.initModality(Modality.APPLICATION_MODAL);
-            FXMLLoader loader = new FXMLLoader(PedidosDeOrcamentoController.class.getResource(fxmlName));
+            FXMLLoader loader = new FXMLLoader(OrcamentosController.class.getResource(fxmlName));
             Scene scene = new Scene(loader.load());
-            scene.getStylesheets().add(String.valueOf(PedidosDeOrcamentoController.class.getResource("/css/style.css")));
+            scene.getStylesheets().add(String.valueOf(OrcamentosController.class.getResource("/css/style.css")));
             stage.setScene(scene);
             stage.show();
         }catch (IOException e){
@@ -76,7 +80,8 @@ public class OrcamentosController implements Initializable {
                     GerirPlanoController c = new GerirPlanoController(
                             this.getTableRow().getItem().codCliente
                     );
-                    //showModalWithController("/view/orcamentos/verPasso.fxml","Centro de Reparações",c);
+
+                    showModalWithController("/view/orcamentos/gerirPlano.fxml","Centro de Reparações",c);
                 });
             }
 
@@ -183,6 +188,21 @@ public class OrcamentosController implements Initializable {
 
         public void setPreco(String preco) {
             this.preco.set(preco);
+        }
+    }
+
+    private void showModalWithController(String fxmlName,String title, GerirPlanoController c){
+        try {
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader loader = new FXMLLoader(OrcamentosController.class.getResource(fxmlName));
+            loader.setController(c);
+            Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(String.valueOf(OrcamentosController.class.getResource("/css/style.css")));
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e){
         }
     }
 }
