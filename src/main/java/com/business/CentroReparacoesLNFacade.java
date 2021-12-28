@@ -10,6 +10,7 @@ import com.business.SubsistemaEquipamentos.IEquipamentoLN;
 import com.business.SubsistemaFuncionarios.FuncionarioLNFacade;
 import com.business.SubsistemaFuncionarios.IFuncionarioLN;
 import com.business.SubsistemaOrcamentos.IOrcamentosLN;
+import com.business.SubsistemaOrcamentos.Orcamento;
 import com.business.SubsistemaOrcamentos.OrcamentosLNFacade;
 import com.business.SubsistemaOrcamentos.Passo;
 import com.business.SubsistemaOrcamentos.PedidoOrcamento;
@@ -26,6 +27,8 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public boolean isTecnicoDisponivel() {
         return false;
     }
+
+    //Orcamentos
     //returns codOrcamento
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codPedidoOrcamento)
             throws ClienteInvalidoException, FuncionarioInvalidoException, PedidoOrcamentoInvalidoException {
@@ -73,6 +76,26 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         return orcamentosLN.getPedidosOrcamento();
     }
     public PedidoOrcamento getPedidoOrcamento(String codPedido) throws PedidoOrcamentoInvalidoException {return orcamentosLN.getPedidoOrcamento(codPedido);}
+
+    public List<String> getOrcamentosPorConfirmar() {
+        return orcamentosLN.getOrcamentosPorConfirmar();
+    }
+    public List<String> getOrcamentosAndamento() {
+        return orcamentosLN.getOrcamentosAndamento();
+    }
+    public List<String> getOrcamentosPorPagar() {
+        return orcamentosLN.getOrcamentosPorPagar();
+    }
+    public List<String> getOrcamentosPagos() {
+        return orcamentosLN.getOrcamentosPagos();
+    }
+    public List<String> getOrcamentosArquivados() {
+        return orcamentosLN.getOrcamentosArquivados();
+    }
+
+    public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException {
+        return orcamentosLN.getOrcamento(codOrcamento);
+    }
 
     // Clientes
     @Override
