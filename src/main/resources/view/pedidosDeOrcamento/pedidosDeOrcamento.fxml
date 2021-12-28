@@ -53,7 +53,7 @@
                   <TableColumn prefWidth="128.0" text="Equipamento" />
               </columns>
             </TableView>
-            <Button mnemonicParsing="false" prefHeight="41.0" prefWidth="204.0" text="Registar Pagamento">
+            <Button onAction="#registarPagamentoForm" mnemonicParsing="false" prefHeight="41.0" prefWidth="204.0" text="Registar Pagamento">
                <VBox.margin>
                   <Insets bottom="10.0" top="10.0" />
                </VBox.margin>
