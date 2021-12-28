@@ -67,8 +67,10 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         return null;
     }
     @Override
-    public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc) throws ClienteInvalidoException {
+    public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc)
+            throws ClienteInvalidoException, FuncionarioInvalidoException {
         if (!validarCliente(nif)) throw new ClienteInvalidoException();
+        if (!validarFunc(codFunc)) throw new FuncionarioInvalidoException();
         String codEquipamento = equipamentoLN.registarEquipamento(nif, nomeEquipamento);
         orcamentosLN.registarPedidoOrcamento(nif, codEquipamento, codFunc);
     }
@@ -102,6 +104,32 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public boolean validarCliente(String nif) {
         return clienteLN.validarCliente(nif);
     }
+
+    private boolean validarFunc(String codFunc) {
+        try {
+            funcionarioLN.getFuncBalcao(codFunc);
+            return true;
+        } catch (FuncionarioInvalidoException e) {
+            return false;
+        }
+    }
+
+    private boolean validarTecnico(String codTecnico) {
+        // Não é a maneira mais bonita para fazer
+        // Se restar tempo fazer refacor e implementar um funcionarioLN.validarTecnico();
+        // A mesma coisa para o validarFunc
+        try {
+            funcionarioLN.getTecnico(codTecnico);
+            return true;
+        } catch (FuncionarioInvalidoException e) {
+            return false;
+        }
+    }
+
+    private boolean validarProduto(String produto) {
+        return orcamentosLN.validaProduto(produto);
+    }
+
     public void registarCliente(String nif, String nome, String email, String telemovel) {
         clienteLN.registarCliente(nif, nome, email, telemovel);
     }
@@ -161,6 +189,17 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         String codEquipamento = orcamentosLN.getCodEquipamentoOrcamento(codOrcamento);
         equipamentoLN.registarEquipamentoPorPagar(codEquipamento);
         orcamentosLN.registarOrcamentoConcluido(codOrcamento);
+    }
+
+    @Override
+    public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico)
+            throws ClienteInvalidoException, FuncionarioInvalidoException, ProdutoInvalidoException {
+        if (!validarCliente(nif)) throw new ClienteInvalidoException();
+        if (!validarFunc(codFunc) || !validarTecnico(codTecnico)) throw new FuncionarioInvalidoException();
+        // nomeEquipamento tem que ser igual ao produto do serviço expresso
+        if (!validarProduto(nomeEquipamento)) throw new ProdutoInvalidoException();
+        String codEquipamento = equipamentoLN.registarEquipamento(nif, nomeEquipamento);
+        orcamentosLN.registarPedidoOrcamentoExpresso(nif, codEquipamento, codFunc, codTecnico);
     }
 }
 

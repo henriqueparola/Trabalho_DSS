@@ -43,7 +43,7 @@ public interface IOrcamentosLN {
     // public codEquipamento getEquipamentoPedido(String codPedidoOrcamento);
     public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException;
     public String getEquipamentoPedido(String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException;
-    public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico);
+    public void registarPedidoOrcamentoExpresso(String nif, String codEquipamento, String codFunc, String codTecnico);
     //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
     public String getCodEquipamentoOrcamento(String codOrcamento) throws OrcamentoInvalidoException;
     public void registarOrcamentoAndamento(String codOrcamento);
@@ -57,5 +57,6 @@ public interface IOrcamentosLN {
     public List<String> getOrcamentosPorPagar();
     public List<String> getOrcamentosPagos();
     public List<String> getOrcamentosArquivados();
+    public boolean validaProduto(String produto);
 
 }

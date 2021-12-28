@@ -26,7 +26,7 @@ public interface ICentroReparacoesLN {
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException;
     public List<Passo> getSubPassos(String codOrcamento, String passo)
             throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException;
-    public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc) throws ClienteInvalidoException;
+    public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc) throws ClienteInvalidoException, FuncionarioInvalidoException;
     public List<String> getOrcamentosPorConfirmar();
     public List<String> getOrcamentosAndamento();
     public List<String> getOrcamentosPorPagar();
@@ -36,6 +36,8 @@ public interface ICentroReparacoesLN {
     public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException;
     public void registarPagamento(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
     public void registarOrcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
+    public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico)
+            throws ClienteInvalidoException, FuncionarioInvalidoException, ProdutoInvalidoException;
     public boolean validarCliente(String nif);
     public void registarCliente(String nif, String nome, String email, String telemovel);
     // returns List<codCliente>

@@ -157,8 +157,9 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         if (p == null) throw new PedidoOrcamentoInvalidoException();
         return p.clone();
     }
-    public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico) {
-        //TODO registarPedidoOrcamentoExpresso
+    public void registarPedidoOrcamentoExpresso(String nif, String codEquipamento, String codFunc, String codTecnico) {
+        PedidoOrcamento pedido = new PedidoOrcamentoFixo(codEquipamento, LocalDateTime.now(), codFunc, nif, codTecnico);
+        this.pedidos.put(pedido.getCodPedidoOrcamento(), pedido);
     }
 
     //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
@@ -210,5 +211,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
     public List<String> getOrcamentosArquivados()  {
         return this.arquivados.keySet().stream().collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean validaProduto(String produto) {
+        return this.precoFixos.containsKey(produto);
     }
 }
