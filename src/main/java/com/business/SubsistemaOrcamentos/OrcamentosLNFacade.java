@@ -1,10 +1,10 @@
 package com.business.SubsistemaOrcamentos;
 
-import com.business.Excecoes.OrcamentoInvalidoException;
-import com.business.Excecoes.PassoInvalidoException;
-import com.business.Excecoes.SemSubPassosException;
+import com.business.Excecoes.*;
+import com.business.SubsistemaClientes.Cliente;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,7 +19,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     private Map<String, Orcamento> arquivados;
 
     //Map<codPedidoOrcamento, PedidoOrcamento>
-    private Map<String, PedidoOrcamento> pedidos;
+    private Map<String, PedidoOrcamento> pedidos = new HashMap<>();
     int nextId = 0;
 
 
@@ -107,9 +107,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         //TODO getEquipamentnosPedido
         return null;
     }
-    public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento) {
-        //TODO getPedidoOrcamento
-        return null;
+    public PedidoOrcamento getPedidoOrcamento(String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException {
+        PedidoOrcamento p = this.pedidos.get(codPedidoOrcamento);
+        if (p == null) throw new PedidoOrcamentoInvalidoException();
+        return p.clone();
     }
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico) {
         //TODO registarPedidoOrcamentoExpresso
