@@ -8,7 +8,6 @@ public abstract class Orcamento {
 
     private static int nextId = 0;
 
-
     public void setCodTecnico(String codTecnico) {
         this.codTecnico = codTecnico;
     }
@@ -47,4 +46,7 @@ public abstract class Orcamento {
     public void setCodOrcamento(String codOrcamento) {
         this.codOrcamento = codOrcamento;
     }
+
+    public abstract Orcamento clone();
+
 }

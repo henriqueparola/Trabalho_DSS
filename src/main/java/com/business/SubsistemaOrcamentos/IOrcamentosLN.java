@@ -51,5 +51,10 @@ public interface IOrcamentosLN {
     public List<Passo> getSubPassos(String codOrcamento, String passo)
             throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException;
 
+    public Orcamento getOrcamentoPorConfirmar(String codOrcamento) throws OrcamentoInvalidoException;
+    public Orcamento getOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException;
+    public Orcamento getOrcamentoPorPagar(String codOrcamento) throws OrcamentoInvalidoException;
+    public Orcamento getOrcamentoPagos(String codOrcamento) throws OrcamentoInvalidoException;
+    public Orcamento getOrcamentoArquivados(String codOrcamento) throws OrcamentoInvalidoException;
 
 }

@@ -149,4 +149,30 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
             return orcamentoP.getSubPassos(passo);
         } else throw new OrcamentoInvalidoException();
     }
+
+    public Orcamento getOrcamentoPorConfirmar(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento orcamento = this.porConfirmar.get(codOrcamento);
+        if (orcamento == null) throw new OrcamentoInvalidoException();
+        return orcamento.clone();
+    }
+    public Orcamento getOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento orcamento = this.andamento.get(codOrcamento);
+        if (orcamento == null) throw new OrcamentoInvalidoException();
+        return orcamento.clone();
+    }
+    public Orcamento getOrcamentoPorPagar(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento orcamento = this.porPagar.get(codOrcamento);
+        if (orcamento == null) throw new OrcamentoInvalidoException();
+        return orcamento.clone();
+    }
+    public Orcamento getOrcamentoPagos(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento orcamento = this.pagos.get(codOrcamento);
+        if (orcamento == null) throw new OrcamentoInvalidoException();
+        return orcamento.clone();
+    }
+    public Orcamento getOrcamentoArquivados(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento orcamento = this.arquivados.get(codOrcamento);
+        if (orcamento == null) throw new OrcamentoInvalidoException();
+        return orcamento.clone();
+    }
 }

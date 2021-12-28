@@ -11,6 +11,13 @@ public class OrcamentoProgramado extends Orcamento {
     private double precoTotal;
     private PlanoTrabalho plano;
 
+    public OrcamentoProgramado(OrcamentoProgramado o) {
+        super.setCodTecnico(o.getCodTecnico());
+        super.setCodCliente(o.getCodCliente());
+        super.setCodEquipamento(o.getCodEquipamento());
+        super.setCodOrcamento(o.getCodOrcamento());
+        this.plano = o.getPlano();
+    }
     public OrcamentoProgramado(String codTecnico, String codCliente, String codEquipamento) {
         super.setCodTecnico(codTecnico);
         super.setCodCliente(codCliente);
@@ -35,6 +42,14 @@ public class OrcamentoProgramado extends Orcamento {
 
     public List<Passo> getSubPassos(String passo) throws PassoInvalidoException, SemSubPassosException {
         return this.plano.getSubPassos(passo);
+    }
+
+    public PlanoTrabalho getPlano() {
+        return this.plano.clone();
+    }
+
+    public Orcamento clone() {
+        return new OrcamentoProgramado(this);
     }
 
 }

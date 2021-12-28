@@ -9,8 +9,18 @@ import java.util.*;
 public class PlanoTrabalho {
     private Map<Integer, Passo> passos;
 
+    public PlanoTrabalho(PlanoTrabalho p) {
+        this.passos = p.getPassos();
+    }
     public PlanoTrabalho() {
         this.passos = new HashMap<>();
+    }
+
+    public Map<Integer, Passo> getPassos() {
+        Map<Integer, Passo> r = new HashMap<>();
+        for (Passo p : this.passos.values())
+            r.put(p.getNoPasso(), p.clone());
+        return r;
     }
 
     public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String passoUnparsed) {
@@ -77,5 +87,9 @@ public class PlanoTrabalho {
         int nextPasso = parsePassos.remove(0);
         Passo passo = this.passos.get(nextPasso);
         return passo.getSubPassos(parsePassos);
+    }
+
+    public PlanoTrabalho clone() {
+        return new PlanoTrabalho(this);
     }
 }
