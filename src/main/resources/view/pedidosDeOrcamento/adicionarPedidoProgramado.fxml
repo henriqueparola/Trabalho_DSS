@@ -9,20 +9,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="247.0" prefWidth="278.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.PedidosDeOrcamento.PedidoDeOrcamentoController">
+<AnchorPane prefHeight="316.0" prefWidth="278.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.PedidosDeOrcamento.PedidoDeOrcamentoController">
    <children>
       <Pane prefHeight="332.0" prefWidth="278.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <TextField fx:id="nifInput" layoutX="7.0" layoutY="83.0" prefHeight="24.0" prefWidth="260.0" />
             <TextField fx:id="equipamentoInput" layoutX="7.0" layoutY="150.0" prefHeight="24.0" prefWidth="260.0" />
-            <Button layoutX="8.0" layoutY="190.0" mnemonicParsing="false" onAction="#addPedidoDeOrcamentoProgramado" prefHeight="44.0" prefWidth="260.0" text="Adicionar" />
+            <Button layoutX="8.0" layoutY="260.0" mnemonicParsing="false" onAction="#addPedidoDeOrcamentoProgramado" prefHeight="44.0" prefWidth="260.0" text="Adicionar" />
             <Label layoutX="8.0" layoutY="53.0" text="NIF" />
-            <Label layoutX="7.0" layoutY="119.0" text="Equipamento" />
+            <Label layoutX="7.0" layoutY="123.0" text="Equipamento" />
             <Text fill="WHITE" layoutX="9.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar Pedido Programado" wrappingWidth="260.0">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
+            <TextField fx:id="registoBalcaoInput" layoutX="9.0" layoutY="219.0" prefHeight="24.0" prefWidth="260.0" />
+            <Label layoutX="9.0" layoutY="194.0" text="Codigo funcionario Balcao" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

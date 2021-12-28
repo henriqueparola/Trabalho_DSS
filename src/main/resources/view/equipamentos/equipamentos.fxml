@@ -28,7 +28,7 @@
                 </Pane>
                 <BorderPane prefHeight="60.0" prefWidth="550.0">
                     <left>
-                        <TextField text="Pesquisar" BorderPane.alignment="CENTER">
+                        <TextField fx:id="codEquipamentoInput" text="" BorderPane.alignment="CENTER">
                             <BorderPane.margin>
                                 <Insets />
                             </BorderPane.margin>
@@ -42,11 +42,11 @@
                     <left>
                         <SplitMenuButton mnemonicParsing="false" prefHeight="24.0" prefWidth="157.0" text="Estado" BorderPane.alignment="CENTER">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Em andamento" />
-                                <MenuItem mnemonicParsing="false" text="Por pagar" />
-                                <MenuItem mnemonicParsing="false" text="Pago" />
-                                <MenuItem mnemonicParsing="false" text="Recusado" />
-                                <MenuItem mnemonicParsing="false" text="Abandonado" />
+                                <MenuItem onAction="#emAndamentoAction" mnemonicParsing="false" text="Em andamento" />
+                                <MenuItem onAction="#porPagarAction" mnemonicParsing="false" text="Por pagar" />
+                                <MenuItem onAction="#pagoAction" mnemonicParsing="false" text="Pago" />
+                                <MenuItem onAction="#recusadoAction" mnemonicParsing="false" text="Recusado" />
+                                <MenuItem onAction="#abandonadoAction" mnemonicParsing="false" text="Abandonado" />
                             </items>
                         </SplitMenuButton>
                     </left>
