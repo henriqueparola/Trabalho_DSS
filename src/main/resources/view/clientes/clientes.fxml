@@ -27,7 +27,7 @@
                 </Pane>
                 <BorderPane prefHeight="74.0" prefWidth="600.0">
                     <left>
-                        <TextField prefHeight="24.0" prefWidth="285.0" text="Pesquisar" BorderPane.alignment="CENTER">
+                        <TextField fx:id="nifInput" prefHeight="24.0" prefWidth="285.0" text="" BorderPane.alignment="CENTER">
                             <BorderPane.margin>
                                 <Insets bottom="10.0" right="10.0" top="10.0" />
                             </BorderPane.margin>
@@ -37,12 +37,8 @@
                   <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="257.0" onAction="#adicionarClienteForm" text="Adicionar cliente" BorderPane.alignment="CENTER" />
                </right>
                 </BorderPane>
-                <TableView prefHeight="291.0" prefWidth="600.0">
+                <TableView fx:id="table" prefHeight="291.0" prefWidth="600.0">
                     <columns>
-                        <TableColumn prefWidth="114.0" text="NIF" />
-                        <TableColumn prefWidth="118.0" text="Nome" />
-                        <TableColumn prefWidth="130.0" text="E-mail" />
-                        <TableColumn prefWidth="189.0" text="Telemovel" />
                     </columns>
                 </TableView>
             </children>

@@ -12,20 +12,20 @@
    <children>
       <Pane layoutY="6.0" prefHeight="413.0" prefWidth="370.0" AnchorPane.bottomAnchor="-19.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="6.0">
          <children>
-            <TextField fx:id="nifInput" layoutX="100.0" layoutY="107.0" />
-            <TextField fx:id="nomeInput" layoutX="100.0" layoutY="170.0" />
-            <Button layoutX="100.0" layoutY="342.0" mnemonicParsing="false" onAction="#addCliente" prefHeight="24.0" prefWidth="171.0" text="Adicionar" />
-            <Label layoutX="100.0" layoutY="77.0" text="NIF" />
-            <Label layoutX="101.0" layoutY="145.0" text="Nome" />
-            <Text fill="WHITE" layoutX="94.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar Cliente" wrappingWidth="183.765625">
+            <TextField fx:id="nifInput" layoutX="20.0" layoutY="107.0" prefHeight="24.0" prefWidth="324.0" />
+            <TextField fx:id="nomeInput" layoutX="20.0" layoutY="170.0" prefHeight="24.0" prefWidth="324.0" />
+            <Button layoutX="23.0" layoutY="351.0" mnemonicParsing="false" onAction="#addCliente" prefHeight="46.0" prefWidth="324.0" text="Adicionar" />
+            <Label layoutX="22.0" layoutY="79.0" text="NIF" />
+            <Label layoutX="21.0" layoutY="145.0" text="Nome" />
+            <Text fill="WHITE" layoutX="43.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adicionar Cliente" wrappingWidth="413.765625">
                <font>
-                  <Font name="System Bold" size="18.0" />
+                  <Font name="System Bold" size="29.0" />
                </font>
             </Text>
-            <TextField fx:id="emailInput" layoutX="100.0" layoutY="235.0" />
-            <Label fx:id="nomeInput1" layoutX="100.0" layoutY="209.0" text="E-mail" />
-            <TextField fx:id="telemovelInput" layoutX="100.0" layoutY="300.0" />
-            <Label fx:id="nomeInput2" layoutX="100.0" layoutY="275.0" text="Telemovel" />
+            <TextField fx:id="emailInput" layoutX="22.0" layoutY="235.0" prefHeight="24.0" prefWidth="324.0" />
+            <Label fx:id="nomeInput1" layoutX="23.0" layoutY="209.0" text="E-mail" />
+            <TextField fx:id="telemovelInput" layoutX="22.0" layoutY="300.0" prefHeight="24.0" prefWidth="324.0" />
+            <Label fx:id="nomeInput2" layoutX="22.0" layoutY="275.0" text="Telemovel" />
          </children>
       </Pane>
    </children>
