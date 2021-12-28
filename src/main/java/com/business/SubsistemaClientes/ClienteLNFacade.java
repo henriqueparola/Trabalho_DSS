@@ -2,6 +2,7 @@ package com.business.SubsistemaClientes;
 
 import com.business.Excecoes.ClienteInvalidoException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,8 +10,7 @@ import java.util.stream.Collectors;
 public class ClienteLNFacade implements IClienteLN {
 
     //Map<codCLiente, Cliente>
-    private Map<String, Cliente> clientes;
-
+    private Map<String, Cliente> clientes = new HashMap<>();
 
     public boolean validarCliente(String nif) {
         Cliente c = clientes.get(nif);
