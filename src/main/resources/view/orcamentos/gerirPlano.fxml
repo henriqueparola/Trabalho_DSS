@@ -27,7 +27,7 @@
                                 <Insets bottom="10.0" top="10.0" />
                             </VBox.margin>
                         </Text>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço Total">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Preço Estimado">
                             <font>
                                 <Font name="System Bold" size="23.0" />
                             </font>
@@ -53,35 +53,24 @@
                         </TableView>
                         <Pane prefHeight="292.0" prefWidth="760.0">
                             <children>
-                                <Text fill="WHITE" layoutX="6.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserir Passo">
+                                <Text fill="WHITE" layoutX="6.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Assinalar Passo">
                                     <font>
                                         <Font name="System Bold" size="29.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="6.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Descriçao">
+                                <Text fill="WHITE" layoutX="6.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Custo real">
                                     <font>
                                         <Font name="System Bold" size="16.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="6.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Custo estimado">
+                                <Text fill="WHITE" layoutX="6.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tempo real">
                                     <font>
                                         <Font name="System Bold" size="16.0" />
                                     </font>
                                 </Text>
-                                <Text fill="WHITE" layoutX="6.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tempo estimado">
-                                    <font>
-                                        <Font name="System Bold" size="16.0" />
-                                    </font>
-                                </Text>
-                                <TextField fx:id="descricaoInput" layoutX="6.0" layoutY="85.0" prefHeight="24.0" prefWidth="210.0" />
-                                <TextField fx:id="custoEstimadoInput" layoutX="8.0" layoutY="148.0" prefHeight="24.0" prefWidth="207.0" />
-                                <TextField fx:id="tempoEstimadoInput" layoutX="7.0" layoutY="211.0" prefHeight="24.0" prefWidth="209.0" />
-                                <Button layoutX="8.0" layoutY="250.0" mnemonicParsing="false" onAction="#inserirPassoAction" prefHeight="32.0" prefWidth="207.0" text="Inserir" />
-                                <Text fill="#9fc7f8b5" layoutX="231.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Valores do custo e tempo estimado, por omissao, serao considerados a soma dos seus sub-passos." wrappingWidth="642.42724609375">
-                                    <font>
-                                        <Font size="10.0" />
-                                    </font>
-                                </Text>
+                                <TextField fx:id="custoRealInput" layoutX="8.0" layoutY="88.0" prefHeight="24.0" prefWidth="207.0" />
+                                <TextField fx:id="tempoRealInput" layoutX="7.0" layoutY="151.0" prefHeight="24.0" prefWidth="209.0" />
+                                <Button layoutX="8.0" layoutY="190.0" mnemonicParsing="false" onAction="#inserirPassoAction" prefHeight="32.0" prefWidth="207.0" text="Inserir" />
                             </children>
                         </Pane>
                     </children>
@@ -90,4 +79,3 @@
         </BorderPane>
     </children>
 </AnchorPane>
-
