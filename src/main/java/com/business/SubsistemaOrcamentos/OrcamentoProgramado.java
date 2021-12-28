@@ -1,5 +1,7 @@
 package com.business.SubsistemaOrcamentos;
 
+import com.business.Excecoes.PassoInvalidoException;
+
 import java.time.LocalDateTime;
 
 public class OrcamentoProgramado extends Orcamento {
@@ -19,6 +21,10 @@ public class OrcamentoProgramado extends Orcamento {
     public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String passo) {
         this.plano.adicionarPasso(descricao, previsaoTempo, previsaoCusto, passo);
         // Possivelmente atualizarDados
+    }
+
+    public void assinalarPasso(LocalDateTime duracao, double custo, String passo) throws PassoInvalidoException {
+        this.plano.assinalarPasso(duracao,custo,passo);
     }
 
 }

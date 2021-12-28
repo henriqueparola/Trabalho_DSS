@@ -1,9 +1,6 @@
 package com.business;
 
-import com.business.Excecoes.ClienteInvalidoException;
-import com.business.Excecoes.FuncionarioInvalidoException;
-import com.business.Excecoes.OrcamentoInvalidoException;
-import com.business.Excecoes.PedidoOrcamentoInvalidoException;
+import com.business.Excecoes.*;
 import com.business.SubsistemaClientes.ClienteLNFacade;
 import com.business.SubsistemaClientes.IClienteLN;
 import com.business.SubsistemaEquipamentos.EquipamentoLNFacade;
@@ -50,6 +47,12 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double custoPecas, String codOrcamento, String passo)
             throws OrcamentoInvalidoException {
         orcamentosLN.adicionarPasso(descricao, previsaoTempo, custoPecas, codOrcamento, passo);
+    }
+
+    @Override
+    public void assinalarPasso(LocalDateTime duracao, double custoReal, String passo, String codOrcamento)
+            throws OrcamentoInvalidoException, PassoInvalidoException {
+        orcamentosLN.assinalarPasso(duracao,custoReal,passo,codOrcamento);
     }
 }
 

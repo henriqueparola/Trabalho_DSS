@@ -1,5 +1,7 @@
 package com.business.SubsistemaOrcamentos;
 
+import com.business.Excecoes.PassoInvalidoException;
+
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -25,6 +27,17 @@ public class PlanoTrabalho {
 
     }
 
+    public void assinalarPasso(LocalDateTime duracao, double custo, String passoUnparsed) throws PassoInvalidoException {
+        List<Integer> parsePassos = parsePasso(passoUnparsed);
+        boolean passoValido = validarPasso(parsePassos);
+        if (passoValido) {
+            int nextPasso = parsePassos.remove(0);
+            Passo passo = this.passos.get(nextPasso);
+            passo.assinalarPasso(duracao,custo, parsePassos);
+        }
+
+    }
+
     private List<Integer> parsePasso(String passo) {
         final String delim = "#";
         String []tokens = passo.split(delim);
@@ -33,5 +46,19 @@ public class PlanoTrabalho {
             parsedPassos.add(Integer.parseInt(token));
 
         return parsedPassos;
+    }
+
+    public boolean validarPasso(List<Integer> parsePassos) {
+        if (parsePassos.size() == 0) return true;
+        int nextPasso = parsePassos.remove(0);
+        Passo passo = this.passos.get(nextPasso);
+        try {
+            if (passo != null)
+                return passo.validarPasso(parsePassos);
+            else return false;
+        } finally {
+            parsePassos.add(0, nextPasso);
+        }
+
     }
 }

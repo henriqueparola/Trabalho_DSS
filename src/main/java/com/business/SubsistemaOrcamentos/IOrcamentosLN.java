@@ -1,6 +1,7 @@
 package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.OrcamentoInvalidoException;
+import com.business.Excecoes.PassoInvalidoException;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,7 +29,8 @@ public interface IOrcamentosLN {
     public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo)
             throws OrcamentoInvalidoException;
     // Tinhamos concordado que os noPasso era uma String certo?
-    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamento);
+    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamente)
+            throws OrcamentoInvalidoException, PassoInvalidoException;
     public PlanoTrabalho getPlanoTrabalho(String codOrcamento);
 
     // Métodos relativos aos pedidos de orçamento

@@ -37,6 +37,26 @@ public class Passo {
 
     }
 
+    public void assinalarPasso(LocalDateTime duracao, double custo, List<Integer> parsePassos) {
+        if (parsePassos.size() == 0) this.estadoConclusao = true;
+        else {
+            int nextPasso = parsePassos.remove(0);
+            Passo passo = this.passos.get(nextPasso);
+            passo.assinalarPasso(duracao, custo, parsePassos);
+            boolean subPassos = verificarSubPassosConcluidos();
+            if (subPassos) this.estadoConclusao = true;
+        }
+    }
+
+    private boolean verificarSubPassosConcluidos() {
+        for (Passo p : this.passos.values()) {
+            if (p.estadoConclusao == false)
+                return false;
+        }
+
+        return true;
+    }
+
     private void atualizarDados(LocalDateTime previsaoTempo, double previsaoCustoPecas) {
         this.previsaoDuracao.plusMonths(previsaoTempo.getMonthValue());
         this.previsaoDuracao.plusDays(previsaoTempo.getDayOfMonth());
@@ -45,5 +65,29 @@ public class Passo {
         this.previsaoDuracao.plusSeconds(previsaoTempo.getSecond());
         this.previsaoCustoPecas += previsaoCustoPecas;
     }
+
+    private void atualizarConfirmacoes(LocalDateTime duracao, double custo) {
+        this.duracao.plusMonths(duracao.getMonthValue());
+        this.duracao.plusDays(duracao.getDayOfMonth());
+        this.duracao.plusHours(duracao.getHour());
+        this.duracao.plusMinutes(duracao.getMinute());
+        this.duracao.plusSeconds(duracao.getSecond());
+        this.custoPecas += custo;
+    }
+
+
+    public boolean validarPasso(List<Integer> parsePassos) {
+        if (parsePassos.size() == 0) return true;
+        int nextPasso = parsePassos.remove(0);
+        Passo passo = this.passos.get(nextPasso);
+        try {
+            if (passo != null)
+                return passo.validarPasso(parsePassos);
+            else return false;
+        } finally {
+            parsePassos.add(0, nextPasso);
+        }
+    }
+
 
 }
