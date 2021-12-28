@@ -1,8 +1,10 @@
 package com.business;
 
 import com.business.Excecoes.*;
+import com.business.SubsistemaClientes.Cliente;
 import com.business.SubsistemaClientes.ClienteLNFacade;
 import com.business.SubsistemaClientes.IClienteLN;
+import com.business.SubsistemaEquipamentos.Equipamento;
 import com.business.SubsistemaEquipamentos.EquipamentoLNFacade;
 import com.business.SubsistemaEquipamentos.IEquipamentoLN;
 import com.business.SubsistemaFuncionarios.FuncionarioLNFacade;
@@ -65,6 +67,51 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public List<Passo> getSubPassos(String codOrcamento, String passo)
             throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException {
         return null;
+    }
+
+    @Override
+    public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc) throws ClienteInvalidoException {
+        if (!validarCliente(nif)) throw new ClienteInvalidoException();
+        String codEquipamento = equipamentoLN.registarEquipamento(nif, nomeEquipamento);
+        orcamentosLN.registarPedidoOrcamento(nif, codEquipamento, codFunc);
+    }
+
+    // Clientes
+
+    @Override
+    public boolean validarCliente(String nif) {
+        return clienteLN.validarCliente(nif);
+    }
+
+    public void registarCliente(String nif, String nome, String email, String telemovel) {
+        clienteLN.registarCliente(nif, nome, email, telemovel);
+    }
+    // returns List<codCliente>
+    public List<String> getClientes() {
+        return clienteLN.getClientes();
+    }
+    public Cliente getCliente(String codCliente) throws ClienteInvalidoException {
+        return clienteLN.getCliente(codCliente);
+    }
+
+    // Equipamentos
+    public List<String> getEquipamentosAndamento() {
+        return equipamentoLN.getEquipamentosAndamento();
+    }
+    public List<String> getEquipamentosPago() {
+        return equipamentoLN.getEquipamentosPago();
+    }
+    public List<String> getEquipamentosPorPagar() {
+        return equipamentoLN.getEquipamentosPorPagar();
+    }
+    public List<String> getEquipamentosRecusado() {
+        return equipamentoLN.getEquipamentosRecusado();
+    }
+    public List<String> getEquipamentosAbandonado() {
+        return equipamentoLN.getEquipamentosAbandonado();
+    }
+    public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException {
+        return equipamentoLN.getEquipamento(codEquipamento);
     }
 }
 

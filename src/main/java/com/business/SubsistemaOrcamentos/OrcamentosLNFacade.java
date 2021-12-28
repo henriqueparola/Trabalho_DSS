@@ -7,6 +7,7 @@ import com.business.Excecoes.SemSubPassosException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OrcamentosLNFacade implements IOrcamentosLN {
 
@@ -93,13 +94,13 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
 
     // Métodos relativos aos pedidos de orçamento
-    public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc) {
-        //TODO registarPedidoOrcamento
+    public void registarPedidoOrcamento(String nif, String codEquipamento, String codFunc) {
+        PedidoOrcamento pedido = new PedidoOrcamento(codEquipamento, LocalDateTime.now(), codFunc, nif);
+        this.pedidos.put(pedido.getCodPedidoOrcamento(), pedido);
     }
     // public List<codPedidoOrcamento> getPedidosOrcamento();
     public List<String> getPedidosOrcamento() {
-        //TODO  getPedidosOrcamento
-        return null;
+        return this.pedidos.keySet().stream().collect(Collectors.toList());
     }
     // public codEquipamento getEquipamentoPedido(String codPedidoOrcamento);
     public String getEquipamentoPedido(String codPedidoOrcamento) {

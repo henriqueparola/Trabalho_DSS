@@ -1,14 +1,17 @@
 package com.business;
 
 import com.business.Excecoes.*;
+import com.business.SubsistemaClientes.Cliente;
+import com.business.SubsistemaEquipamentos.Equipamento;
 import com.business.SubsistemaOrcamentos.Passo;
-import com.sun.istack.internal.localization.LocalizableMessageFactory;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface ICentroReparacoesLN {
     boolean isTecnicoDisponivel();
+
+    /// Orcamentos
     //public codOrcamento registarOrcamentoProgramado(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codPedidoOrcamento)
         throws ClienteInvalidoException, FuncionarioInvalidoException, PedidoOrcamentoInvalidoException;
@@ -19,6 +22,23 @@ public interface ICentroReparacoesLN {
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException;
     public List<Passo> getSubPassos(String codOrcamento, String passo)
             throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException;
+    public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc) throws ClienteInvalidoException;
+    /// Clientes
+    public boolean validarCliente(String nif);
+    public void registarCliente(String nif, String nome, String email, String telemovel);
+    // returns List<codCliente>
+    public List<String> getClientes();
+    public Cliente getCliente(String codCliente) throws ClienteInvalidoException;
+
+    // Equipamentos
+    public List<String> getEquipamentosAndamento();
+    public List<String> getEquipamentosPago();
+    public List<String> getEquipamentosPorPagar();
+    public List<String> getEquipamentosRecusado();
+    public List<String> getEquipamentosAbandonado();
+    public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException;
+
+
 
 
 }
