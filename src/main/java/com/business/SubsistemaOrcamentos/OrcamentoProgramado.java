@@ -1,8 +1,10 @@
 package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.PassoInvalidoException;
+import com.business.Excecoes.SemSubPassosException;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class OrcamentoProgramado extends Orcamento {
     private LocalDateTime prazo;
@@ -29,6 +31,10 @@ public class OrcamentoProgramado extends Orcamento {
 
     public Passo getPasso(String passo) throws PassoInvalidoException {
         return this.plano.getPasso(passo);
+    }
+
+    public List<Passo> getSubPassos(String passo) throws PassoInvalidoException, SemSubPassosException {
+        return this.plano.getSubPassos(passo);
     }
 
 }

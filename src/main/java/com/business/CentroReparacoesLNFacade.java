@@ -12,6 +12,7 @@ import com.business.SubsistemaOrcamentos.OrcamentosLNFacade;
 import com.business.SubsistemaOrcamentos.Passo;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     IClienteLN clienteLN = new ClienteLNFacade();
@@ -58,6 +59,12 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
 
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException {
         return orcamentosLN.getPasso(codOrcamento, passo);
+    }
+
+
+    public List<Passo> getSubPassos(String codOrcamento, String passo)
+            throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException {
+        return null;
     }
 }
 
