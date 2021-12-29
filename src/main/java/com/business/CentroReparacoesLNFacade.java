@@ -187,8 +187,9 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     }
 
     @Override
-    public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException {
+    public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException{
         orcamentosLN.arquivarOrcamentoRecusado(codOrcamento);
+        equipamentoLN.registarEquipamentoRecusado(orcamentosLN.getCodEquipamentoOrcamento(codOrcamento));
     }
 
 
@@ -196,10 +197,6 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         String codEquipamento = orcamentosLN.getCodEquipamentoOrcamento(codOrcamento);
         equipamentoLN.registarEquipamentoPago(codEquipamento);
         orcamentosLN.registarPagamento(codOrcamento);
-    }
-
-    public void registarEquipamentoRecusado(String codEquipamento) throws EquipamentoInvalidoException {
-        equipamentoLN.registarEquipamentoRecusado(codEquipamento);
     }
 
 

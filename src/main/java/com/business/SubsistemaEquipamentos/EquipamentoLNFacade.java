@@ -24,7 +24,7 @@ public class EquipamentoLNFacade implements IEquipamentoLN {
         List<String> equipamentos = new ArrayList<>();
         return null;
     }
-    public void arquivarEquipamento(String codEquipamento) {
+    public void arquivarEquipamentoAbandonado(String codEquipamento) {
         //TODO arquivarEquipamento
     }
     public void arquivarEquipamentosAbandonados() {

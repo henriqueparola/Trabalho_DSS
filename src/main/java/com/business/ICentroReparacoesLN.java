@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public interface ICentroReparacoesLN {
-    boolean isTecnicoDisponivel();
 
     public List<String> getPedidosOrcamento();
     public PedidoOrcamento getPedidoOrcamento(String codPedido) throws PedidoOrcamentoInvalidoException;
@@ -35,7 +34,7 @@ public interface ICentroReparacoesLN {
     public List<String> getOrcamentosPagos();
     public List<String> getOrcamentosRecusados();
     public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException;
-    public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException;
+    public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
     public void registarPagamento(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
     public void registarOrcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico)
@@ -45,7 +44,6 @@ public interface ICentroReparacoesLN {
     // returns List<codCliente>
     public List<String> getClientes();
     public Cliente getCliente(String codCliente) throws ClienteInvalidoException;
-    public void registarEquipamentoRecusado(String codEquipamento) throws EquipamentoInvalidoException;
     public List<String> getEquipamentosAndamento();
     public List<String> getEquipamentosPago();
     public List<String> getEquipamentosPorPagar();
@@ -54,6 +52,7 @@ public interface ICentroReparacoesLN {
     public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException;
     public void registarOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException;
     public void enviarEmailConfirmacao(String codOrcamento) throws OrcamentoInvalidoException;
+    boolean isTecnicoDisponivel();
 
 
 

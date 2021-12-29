@@ -25,10 +25,7 @@ public interface IOrcamentosLN {
     public void verificarCustoUltrapassado(String codOrcamento);
     // public codOrcamento registarOrcamentoFixo(...);
     public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
-    public void registarOrcamentoFixoConcluido(String codOrcamento);
-    // public void registarPlanoTrabalho();
-    // TODO verificar este método está na interface mais genérica
-    public String registarPlanoTrabalho();
+    public void registarOrcamentoExpressoConcluido(String codOrcamento);
     public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCusto, String codOrcamento, String passo)
             throws OrcamentoInvalidoException;
     // Tinhamos concordado que os noPasso era uma String certo?

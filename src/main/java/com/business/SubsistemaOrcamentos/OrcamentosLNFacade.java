@@ -104,14 +104,8 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
 
 
-    public void registarOrcamentoFixoConcluido(String codOrcamento) {
+    public void registarOrcamentoExpressoConcluido(String codOrcamento) {
         //TODO  registarOrcamentoFixoConcluido
-    }
-    // public codPlano registarPlanoTrabalho();
-    // TODO Verificar este método
-    public String registarPlanoTrabalho() {
-        //TODO registarPlanoTrabalho
-        return null;
     }
     public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCusto, String codOrcamento, String passo) throws OrcamentoInvalidoException {
         Orcamento orcamento = this.porConfirmar.get(codOrcamento);
