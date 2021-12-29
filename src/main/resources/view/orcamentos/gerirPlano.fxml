@@ -33,6 +33,7 @@
                               <Font name="System Bold Italic" size="28.0" />
                            </font>
                         </Text>
+                        <Button onAction="#registarOrcamentoConcluido" layoutX="486.0" layoutY="10.0" mnemonicParsing="false" prefHeight="42.0" prefWidth="277.0" text="Registar Orçamento como concluido" />
                      </children>
                   </Pane>
                   <Pane prefHeight="144.0" prefWidth="760.0">
@@ -54,7 +55,7 @@
                               </Text>
                         <Text fx:id="descricao" fill="WHITE" layoutX="14.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
                         <Text fx:id="tempoEstimado" fill="WHITE" layoutX="245.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
-                        <Text fx:id="precoEstimado" fill="WHITE" layoutX="538.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+                        <Text fx:id="custoEstimado" fill="WHITE" layoutX="538.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
                      </children>
                   </Pane>
                         <TableView fx:id="table" prefHeight="232.0" prefWidth="760.0">
