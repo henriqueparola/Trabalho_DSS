@@ -121,7 +121,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         } else throw new OrcamentoInvalidoException();
     }
     // Tinhamos concordado que os noPasso era uma String certo?
-    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamento)
+    public void assinalarPasso(double duracao, double custo, String passo, String codOrcamento)
             throws OrcamentoInvalidoException, PassoInvalidoException {
         Orcamento orcamento = this.andamento.get(codOrcamento);
         if (orcamento != null && orcamento instanceof OrcamentoProgramado) {

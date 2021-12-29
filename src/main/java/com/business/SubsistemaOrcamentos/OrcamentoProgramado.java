@@ -35,7 +35,7 @@ public class OrcamentoProgramado extends Orcamento {
         // Possivelmente atualizarDados
     }
 
-    public void assinalarPasso(LocalDateTime duracao, double custo, String passo) throws PassoInvalidoException {
+    public void assinalarPasso(double duracao, double custo, String passo) throws PassoInvalidoException {
         this.plano.assinalarPasso(duracao,custo,passo);
     }
 

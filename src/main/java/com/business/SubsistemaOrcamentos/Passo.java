@@ -95,6 +95,8 @@ public class Passo {
         this.previsaoCustoPecas = previsaoCustoPecas;
         this.descricao = descricao;
         this.noPasso = noPasso;
+        this.duracao = -1;
+        this.custoPecas = -1;
     }
 
     public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCustoPecas,
@@ -113,7 +115,7 @@ public class Passo {
 
     }
 
-    public void assinalarPasso(LocalDateTime duracao, double custo, List<Integer> parsePassos) {
+    public void assinalarPasso(double duracao, double custo, List<Integer> parsePassos) {
         if (parsePassos.size() == 0) this.estadoConclusao = true;
         else {
             int nextPasso = parsePassos.remove(0);

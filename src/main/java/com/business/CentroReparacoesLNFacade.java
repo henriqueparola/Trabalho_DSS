@@ -73,7 +73,7 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         orcamentosLN.adicionarPasso(descricao, previsaoTempo, custoPecas, codOrcamento, passo);
     }
     @Override
-    public void assinalarPasso(LocalDateTime duracao, double custoReal, String passo, String codOrcamento)
+    public void assinalarPasso(double duracao, double custoReal, String passo, String codOrcamento)
             throws OrcamentoInvalidoException, PassoInvalidoException {
         orcamentosLN.assinalarPasso(duracao,custoReal,passo,codOrcamento);
     }

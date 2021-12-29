@@ -39,7 +39,7 @@ public class PlanoTrabalho {
 
     }
 
-    public void assinalarPasso(LocalDateTime duracao, double custo, String passoUnparsed) throws PassoInvalidoException {
+    public void assinalarPasso(double duracao, double custo, String passoUnparsed) throws PassoInvalidoException {
         List<Integer> parsePassos = parsePasso(passoUnparsed);
         boolean passoValido = validarPasso(parsePassos);
         if (passoValido) {

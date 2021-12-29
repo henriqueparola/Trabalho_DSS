@@ -23,7 +23,7 @@ public interface ICentroReparacoesLN {
             throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
     public void adicionarPasso(String descricao, double previsaoTempo, double custoPecas, String codOrcamento, String passo)
         throws OrcamentoInvalidoException;
-    public void assinalarPasso(LocalDateTime duracao, double custoReal, String passo, String codOrcamento)
+    public void assinalarPasso(double duracao, double custoReal, String passo, String codOrcamento)
             throws OrcamentoInvalidoException, PassoInvalidoException;
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException;
     public List<Passo> getSubPassos(String codOrcamento, String passo)

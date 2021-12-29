@@ -32,7 +32,7 @@ public interface IOrcamentosLN {
     public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCusto, String codOrcamento, String passo)
             throws OrcamentoInvalidoException;
     // Tinhamos concordado que os noPasso era uma String certo?
-    public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamente)
+    public void assinalarPasso(double duracao, double custo, String passo, String codOrcamente)
             throws OrcamentoInvalidoException, PassoInvalidoException;
     public PlanoTrabalho getPlanoTrabalho(String codOrcamento) throws OrcamentoInvalidoException;
 
