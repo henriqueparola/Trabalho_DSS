@@ -15,7 +15,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     private Map<String, Orcamento> andamento = new HashMap<>();
     private Map<String, Orcamento> porPagar = new HashMap<>();
     private Map<String, Orcamento> pagos = new HashMap<>();
-    private Map<String, Orcamento> arquivados = new HashMap<>();
+    private Map<String, Orcamento> recusados = new HashMap<>();
 
     //Map<codPedidoOrcamento, PedidoOrcamento>
     private Map<String, PedidoOrcamento> pedidos = new HashMap<>();
@@ -47,7 +47,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         r = this.pagos.get(codOrcamento);
         if (r != null) return r.clone();
 
-        r = this.arquivados.get(codOrcamento);
+        r = this.recusados.get(codOrcamento);
         if (r != null) return r.clone();
 
         throw new OrcamentoInvalidoException();
@@ -60,7 +60,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException {
         Orcamento o = this.porConfirmar.remove(codOrcamento);
         if (o == null) throw new OrcamentoInvalidoException();
-        this.arquivados.put(codOrcamento, o);
+        this.recusados.put(codOrcamento, o);
     }
 
     public void arquivarOrcamentosSemConfirmacao() {
@@ -117,7 +117,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         Orcamento orcamento = this.porConfirmar.get(codOrcamento);
         if (orcamento instanceof OrcamentoProgramado) {
             OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
-            //orcamentoP.adicionarPasso(descricao,previsaoTempo, custoPecas, passo);
+            orcamentoP.adicionarPasso(descricao,previsaoTempo, previsaoCusto, passo);
         } else throw new OrcamentoInvalidoException();
     }
     // Tinhamos concordado que os noPasso era uma String certo?
@@ -209,8 +209,8 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     public List<String> getOrcamentosPagos() {
         return this.pagos.keySet().stream().collect(Collectors.toList());
     }
-    public List<String> getOrcamentosArquivados()  {
-        return this.arquivados.keySet().stream().collect(Collectors.toList());
+    public List<String> getOrcamentosRecusados()  {
+        return this.recusados.keySet().stream().collect(Collectors.toList());
     }
 
     @Override

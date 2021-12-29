@@ -56,7 +56,7 @@ public interface IOrcamentosLN {
     public List<String> getOrcamentosAndamento();
     public List<String> getOrcamentosPorPagar();
     public List<String> getOrcamentosPagos();
-    public List<String> getOrcamentosArquivados();
+    public List<String> getOrcamentosRecusados();
     public boolean validaProduto(String produto);
 
 }
