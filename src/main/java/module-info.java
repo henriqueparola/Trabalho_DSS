@@ -1,6 +1,7 @@
 module com.example.trabalho_dss {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javax.mail.api;
 
     exports com;
     opens com to javafx.fxml;

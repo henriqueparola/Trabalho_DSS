@@ -14,15 +14,33 @@ import com.business.SubsistemaOrcamentos.Orcamento;
 import com.business.SubsistemaOrcamentos.OrcamentosLNFacade;
 import com.business.SubsistemaOrcamentos.Passo;
 import com.business.SubsistemaOrcamentos.PedidoOrcamento;
+import java.util.Properties;
+import javax.mail.*;
+import javax.mail.internet.*;
+
+
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Properties;
 
 public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     IClienteLN clienteLN = new ClienteLNFacade();
     IEquipamentoLN equipamentoLN = new EquipamentoLNFacade();
     IFuncionarioLN funcionarioLN = new FuncionarioLNFacade();
     IOrcamentosLN orcamentosLN = new OrcamentosLNFacade();
+
+    //
+    public CentroReparacoesLNFacade() {
+        // Configuracao
+        try {
+            enviarEmailConfirmacao("");
+        } catch (OrcamentoInvalidoException e) {
+
+        }
+    }
+
+
 
     public boolean isTecnicoDisponivel() {
         return false;
@@ -205,7 +223,39 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     @Override
     public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
             throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException {
-        return orcamentosLN.registarOrcamentoExpresso(nif, produto,codPedidoOrcamento);
+        return orcamentosLN.registarOrcamentoExpresso(nif, produto, codPedidoOrcamento);
+    }
+
+    public void registarOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException {
+        orcamentosLN.registarOrcamentoAndamento(codOrcamento);
+    }
+
+    @Override
+    public void enviarEmailConfirmacao(String codOrcamento) throws OrcamentoInvalidoException {
+        Properties prop = new Properties();
+        prop.put("mail.smtp.auth", true);
+        prop.put("mail.smtp.host", "smtp.gmail.com");
+        prop.put("mail.smtp.port", "465");
+        prop.put("mail.smtp.ssl.enable", "true");
+
+        javax.mail.Session session = javax.mail.Session.getInstance(prop, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication("jpdiasfernandes10@gmail.com", "dsstrabalho2021");
+            }
+        });
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress("jpdiasfernandes10@gmail.com"));
+            message.addRecipient(Message.RecipientType.TO,new InternetAddress("jpdiasfernandes13@gmail.com"));
+            message.setSubject("Henriqueta");
+            message.setText("Como estás grande henrique?");
+            Transport.send(message);
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
     }
 }
 

@@ -167,8 +167,10 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         Orcamento o = getOrcamento(codOrcamento);
         return o.getCodEquipamento();
     }
-    public void registarOrcamentoAndamento(String codOrcamento) {
-        //TODO registarOrcamentoAndamento
+    public void registarOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = this.porConfirmar.remove(codOrcamento);
+        if (o == null) throw new OrcamentoInvalidoException();
+        this.andamento.put(o.getCodOrcamento(), o);
     }
     public void removePedidoOrcamento(String codPedidoOrcamento) {
         //TODO removePedidoOrcamento

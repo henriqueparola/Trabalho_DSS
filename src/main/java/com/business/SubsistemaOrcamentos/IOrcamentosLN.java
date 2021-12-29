@@ -46,7 +46,7 @@ public interface IOrcamentosLN {
     public void registarPedidoOrcamentoExpresso(String nif, String codEquipamento, String codFunc, String codTecnico);
     //public codEquipamento getCodEquipamentoOrcamento(String codOrcamento);
     public String getCodEquipamentoOrcamento(String codOrcamento) throws OrcamentoInvalidoException;
-    public void registarOrcamentoAndamento(String codOrcamento);
+    public void registarOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException;
     public void removePedidoOrcamento(String codPedidoOrcamento);
     public boolean validarPedidoOrcamento(String codPedidoOrcamento);
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException;

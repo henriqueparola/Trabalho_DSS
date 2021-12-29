@@ -52,4 +52,11 @@ public interface ICentroReparacoesLN {
     public List<String> getEquipamentosRecusado();
     public List<String> getEquipamentosAbandonado();
     public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException;
+    public void registarOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException;
+    public void enviarEmailConfirmacao(String codOrcamento) throws OrcamentoInvalidoException;
+
+
+
+
+
 }
