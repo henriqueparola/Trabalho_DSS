@@ -26,7 +26,7 @@ public class Passo {
         return r;
     }
 
-    private Map<Integer, Passo> passos;
+    private Map<Integer, Passo> passos = new HashMap<>();
 
     public boolean isEstadoConclusao() {
         return estadoConclusao;
