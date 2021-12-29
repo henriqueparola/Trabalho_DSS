@@ -1,6 +1,7 @@
 package com.controllers.Orcamentos;
 
 import com.business.CentroReparacoesLNFacade;
+import com.business.Excecoes.EquipamentoInvalidoException;
 import com.business.Excecoes.OrcamentoInvalidoException;
 import com.business.ICentroReparacoesLN;
 import javafx.event.ActionEvent;
@@ -24,6 +25,8 @@ public class ArquivarOrcamentoRecusadoController {
             } catch (OrcamentoInvalidoException ex) {
                 System.out.println("Orçamento inválido");
                 //ex.printStackTrace();
+            } catch (EquipamentoInvalidoException ex) {
+                System.out.println("Equipamento do Orcamento inválido");
             }
         }
     }
