@@ -25,7 +25,6 @@ public interface IOrcamentosLN {
     public boolean verificarCustoUltrapassado(String codOrcamento) throws OrcamentoInvalidoException;
     // public codOrcamento registarOrcamentoFixo(...);
     public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
-    public void registarOrcamentoExpressoConcluido(String codOrcamento);
     public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCusto, String codOrcamento, String passo)
             throws OrcamentoInvalidoException;
     // Tinhamos concordado que os noPasso era uma String certo?
