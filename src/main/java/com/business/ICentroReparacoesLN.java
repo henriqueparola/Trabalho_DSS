@@ -21,7 +21,7 @@ public interface ICentroReparacoesLN {
         throws ClienteInvalidoException, FuncionarioInvalidoException, PedidoOrcamentoInvalidoException;
     public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
             throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double custoPecas, String codOrcamento, String passo)
+    public void adicionarPasso(String descricao, double previsaoTempo, double custoPecas, String codOrcamento, String passo)
         throws OrcamentoInvalidoException;
     public void assinalarPasso(LocalDateTime duracao, double custoReal, String passo, String codOrcamento)
             throws OrcamentoInvalidoException, PassoInvalidoException;

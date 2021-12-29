@@ -29,7 +29,7 @@ public interface IOrcamentosLN {
     // public void registarPlanoTrabalho();
     // TODO verificar este método está na interface mais genérica
     public String registarPlanoTrabalho();
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String codOrcamento, String passo)
+    public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCusto, String codOrcamento, String passo)
             throws OrcamentoInvalidoException;
     // Tinhamos concordado que os noPasso era uma String certo?
     public void assinalarPasso(LocalDateTime duracao, double custo, String passo, String codOrcamente)
