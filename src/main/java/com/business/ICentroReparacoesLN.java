@@ -52,6 +52,7 @@ public interface ICentroReparacoesLN {
     public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException;
     public void registarOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException;
     public void enviarEmailConfirmacao(String codOrcamento) throws OrcamentoInvalidoException;
+    public void enviarEmailConclusao(String codOrcamento) throws OrcamentoInvalidoException;
     boolean isTecnicoDisponivel();
     boolean orcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException;
 

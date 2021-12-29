@@ -263,6 +263,43 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void enviarEmailConclusao(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = orcamentosLN.getOrcamento(codOrcamento);
+        Cliente c = null;
+        try {
+            c = clienteLN.getCliente(o.getCodCliente());
+            Properties prop = new Properties();
+            prop.put("mail.smtp.auth", true);
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "465");
+            prop.put("mail.smtp.ssl.enable", "true");
+            final String from = "trabalhodss2021@gmail.com";
+
+            javax.mail.Session session = javax.mail.Session.getInstance(prop, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(from, "dsstrabalho2021");
+                }
+            });
+
+            try {
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(from));
+                message.addRecipient(Message.RecipientType.TO,new InternetAddress(c.getEmail()));
+                message.setSubject("Proposta de Orçamento - grupo 11");
+                message.setText("Código Orçamento: " + o.getCodOrcamento());
+                Transport.send(message);
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        } catch (ClienteInvalidoException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void enviarEmailCustoUltrapassado(String codOrcamento) throws OrcamentoInvalidoException {
         OrcamentoProgramado o = orcamentosLN.getOrcamentoProgramado(codOrcamento);
         Cliente c;
