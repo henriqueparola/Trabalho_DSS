@@ -2,6 +2,7 @@ package com.controllers.PedidosDeOrcamento;
 
 import com.business.CentroReparacoesLNFacade;
 import com.business.Excecoes.ClienteInvalidoException;
+import com.business.Excecoes.FuncionarioInvalidoException;
 import com.business.ICentroReparacoesLN;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +27,8 @@ public class PedidoDeOrcamentoController {
                 stage.close();
             } catch (ClienteInvalidoException e) {
                 System.out.println("Cliente inválido");
+            } catch (FuncionarioInvalidoException e) {
+                e.printStackTrace();
             }
         }
     }
