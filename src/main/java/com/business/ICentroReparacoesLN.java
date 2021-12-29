@@ -33,7 +33,7 @@ public interface ICentroReparacoesLN {
     public List<String> getOrcamentosAndamento();
     public List<String> getOrcamentosPorPagar();
     public List<String> getOrcamentosPagos();
-    public List<String> getOrcamentosArquivados();
+    public List<String> getOrcamentosRecusados();
     public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException;
     public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException;
     public void registarPagamento(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
@@ -52,10 +52,4 @@ public interface ICentroReparacoesLN {
     public List<String> getEquipamentosRecusado();
     public List<String> getEquipamentosAbandonado();
     public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException;
-
-
-
-
-
-
 }

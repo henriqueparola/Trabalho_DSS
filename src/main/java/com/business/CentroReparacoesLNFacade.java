@@ -64,7 +64,7 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     }
     public List<Passo> getSubPassos(String codOrcamento, String passo)
             throws OrcamentoInvalidoException, PassoInvalidoException, SemSubPassosException {
-        return null;
+        return orcamentosLN.getSubPassos(codOrcamento,passo);
     }
     @Override
     public void registarPedidoOrcamento(String nif, String nomeEquipamento, String codFunc)
@@ -91,8 +91,8 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public List<String> getOrcamentosPagos() {
         return orcamentosLN.getOrcamentosPagos();
     }
-    public List<String> getOrcamentosArquivados() {
-        return orcamentosLN.getOrcamentosArquivados();
+    public List<String> getOrcamentosRecusados() {
+        return orcamentosLN.getOrcamentosRecusados();
     }
 
     public Orcamento getOrcamento(String codOrcamento) throws OrcamentoInvalidoException {
