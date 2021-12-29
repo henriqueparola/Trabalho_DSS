@@ -33,11 +33,11 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     //
     public CentroReparacoesLNFacade() {
         // Configuracao
-        try {
-            enviarEmailConfirmacao("");
-        } catch (OrcamentoInvalidoException e) {
-
-        }
+        //try {
+        //    //enviarEmailConfirmacao("");
+        //} catch (OrcamentoInvalidoException e) {
+//
+  //      }
     }
 
 
@@ -68,7 +68,7 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         }
     }
     @Override
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double custoPecas, String codOrcamento, String passo)
+    public void adicionarPasso(String descricao, double previsaoTempo, double custoPecas, String codOrcamento, String passo)
             throws OrcamentoInvalidoException {
         orcamentosLN.adicionarPasso(descricao, previsaoTempo, custoPecas, codOrcamento, passo);
     }
@@ -232,28 +232,36 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
 
     @Override
     public void enviarEmailConfirmacao(String codOrcamento) throws OrcamentoInvalidoException {
-        Properties prop = new Properties();
-        prop.put("mail.smtp.auth", true);
-        prop.put("mail.smtp.host", "smtp.gmail.com");
-        prop.put("mail.smtp.port", "465");
-        prop.put("mail.smtp.ssl.enable", "true");
-
-        javax.mail.Session session = javax.mail.Session.getInstance(prop, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("jpdiasfernandes10@gmail.com", "dsstrabalho2021");
-            }
-        });
-
+        Orcamento o = orcamentosLN.getOrcamento(codOrcamento);
+        Cliente c = null;
         try {
-            MimeMessage message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("jpdiasfernandes10@gmail.com"));
-            message.addRecipient(Message.RecipientType.TO,new InternetAddress("jpdiasfernandes13@gmail.com"));
-            message.setSubject("Henriqueta");
-            message.setText("Como estás grande henrique?");
-            Transport.send(message);
+            c = clienteLN.getCliente(o.getCodCliente());
+            Properties prop = new Properties();
+            prop.put("mail.smtp.auth", true);
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "465");
+            prop.put("mail.smtp.ssl.enable", "true");
+            final String from = "trabalhodss2021@gmail.com";
 
-        } catch (MessagingException e) {
+            javax.mail.Session session = javax.mail.Session.getInstance(prop, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(from, "dsstrabalho2021");
+                }
+            });
+
+            try {
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(from));
+                message.addRecipient(Message.RecipientType.TO,new InternetAddress(c.getEmail()));
+                message.setSubject("Proposta de Orçamento - grupo 11");
+                message.setText("Código Orçamento: " + o.getCodOrcamento());
+                Transport.send(message);
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        } catch (ClienteInvalidoException e) {
             e.printStackTrace();
         }
     }
