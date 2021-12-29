@@ -34,19 +34,19 @@ public class EquipamentoLNFacade implements IEquipamentoLN {
     public Equipamento getEquipamento(String codEquipamento) throws EquipamentoInvalidoException {
         Equipamento res;
         res = this.andamento.get(codEquipamento);
-        if (res != null) return res;
+        if (res != null) return res.clone();
 
         res = this.pagos.get(codEquipamento);
-        if (res != null) return res;
+        if (res != null) return res.clone();
 
         res = this.porPagar.get(codEquipamento);
-        if (res != null) return res;
+        if (res != null) return res.clone();
 
         res = this.recusados.get(codEquipamento);
-        if (res != null) return res;
+        if (res != null) return res.clone();
 
         res = this.abandonados.get(codEquipamento);
-        if (res != null) return res;
+        if (res != null) return res.clone();
 
         throw new EquipamentoInvalidoException();
     }
