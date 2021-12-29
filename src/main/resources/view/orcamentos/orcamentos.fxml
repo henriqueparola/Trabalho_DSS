@@ -47,22 +47,27 @@
                <left>
                   <SplitMenuButton mnemonicParsing="false" prefHeight="24.0" prefWidth="157.0" text="Estado" BorderPane.alignment="CENTER">
                     <items>
-                        <MenuItem onAction="#porConfirmarAction" mnemonicParsing="false" text="Por confirmar" />
-                      <MenuItem onAction="#emAndamentoAction" mnemonicParsing="false" text="Em andamento" />
-                      <MenuItem onAction="#porPagarAction" mnemonicParsing="false" text="Por pagar" />
-                        <MenuItem onAction="#pagoAction" mnemonicParsing="false" text="Pago" />
-                        <MenuItem onAction="#recusadoAction" mnemonicParsing="false" text="Recusado" />
+                        <MenuItem mnemonicParsing="false" onAction="#porConfirmarAction" text="Por confirmar" />
+                      <MenuItem mnemonicParsing="false" onAction="#emAndamentoAction" text="Em andamento" />
+                      <MenuItem mnemonicParsing="false" onAction="#porPagarAction" text="Por pagar" />
+                        <MenuItem mnemonicParsing="false" onAction="#pagoAction" text="Pago" />
+                        <MenuItem mnemonicParsing="false" onAction="#recusadoAction" text="Recusado" />
                     </items>
                   </SplitMenuButton>
                </left>
                <right>
-                  <Button onAction="#arquivarOrcamentoRecusado" mnemonicParsing="false" text="Arquivar Orçamento Recusado" BorderPane.alignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#arquivarOrcamentoRecusado" prefHeight="24.0" prefWidth="200.0" text="Arquivar Orçamento Recusado" BorderPane.alignment="CENTER" />
                </right>
             </BorderPane>
             <TableView fx:id="table" prefHeight="233.0" prefWidth="550.0">
               <columns>
               </columns>
             </TableView>
+            <Button onAction="#registarOrcamentoConfirmado" mnemonicParsing="false" text="Registar Orçamento confirmado">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Button>
          </children>
       </VBox>
    </children>

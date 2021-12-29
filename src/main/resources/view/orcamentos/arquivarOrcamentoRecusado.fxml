@@ -17,7 +17,7 @@
                     </font>
                 </Text>
                 <Text fill="WHITE" layoutX="17.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Codigo do Orçamento" />
-                <Button layoutX="16.0" layoutY="135.0" mnemonicParsing="false" onAction="#registarPagamento" prefHeight="40.0" prefWidth="339.0" text="Registar" />
+                <Button layoutX="16.0" layoutY="135.0" mnemonicParsing="false" onAction="#arquivarOrcamentoRecusado" prefHeight="40.0" prefWidth="339.0" text="Registar" />
                 <TextField fx:id="codOrcamentoInput" layoutX="15.0" layoutY="98.0" prefHeight="24.0" prefWidth="339.0" />
             </children>
         </Pane>
