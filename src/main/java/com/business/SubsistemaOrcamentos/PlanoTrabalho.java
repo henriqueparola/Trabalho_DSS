@@ -24,7 +24,7 @@ public class PlanoTrabalho {
         return r;
     }
 
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String passoUnparsed) {
+    public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCusto, String passoUnparsed) {
         List<Integer> parsePassos = parsePasso(passoUnparsed);
         int nextPasso = parsePassos.remove(0);
         Passo passo = this.passos.get(nextPasso);
