@@ -70,7 +70,7 @@ public class EquipamentoLNFacade implements IEquipamentoLN {
         this.porPagar.put(e.getCodEquipamento(), e);
     }
     public void registarEquipamentoRecusado(String codEquipamento) throws EquipamentoInvalidoException {
-        Equipamento e = this.andamento.get(codEquipamento);
+        Equipamento e = this.andamento.remove(codEquipamento);
         if (e == null) throw new EquipamentoInvalidoException();
         this.recusados.put(e.getCodEquipamento(), e);
     }
