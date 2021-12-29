@@ -99,4 +99,11 @@ public class PlanoTrabalho {
     public PlanoTrabalho clone() {
         return new PlanoTrabalho(this);
     }
+
+    public boolean concluido() {
+        for (Passo p : this.passos.values()) {
+            if (!p.isEstadoConclusao()) return false;
+        }
+        return true;
+    }
 }

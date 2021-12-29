@@ -9,11 +9,8 @@ import com.business.SubsistemaEquipamentos.EquipamentoLNFacade;
 import com.business.SubsistemaEquipamentos.IEquipamentoLN;
 import com.business.SubsistemaFuncionarios.FuncionarioLNFacade;
 import com.business.SubsistemaFuncionarios.IFuncionarioLN;
-import com.business.SubsistemaOrcamentos.IOrcamentosLN;
-import com.business.SubsistemaOrcamentos.Orcamento;
-import com.business.SubsistemaOrcamentos.OrcamentosLNFacade;
-import com.business.SubsistemaOrcamentos.Passo;
-import com.business.SubsistemaOrcamentos.PedidoOrcamento;
+import com.business.SubsistemaOrcamentos.*;
+
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -76,6 +73,10 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public void assinalarPasso(double duracao, double custoReal, String passo, String codOrcamento)
             throws OrcamentoInvalidoException, PassoInvalidoException {
         orcamentosLN.assinalarPasso(duracao,custoReal,passo,codOrcamento);
+        if (orcamentosLN.verificarCustoUltrapassado(codOrcamento))
+            enviarEmailCustoUltrapassado(codOrcamento);
+
+
     }
     public Passo getPasso(String codOrcamento, String passo) throws OrcamentoInvalidoException, PassoInvalidoException {
         return orcamentosLN.getPasso(codOrcamento, passo);
@@ -261,6 +262,49 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         } catch (ClienteInvalidoException e) {
             e.printStackTrace();
         }
+    }
+    public void enviarEmailCustoUltrapassado(String codOrcamento) throws OrcamentoInvalidoException {
+        OrcamentoProgramado o = orcamentosLN.getOrcamentoProgramado(codOrcamento);
+        Cliente c;
+        try {
+            c = clienteLN.getCliente(o.getCodCliente());
+            Properties prop = new Properties();
+            prop.put("mail.smtp.auth", true);
+            prop.put("mail.smtp.host", "smtp.gmail.com");
+            prop.put("mail.smtp.port", "465");
+            prop.put("mail.smtp.ssl.enable", "true");
+            final String from = "trabalhodss2021@gmail.com";
+
+            javax.mail.Session session = javax.mail.Session.getInstance(prop, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(from, "dsstrabalho2021");
+                }
+            });
+
+            try {
+                MimeMessage message = new MimeMessage(session);
+                message.setFrom(new InternetAddress(from));
+                message.addRecipient(Message.RecipientType.TO,new InternetAddress(c.getEmail()));
+                message.setSubject("Custo Ultrapassado 120% - grupo 11");
+                message.setText("Código Orçamento: " + o.getCodOrcamento() +
+                        "\n O preco confirmado foi de : " + o.getPrecoTotal() +
+                        "\n No entanto, o preco atingiu o valor : " +  o.getPrecoRealTotal() +
+                        "\n Se pretender recusar responda a este email.");
+
+                Transport.send(message);
+
+            } catch (MessagingException e) {
+                e.printStackTrace();
+            }
+        } catch (ClienteInvalidoException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean orcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException {
+        return orcamentosLN.orcamentoConcluido(codOrcamento);
     }
 }
 

@@ -79,8 +79,13 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
     // Não me lembro do contexto desta função
     // Mas ela não deveria retornar alguma coisa?
-    public void verificarCustoUltrapassado(String codOrcamennto) {
-        //TODO  verificarCustoUltrapassado
+    public boolean verificarCustoUltrapassado(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = getOrcamento(codOrcamento);
+        // Podia-se criar uma função getOrcamentoProgramado se tivermos tempo
+        if (o != null || o instanceof OrcamentoProgramado) {
+            OrcamentoProgramado op = (OrcamentoProgramado) o;
+            return (op.getPrecoRealTotal() / op.getPrecoTotal() ) > 1.2;
+        } else throw new OrcamentoInvalidoException();
     }
     // public codOrcamento txo(...);
     public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
@@ -121,6 +126,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         if (orcamento != null && orcamento instanceof OrcamentoProgramado) {
             OrcamentoProgramado orcamentoP = (OrcamentoProgramado) orcamento;
             orcamentoP.assinalarPasso(duracao,custo, passo);
+            if (verificarCustoUltrapassado(codOrcamento)) registarOrcamentoCustoUltrapassado(codOrcamento);
         } else throw new OrcamentoInvalidoException();
     }
     public PlanoTrabalho getPlanoTrabalho(String codOrcamento) throws OrcamentoInvalidoException {
@@ -167,7 +173,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         this.andamento.put(o.getCodOrcamento(), o);
     }
     public void removePedidoOrcamento(String codPedidoOrcamento) {
-        //TODO removePedidoOrcamento
+        this.pedidos.remove(codPedidoOrcamento);
     }
 
     @Override
@@ -212,5 +218,23 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     @Override
     public boolean validaProduto(String produto) {
         return this.precoFixos.containsKey(produto);
+    }
+
+    public OrcamentoProgramado getOrcamentoProgramado(String codOrcamento) throws OrcamentoInvalidoException {
+        Orcamento o = getOrcamento(codOrcamento);
+        if (o == null || !(o instanceof OrcamentoProgramado)) throw new OrcamentoInvalidoException();
+        return (OrcamentoProgramado) o;
+    }
+
+    private void registarOrcamentoCustoUltrapassado(String codOrcamento) {
+        Orcamento o = this.andamento.remove(codOrcamento);
+        this.porConfirmar.put(o.getCodOrcamento(), o);
+    }
+
+
+    @Override
+    public boolean orcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException {
+        OrcamentoProgramado o = getOrcamentoProgramado(codOrcamento);
+        return o.orcamentoConcluido();
     }
 }
