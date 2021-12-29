@@ -1,10 +1,13 @@
 package com.business.SubsistemaOrcamentos;
 
+import java.time.LocalDateTime;
+
 public abstract class Orcamento {
     private String codTecnico;
     private String codCliente;
     private String codEquipamento;
     private String codOrcamento;
+    private LocalDateTime dataCriacao;
 
     private static int nextId = 0;
 
@@ -18,6 +21,14 @@ public abstract class Orcamento {
 
     public void setCodEquipamento(String codEquipamento) {
         this.codEquipamento = codEquipamento;
+    }
+
+    public void setDataCriacao(LocalDateTime data){
+        this.dataCriacao = data;
+    }
+
+    public LocalDateTime getDataCriacao(){
+        return dataCriacao;
     }
 
     public String getCodTecnico() {
