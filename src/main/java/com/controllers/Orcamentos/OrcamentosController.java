@@ -290,9 +290,9 @@ public class OrcamentosController implements Initializable {
                 seeButton.setOnAction(event -> {
                     System.out.println(this.getTableRow().getItem().getCodOrcamento());
                     GerirPlanoController c = new GerirPlanoController(
-                            this.getTableRow().getItem().getCodOrcamento()
+                            this.getTableRow().getItem().getCodOrcamento(),
+                            ""
                     );
-
                     showModalWithController("/view/orcamentos/gerirPlano.fxml","Centro de Reparações",c);
                 });
             }
@@ -501,6 +501,7 @@ public class OrcamentosController implements Initializable {
             stage.setScene(scene);
             stage.show();
         }catch (IOException e){
+            e.printStackTrace();
         }
     }
 }

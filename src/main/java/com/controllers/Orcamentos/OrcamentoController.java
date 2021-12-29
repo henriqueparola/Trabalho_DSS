@@ -75,6 +75,8 @@ public class OrcamentoController implements Initializable{
     private void finalizarAction(ActionEvent event) throws IOException {
         try {
             model.enviarEmailConfirmacao(oCController.codOrcamento);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
         } catch (OrcamentoInvalidoException e) {
             System.out.println("Orçamento inválido");
             //e.printStackTrace();

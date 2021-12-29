@@ -1,5 +1,14 @@
 package com.controllers.Orcamentos;
 
+import com.business.CentroReparacoesLNFacade;
+import com.business.Excecoes.OrcamentoInvalidoException;
+import com.business.Excecoes.PassoInvalidoException;
+import com.business.Excecoes.SemSubPassosException;
+import com.business.ICentroReparacoesLN;
+import com.business.SubsistemaOrcamentos.Orcamento;
+import com.business.SubsistemaOrcamentos.OrcamentoFixo;
+import com.business.SubsistemaOrcamentos.OrcamentoProgramado;
+import com.business.SubsistemaOrcamentos.Passo;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,54 +30,155 @@ import java.util.ResourceBundle;
 public class GerirPlanoController implements Initializable {
     private final String codOrcamento;
     @FXML
-    public Text descricao;
-    public String descricaoS;
+    Text estadoTrue = new Text();
     @FXML
-    public Text precoTotal;
-    public String precoTotalS;
+    Text estadoFalse = new Text();
     @FXML
-    public Text tempoEstimado;
-    public String tempoEstimadoS;
+    Text descricao = new Text();
     @FXML
-    TextField tempoRealInput;
+    Text tempoEstimado = new Text();
     @FXML
-    TextField custoRealInput;
+    Text custoEstimado = new Text();
+    @FXML
+    TextField tempoRealInput = new TextField();
+    @FXML
+    TextField custoRealInput = new TextField();
     @FXML
     TableView table;
-    String codCliente;
-    private final ObservableList<Passo> data =
-            FXCollections.observableArrayList(
-                    new Passo("13", "4", "descricao1"),
-                    new Passo("56", "9", "descricao2"),
-                    new Passo("34", "7", "descricao3"),
-                    new Passo("75", "13", "descricao4"),
-                    new Passo("43", "3", "descricao5")
+    private ObservableList<PassoObs> passos = FXCollections.observableArrayList();
+    ICentroReparacoesLN model = CentroReparacoesLNFacade.getInstance();
+    String passoFmt;
+
+    public GerirPlanoController(String codOrcamento,String passoFmt) {
+        this.codOrcamento = codOrcamento;
+        this.passoFmt = passoFmt;
+    }
+
+    @FXML
+    void assinalarPassoAction(ActionEvent e){
+        System.out.println(custoRealInput.getText() + "-" + tempoRealInput.getText());
+        try {
+            model.assinalarPasso(
+                    Double.parseDouble(tempoRealInput.getText()),
+                    Double.parseDouble(custoRealInput.getText()),
+                    passoFmt,
+                    codOrcamento
             );
 
+            if (!passoFmt.equals("")) {
+                boolean estado = model.getPasso(codOrcamento, passoFmt).isEstadoConclusao();
+                if (estado == true) {
+                    estadoTrue.setText("concluído");
+                    estadoFalse.setText("");
+                } else {
+                    estadoFalse.setText("por fazer");
+                    estadoTrue.setText("");
+                }
 
-    public GerirPlanoController(String codOrcamento) {
-        this.codOrcamento = codOrcamento;
+                descricao.setText(model.getPasso(codOrcamento, passoFmt).getDescricao());
+                custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getCustoPecas()));
+                tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoDuracao()));
+            }else{
+                Orcamento o = model.getOrcamento(codOrcamento);
+                if (o instanceof OrcamentoProgramado){
+                    OrcamentoProgramado op = (OrcamentoProgramado) o;
+                    custoEstimado.setText(String.valueOf((op.getPrecoTotal())));
+                    tempoEstimado.setText(String.valueOf((op.getPrazo())));
+                }else{
+                    OrcamentoFixo of = (OrcamentoFixo) o;
+                    custoEstimado.setText(String.valueOf((of.getPrecoFixo())));
+                    tempoEstimado.setText("urgente");
+                }
+            }
+        } catch (OrcamentoInvalidoException ex) {
+            System.out.println("Orçamento inválido");
+            // ex.printStackTrace();
+        } catch (PassoInvalidoException ex) {
+            ex.printStackTrace();
+        }
+        getSubNiveis();
+    }
+
+    private void getSubNiveis() {
+        passos.removeAll(passos);
+        try {
+            for (Passo p : model.getSubPassos(codOrcamento, passoFmt)) {
+                passos.add(new PassoObs(
+                        String.valueOf(p.getNoPasso()),
+                        String.valueOf(p.getPrevisaoCustoPecas()),
+                        String.valueOf(p.getPrevisaoDuracao()),
+                        p.getCustoPecas(),
+                        p.getDuracao(),
+                        p.getDescricao()
+                ));
+            }
+        } catch (OrcamentoInvalidoException e) {
+            System.out.println("Orcamento inválido");
+            // e.printStackTrace();
+        } catch (PassoInvalidoException e) {
+            System.out.println("passo invalido");
+            // e.printStackTrace();
+        } catch (SemSubPassosException e) {
+            System.out.println("sem subPassos");
+            // e.printStackTrace();
+        }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        descricao.setText(descricaoS);
-        precoTotal.setText(precoTotalS);
-        tempoEstimado.setText(tempoEstimadoS);
+        try {
+            if (!passoFmt.equals("")) {
+                boolean estado = model.getPasso(codOrcamento, passoFmt).isEstadoConclusao();
+                if (estado == true) {
+                    estadoTrue.setText("concluído");
+                    estadoFalse.setText("");
+                } else {
+                    estadoFalse.setText("por fazer");
+                    estadoTrue.setText("");
+                }
 
-        TableColumn<Passo,String> custoColumn = new TableColumn<>("Custo");
-        TableColumn<Passo,String> previsaoDoTempoColumn = new TableColumn<>("Previsão do tempo");
-        TableColumn<Passo,Void> passoColumn = new TableColumn<>("Passo");
+                descricao.setText(model.getPasso(codOrcamento, passoFmt).getDescricao());
+                custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoCustoPecas()));
+                tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoDuracao()));
+            }else{
+                Orcamento o = model.getOrcamento(codOrcamento);
+                descricao.setText("Orçamento do cliente: " + o.getCodCliente());
+                if (o instanceof OrcamentoProgramado){
+                    OrcamentoProgramado op = (OrcamentoProgramado) o;
+                    custoEstimado.setText(String.valueOf((op.getPrecoTotal())));
+                    tempoEstimado.setText(String.valueOf((op.getPrazo())));
+                }else{
+                    OrcamentoFixo of = (OrcamentoFixo) o;
+                    custoEstimado.setText(String.valueOf((of.getPrecoFixo())));
+                    tempoEstimado.setText("urgente");
+                }
+            }
+        } catch (OrcamentoInvalidoException e) {
+            e.printStackTrace();
+        } catch (PassoInvalidoException e) {
+            e.printStackTrace();
+        }
 
-        passoColumn.setCellFactory(param -> new TableCell<Passo,Void>() {
+        TableColumn<PassoObs, String> nPassoColumn = new TableColumn<>("Número");
+        TableColumn<PassoObs, String> custoEstColumn = new TableColumn<>("Custo Estimado");
+        TableColumn<PassoObs, String> tempEstColumn = new TableColumn<>("Tempo estimado");
+        TableColumn<PassoObs, String> custoRealColumn = new TableColumn<>("Custo Real");
+        TableColumn<PassoObs, String> tempRealColumn = new TableColumn<>("Tempo Real");
+        TableColumn<PassoObs, Void> verDetalhesColumn = new TableColumn<>("Ver detalhes");
+
+        verDetalhesColumn.setCellFactory(param -> new TableCell<PassoObs,Void>() {
             private final Button seeButton = new Button("Ver");
             {
                 seeButton.setOnAction(event -> {
-                    System.out.println(this.getTableRow().getItem().getPrevisaoTempo());
+                    String newPasso;
+                    if (passoFmt.equals("")) newPasso = this.getTableRow().getItem().getnPasso();
+                    else newPasso = passoFmt + "#" + this.getTableRow().getItem().getnPasso();
                     GerirPlanoController c = new GerirPlanoController(
-                            this.getTableRow().getItem().getDescricao()
+                            codOrcamento,
+                            newPasso
                     );
                     showModalWithController("/view/orcamentos/gerirPlano.fxml","Centro de Reparações",c);
+                    getSubNiveis();
                 });
             }
 
@@ -83,47 +193,114 @@ public class GerirPlanoController implements Initializable {
                 }
             }
         });
-        custoColumn.setCellValueFactory(new PropertyValueFactory<>("custo"));
-        previsaoDoTempoColumn.setCellValueFactory(new PropertyValueFactory<>("previsaoTempo"));
+        nPassoColumn.setCellValueFactory(new PropertyValueFactory<>("nPasso"));
+        custoEstColumn.setCellValueFactory(new PropertyValueFactory<>("custoEstimado"));
+        tempEstColumn.setCellValueFactory(new PropertyValueFactory<>("tempoEstimado"));
+        custoRealColumn.setCellValueFactory(new PropertyValueFactory<>("custoReal"));
+        tempRealColumn.setCellValueFactory(new PropertyValueFactory<>("tempoReal"));
+
+        nPassoColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
+        custoEstColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
+        tempEstColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
+        custoRealColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
+        tempRealColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.15));
+        verDetalhesColumn.prefWidthProperty().bind(table.widthProperty().multiply(0.25));
 
         table.getColumns().clear();
-        table.getColumns().addAll(passoColumn,custoColumn,previsaoDoTempoColumn);
-        table.setItems(data);
+        table.getColumns().addAll(
+                nPassoColumn,
+                custoEstColumn,
+                tempEstColumn,
+                custoRealColumn,
+                tempRealColumn,
+                verDetalhesColumn
+        );
+
+        getSubNiveis();
+        table.setItems(passos);
     }
 
-    public class Passo {
-        private final SimpleStringProperty custo;
-        private final SimpleStringProperty previsaoTempo;
+    public class PassoObs {
+        private final SimpleStringProperty nPasso;
+        private final SimpleStringProperty custoEstimado;
+        private final SimpleStringProperty tempoEstimado;
+        private final SimpleStringProperty custoReal;
+        private final SimpleStringProperty tempoReal;
         private final SimpleStringProperty descricao;
 
-        private Passo(String fName, String lName, String descricao) {
-            this.custo = new SimpleStringProperty(fName);
-            this.previsaoTempo = new SimpleStringProperty(lName);
+        private PassoObs(String nPasso, String custoEstimado, String tempoEstimado, double custoReal, double tempoReal, String descricao) {
+            this.nPasso = new SimpleStringProperty(nPasso);
+            this.custoEstimado = new SimpleStringProperty(custoEstimado);
+            this.tempoEstimado = new SimpleStringProperty(tempoEstimado);
             this.descricao = new SimpleStringProperty(descricao);
+            if (custoReal == -1) this.custoReal = new SimpleStringProperty("?");
+            else {
+                this.custoReal = new SimpleStringProperty(String.valueOf(custoReal));
+            }
+            if (custoReal == -1 ) this.tempoReal = new SimpleStringProperty("?");
+            else {
+                this.tempoReal = new SimpleStringProperty(String.valueOf(tempoEstimado));
+            }
         }
 
-        public String getCusto() {
-            return custo.get();
+        public String getnPasso() {
+            return nPasso.get();
         }
 
-        public SimpleStringProperty custoProperty() {
-            return custo;
+        public SimpleStringProperty nPassoProperty() {
+            return nPasso;
         }
 
-        public void setCusto(String custo) {
-            this.custo.set(custo);
+        public void setnPasso(String nPasso) {
+            this.nPasso.set(nPasso);
         }
 
-        public String getPrevisaoTempo() {
-            return previsaoTempo.get();
+        public String getCustoEstimado() {
+            return custoEstimado.get();
         }
 
-        public SimpleStringProperty previsaoTempoProperty() {
-            return previsaoTempo;
+        public SimpleStringProperty custoEstimadoProperty() {
+            return custoEstimado;
         }
 
-        public void setPrevisaoTempo(String previsaoTempo) {
-            this.previsaoTempo.set(previsaoTempo);
+        public void setCustoEstimado(String custoEstimado) {
+            this.custoEstimado.set(custoEstimado);
+        }
+
+        public String getTempoEstimado() {
+            return tempoEstimado.get();
+        }
+
+        public SimpleStringProperty tempoEstimadoProperty() {
+            return tempoEstimado;
+        }
+
+        public void setTempoEstimado(String tempoEstimado) {
+            this.tempoEstimado.set(tempoEstimado);
+        }
+
+        public String getCustoReal() {
+            return custoReal.get();
+        }
+
+        public SimpleStringProperty custoRealProperty() {
+            return custoReal;
+        }
+
+        public void setCustoReal(String custoReal) {
+            this.custoReal.set(custoReal);
+        }
+
+        public String getTempoReal() {
+            return tempoReal.get();
+        }
+
+        public SimpleStringProperty tempoRealProperty() {
+            return tempoReal;
+        }
+
+        public void setTempoReal(String tempoReal) {
+            this.tempoReal.set(tempoReal);
         }
 
         public String getDescricao() {
@@ -137,11 +314,6 @@ public class GerirPlanoController implements Initializable {
         public void setDescricao(String descricao) {
             this.descricao.set(descricao);
         }
-    }
-
-    public void inserirPassoAction(ActionEvent e){
-        System.out.println(custoRealInput.getText() + "-" + tempoRealInput.getText() + "-" + "");
-        data.add(new Passo(custoRealInput.getText(),tempoRealInput.getText(),""));
     }
 
     private void showModalWithController(String fxmlName,String title, GerirPlanoController c){
