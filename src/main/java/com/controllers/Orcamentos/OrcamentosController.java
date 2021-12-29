@@ -51,6 +51,12 @@ public class OrcamentosController implements Initializable {
 
     public void arquivarOrcamentoRecusado(ActionEvent actionEvent) {
         Modal.showModal("/view/orcamentos/arquivarOrcamentoRecusado.fxml","Centro de Reparações");
+        getOrcamentosPorConfirmar();
+    }
+
+    public void registarOrcamentoConfirmado(ActionEvent actionEvent) {
+        Modal.showModal("/view/orcamentos/registarOrcamentoConfirmado.fxml","Centro de Reparações");
+        getOrcamentosPorConfirmar();
     }
 
     @FXML
@@ -96,7 +102,7 @@ public class OrcamentosController implements Initializable {
                                 op.getCodTecnico(),
                                 op.getCodCliente(),
                                 op.getCodEquipamento(),
-                                op.getPrazo().toString(),
+                                String.valueOf(op.getPrecoTotal()),
                                 String.valueOf(op.getPrecoTotal())
                         )
                     );
@@ -133,7 +139,7 @@ public class OrcamentosController implements Initializable {
                                     op.getCodTecnico(),
                                     op.getCodCliente(),
                                     op.getCodEquipamento(),
-                                    op.getPrazo().toString(),
+                                    String.valueOf(op.getPrazo()),
                                     String.valueOf(op.getPrecoTotal())
                             )
                     );
@@ -170,7 +176,7 @@ public class OrcamentosController implements Initializable {
                                     op.getCodTecnico(),
                                     op.getCodCliente(),
                                     op.getCodEquipamento(),
-                                    op.getPrazo().toString(),
+                                    String.valueOf(op.getPrazo()),
                                     String.valueOf(op.getPrecoTotal())
                             )
                     );
@@ -207,7 +213,7 @@ public class OrcamentosController implements Initializable {
                                     op.getCodTecnico(),
                                     op.getCodCliente(),
                                     op.getCodEquipamento(),
-                                    op.getPrazo().toString(),
+                                    String.valueOf(op.getPrazo()),
                                     String.valueOf(op.getPrecoTotal())
                             )
                     );
@@ -244,7 +250,7 @@ public class OrcamentosController implements Initializable {
                                     op.getCodTecnico(),
                                     op.getCodCliente(),
                                     op.getCodEquipamento(),
-                                    op.getPrazo().toString(),
+                                    String.valueOf(op.getPrazo()),
                                     String.valueOf(op.getPrecoTotal())
                             )
                     );
@@ -329,7 +335,7 @@ public class OrcamentosController implements Initializable {
                 planoDeTrabalhoColumn
         );
 
-        getOrcamentosAndamento();
+        getOrcamentosPorConfirmar();
         table.setItems(orcamentos);
 
         codOrcamentoInput.setPromptText("Procure por um orçamento");
@@ -367,7 +373,7 @@ public class OrcamentosController implements Initializable {
                                             op.getCodTecnico(),
                                             op.getCodCliente(),
                                             op.getCodEquipamento(),
-                                            op.getPrazo().toString(),
+                                            String.valueOf(op.getPrazo()),
                                             String.valueOf(op.getPrecoTotal())
                                     )
                             );

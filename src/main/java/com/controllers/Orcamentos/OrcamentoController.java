@@ -3,6 +3,7 @@ package com.controllers.Orcamentos;
 import com.business.CentroReparacoesLNFacade;
 import com.business.Excecoes.ClienteInvalidoException;
 import com.business.Excecoes.FuncionarioInvalidoException;
+import com.business.Excecoes.OrcamentoInvalidoException;
 import com.business.Excecoes.PedidoOrcamentoInvalidoException;
 import com.business.ICentroReparacoesLN;
 import com.controllers.PedidosDeOrcamento.PedidosDeOrcamentoController;
@@ -72,9 +73,12 @@ public class OrcamentoController implements Initializable{
 
     @FXML
     private void finalizarAction(ActionEvent event) throws IOException {
-        System.out.println(oCController.nifInput.getText() + " - " +
-                oCController.codFuncionarioInput.getText() + " - " +
-                oCController.codPedidoDeOrcamentoInput.getText());
+        try {
+            model.enviarEmailConfirmacao(oCController.codOrcamento);
+        } catch (OrcamentoInvalidoException e) {
+            System.out.println("Orçamento inválido");
+            //e.printStackTrace();
+        }
     }
 
     @Override

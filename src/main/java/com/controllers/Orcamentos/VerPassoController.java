@@ -54,20 +54,18 @@ public class VerPassoController implements Initializable {
 
     public void inserirPassoAction(ActionEvent e){
         //System.out.println(custoEstimadoInput.getText() + "-" + tempoEstimadoInput.getText() + "-" + descricaoInput.getText());
-        System.out.println(custoEstimadoInput.getText() + "-" + tempoEstimadoInput.getText() + "-" + descricaoInput.getText() + "-" + nPassoInput.getText());
-        LocalDateTime time = LocalDateTime.of(0,1,1,0,0,0,0);
-        time.plusHours(Long.parseLong(tempoEstimadoInput.getText()));
+        //System.out.println(custoEstimadoInput.getText() + "-" + tempoEstimadoInput.getText() + "-" + descricaoInput.getText() + "-" + nPassoInput.getText());
         try {
             model.adicionarPasso(
                     descricaoInput.getText(),
-                    time,
+                    Double.parseDouble(tempoEstimadoInput.getText()),
                     Double.parseDouble(custoEstimadoInput.getText()),
                     codOrcamento,
                     passoFmt + "#" + nPassoInput.getText()
             );
             descricao.setText(model.getPasso(codOrcamento,passoFmt).getDescricao());
-            custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getCustoPecas()));
-            tempoEstimado.setText(model.getPasso(codOrcamento,passoFmt).getPrevisaoDuracao().toString());
+            custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getPrevisaoCustoPecas()));
+            tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getPrevisaoDuracao()));
         } catch (OrcamentoInvalidoException ex) {
             System.out.println("Orçamento inválido");
             // ex.printStackTrace();
@@ -99,7 +97,7 @@ public class VerPassoController implements Initializable {
                 passos.add(new PassoObs(
                         String.valueOf(p.getNoPasso()),
                         String.valueOf(p.getPrevisaoCustoPecas()),
-                        p.getPrevisaoDuracao().toString(),
+                        String.valueOf(p.getPrevisaoDuracao()),
                         p.getDescricao()
                 ));
             }
@@ -120,8 +118,8 @@ public class VerPassoController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             descricao.setText(model.getPasso(codOrcamento,passoFmt).getDescricao());
-            custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getCustoPecas()));
-            tempoEstimado.setText(model.getPasso(codOrcamento,passoFmt).getPrevisaoDuracao().toString());
+            custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getPrevisaoDuracao()));
+            tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getPrevisaoDuracao()));
         } catch (OrcamentoInvalidoException e) {
             e.printStackTrace();
         } catch (PassoInvalidoException e) {
@@ -146,8 +144,8 @@ public class VerPassoController implements Initializable {
                     showModalWithController("/view/orcamentos/verPasso.fxml", "Centro de Reparações", c);
                     try {
                         descricao.setText(model.getPasso(codOrcamento,passoFmt).getDescricao());
-                        custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getCustoPecas()));
-                        tempoEstimado.setText(model.getPasso(codOrcamento,passoFmt).getPrevisaoDuracao().toString());
+                        custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getPrevisaoCustoPecas()));
+                        tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento,passoFmt).getPrevisaoDuracao()));
                         getSubNiveis();
                     } catch (OrcamentoInvalidoException e) {
                         e.printStackTrace();

@@ -53,13 +53,11 @@ public class OrcamentoCController implements Initializable {
     String passoFmt = "";
 
     public void inserirPassoAction(ActionEvent e) {
-        System.out.println(custoEstimadoInput.getText() + "-" + tempoEstimadoInput.getText() + "-" + descricaoInput.getText() + "-" + nPassoInput.getText());
-        LocalDateTime time = LocalDateTime.of(0,1,1,0,0,0,0);
-        time.plusHours(Long.parseLong(tempoEstimadoInput.getText()));
+        //System.out.println(custoEstimadoInput.getText() + "-" + tempoEstimadoInput.getText() + "-" + descricaoInput.getText() + "-" + nPassoInput.getText());
         try {
             model.adicionarPasso(
                     descricaoInput.getText(),
-                    time,
+                    Double.parseDouble(tempoEstimadoInput.getText()),
                     Double.parseDouble(custoEstimadoInput.getText()),
                     codOrcamento,
                     nPassoInput.getText()
@@ -95,7 +93,7 @@ public class OrcamentoCController implements Initializable {
                 passos.add(new PassoObs(
                         String.valueOf(p.getNoPasso()),
                         String.valueOf(p.getPrevisaoCustoPecas()),
-                        p.getPrevisaoDuracao().toString(),
+                        String.valueOf(p.getPrevisaoDuracao()),
                         p.getDescricao()
                 ));
             }

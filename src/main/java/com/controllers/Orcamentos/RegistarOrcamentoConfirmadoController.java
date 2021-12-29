@@ -9,16 +9,16 @@ import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class ArquivarOrcamentoRecusadoController {
+public class RegistarOrcamentoConfirmadoController {
     @FXML
     TextField codOrcamentoInput;
     ICentroReparacoesLN model = CentroReparacoesLNFacade.getInstance();
 
     @FXML
-    void arquivarOrcamentoRecusado(ActionEvent event){
+    void registarOrcamentoConfirmado(ActionEvent event){
         if (codOrcamentoInput.getText() != "") {
             try {
-                model.arquivarOrcamentoRecusado(codOrcamentoInput.getText());
+                model.registarOrcamentoAndamento(codOrcamentoInput.getText());
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.close();
             } catch (OrcamentoInvalidoException ex) {
