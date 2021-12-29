@@ -293,7 +293,18 @@ public class OrcamentosController implements Initializable {
                             this.getTableRow().getItem().getCodOrcamento(),
                             ""
                     );
-                    showModalWithController("/view/orcamentos/gerirPlano.fxml","Centro de Reparações",c);
+
+                    try {
+                        Orcamento o = model.getOrcamento(this.getTableRow().getItem().getCodOrcamento());
+                        if (o instanceof OrcamentoProgramado){
+                            showModalWithController("/view/orcamentos/gerirPlano.fxml","Centro de Reparações",c);
+                        }else{
+                            OrcamentoFixoConcluidoController c2 = new OrcamentoFixoConcluidoController(this.getTableRow().getItem().getCodOrcamento());
+                            showModalWithController2("/view/orcamentos/orcamentoFixoConcluido","Centro de Reparações",c2);
+                        }
+                    } catch (OrcamentoInvalidoException e) {
+                        e.printStackTrace();
+                    }
                 });
             }
 
@@ -490,6 +501,22 @@ public class OrcamentosController implements Initializable {
     }
 
     private void showModalWithController(String fxmlName,String title, GerirPlanoController c){
+        try {
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader loader = new FXMLLoader(OrcamentosController.class.getResource(fxmlName));
+            loader.setController(c);
+            Scene scene = new Scene(loader.load());
+            scene.getStylesheets().add(String.valueOf(OrcamentosController.class.getResource("/css/style.css")));
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void showModalWithController2(String fxmlName,String title, OrcamentoFixoConcluidoController c){
         try {
             Stage stage = new Stage();
             stage.setTitle(title);
