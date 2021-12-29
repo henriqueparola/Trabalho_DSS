@@ -343,5 +343,15 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     public boolean orcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException {
         return orcamentosLN.orcamentoConcluido(codOrcamento);
     }
+
+    @Override
+    public void registarOrcamentoExpressoConcluido(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException {
+        registarOrcamentoConcluido(codOrcamento);
+        enviarSMSConcluido(codOrcamento);
+    }
+
+    public void enviarSMSConcluido(String codOrcamento) {
+        //System.out.println("Reparação feita!");
+    }
 }
 

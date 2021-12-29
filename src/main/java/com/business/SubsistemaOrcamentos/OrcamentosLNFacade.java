@@ -109,9 +109,6 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     }
 
 
-    public void registarOrcamentoExpressoConcluido(String codOrcamento) {
-        //TODO  registarOrcamentoFixoConcluido
-    }
     public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCusto, String codOrcamento, String passo) throws OrcamentoInvalidoException {
         Orcamento orcamento = this.porConfirmar.get(codOrcamento);
         if (orcamento instanceof OrcamentoProgramado) {

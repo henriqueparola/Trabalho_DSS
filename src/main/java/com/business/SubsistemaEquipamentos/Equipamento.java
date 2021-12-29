@@ -12,6 +12,12 @@ public class Equipamento {
         this.codEquipamento = getNextId();
     }
 
+    public Equipamento(Equipamento e) {
+        this.nomeEquipamento = e.getNomeEquipamento();
+        this.nifCliente = e.getNifCliente();
+        this.codEquipamento = e.getCodEquipamento();
+    }
+
     public String getCodEquipamento() {
         return codEquipamento;
     }
@@ -32,5 +38,8 @@ public class Equipamento {
         }
     }
 
+    public Equipamento clone() {
+        return new Equipamento(this);
+    }
 
 }
