@@ -38,12 +38,7 @@ public class EquipamentosController implements Initializable {
     private ObservableList<EquipamentoObs> equipamentos = FXCollections.observableArrayList();
     ICentroReparacoesLN model = CentroReparacoesLNFacade.getInstance();
     String stateSelected = "andamento";
-
-    @FXML
-    void arquivarEquipamentoRecusadoForm(ActionEvent actionEvent){
-        Modal.showModal("/view/equipamentos/arquivarEquipamentoRecusado.fxml","Centro de Reparações");
-    }
-
+    
     @FXML
     void porPagarAction(ActionEvent e){
         getEquipamentosPorPagar();

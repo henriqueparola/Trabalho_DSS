@@ -15,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -47,6 +48,8 @@ public class OrcamentoController implements Initializable{
 
     @FXML
     private void planoDeTrabalhoAction(ActionEvent event) throws IOException {
+        Alert a = new Alert(Alert.AlertType.NONE);
+        a.setAlertType(Alert.AlertType.ERROR);
         if (oCController.nifInput.getText() != "" &&
                 oCController.codFuncionarioInput.getText() != "" &&
                 oCController.codPedidoDeOrcamentoInput.getText() != "") {
@@ -59,13 +62,19 @@ public class OrcamentoController implements Initializable{
                 System.out.println("cod: " + oCController.codOrcamento);
                 mainPane.setCenter(planoDeTrabalhoNode);
             } catch (ClienteInvalidoException e) {
-                System.out.println("cliente inválido");
+                a.setContentText("Cliente inexistente");
+                a.show();
+                //System.out.println("cliente inválido");
                 //e.printStackTrace();
             } catch (FuncionarioInvalidoException e) {
-                System.out.println("Funcionário inválido");
+                a.setContentText("Técnico inexistente");
+                a.show();
+                //System.out.println("Funcionário inválido");
                 //e.printStackTrace();
             } catch (PedidoOrcamentoInvalidoException e) {
-                System.out.println("Pedido de orçamento inválido");
+                a.setContentText("Pedido de orçamento inexistente");
+                a.show();
+                //System.out.println("Pedido de orçamento inválido");
                 //e.printStackTrace();
             }
         }
