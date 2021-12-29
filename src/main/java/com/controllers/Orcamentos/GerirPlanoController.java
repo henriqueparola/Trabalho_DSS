@@ -76,8 +76,9 @@ public class GerirPlanoController implements Initializable {
                 }
 
                 descricao.setText(model.getPasso(codOrcamento, passoFmt).getDescricao());
-                custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getCustoPecas()));
+                custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoCustoPecas()));
                 tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoDuracao()));
+                //getSubNiveis();
             }else{
                 Orcamento o = model.getOrcamento(codOrcamento);
                 if (o instanceof OrcamentoProgramado){
@@ -121,6 +122,42 @@ public class GerirPlanoController implements Initializable {
         } catch (SemSubPassosException e) {
             System.out.println("sem subPassos");
             // e.printStackTrace();
+        }
+    }
+
+    void refreshData(){
+        try {
+            if (!passoFmt.equals("")) {
+                boolean estado = model.getPasso(codOrcamento, passoFmt).isEstadoConclusao();
+                if (estado == true) {
+                    estadoTrue.setText("concluído");
+                    estadoFalse.setText("");
+                } else {
+                    estadoFalse.setText("por fazer");
+                    estadoTrue.setText("");
+                }
+
+                descricao.setText(model.getPasso(codOrcamento, passoFmt).getDescricao());
+                custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoCustoPecas()));
+                tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoDuracao()));
+                getSubNiveis();
+            }else{
+                Orcamento o = model.getOrcamento(codOrcamento);
+                descricao.setText("Orçamento do cliente: " + o.getCodCliente());
+                if (o instanceof OrcamentoProgramado){
+                    OrcamentoProgramado op = (OrcamentoProgramado) o;
+                    custoEstimado.setText(String.valueOf((op.getPrecoTotal())));
+                    tempoEstimado.setText(String.valueOf((op.getPrazo())));
+                }else{
+                    OrcamentoFixo of = (OrcamentoFixo) o;
+                    custoEstimado.setText(String.valueOf((of.getPrecoFixo())));
+                    tempoEstimado.setText("urgente");
+                }
+            }
+        } catch (OrcamentoInvalidoException e) {
+            e.printStackTrace();
+        } catch (PassoInvalidoException e) {
+            e.printStackTrace();
         }
     }
 
@@ -178,7 +215,7 @@ public class GerirPlanoController implements Initializable {
                             newPasso
                     );
                     showModalWithController("/view/orcamentos/gerirPlano.fxml","Centro de Reparações",c);
-                    getSubNiveis();
+                    refreshData();
                 });
             }
 
@@ -326,7 +363,7 @@ public class GerirPlanoController implements Initializable {
             Scene scene = new Scene(loader.load());
             scene.getStylesheets().add(String.valueOf(GerirPlanoController.class.getResource("/css/style.css")));
             stage.setScene(scene);
-            stage.show();
+            stage.showAndWait();
         }catch (IOException e){
         }
     }

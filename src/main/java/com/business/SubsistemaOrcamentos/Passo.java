@@ -116,13 +116,20 @@ public class Passo {
     }
 
     public void assinalarPasso(double duracao, double custo, List<Integer> parsePassos) {
-        if (parsePassos.size() == 0) this.estadoConclusao = true;
-        else {
+        if (parsePassos.size() == 0) {
+            this.estadoConclusao = true;
+            this.duracao = duracao;
+            this.custoPecas = custo;
+        } else {
             int nextPasso = parsePassos.remove(0);
             Passo passo = this.passos.get(nextPasso);
             passo.assinalarPasso(duracao, custo, parsePassos);
+            this.custoPecas += custo;
+            this.duracao += duracao;
             boolean subPassos = verificarSubPassosConcluidos();
-            if (subPassos) this.estadoConclusao = true;
+            if (subPassos) {
+                this.estadoConclusao = true;
+            }
         }
     }
 
