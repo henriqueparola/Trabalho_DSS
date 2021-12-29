@@ -32,23 +32,29 @@
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="6.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Custo estimado">
+                        <Text fill="WHITE" layoutX="161.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Custo estimado">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <Text fill="WHITE" layoutX="6.0" layoutY="196.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tempo estimado">
+                        <Text fill="WHITE" layoutX="350.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tempo estimado">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="descricaoInput" layoutX="6.0" layoutY="85.0" prefHeight="24.0" prefWidth="210.0" />
-                        <TextField fx:id="custoEstimadoInput" layoutX="8.0" layoutY="148.0" prefHeight="24.0" prefWidth="207.0" />
-                        <TextField fx:id="tempoEstimadoInput" layoutX="7.0" layoutY="211.0" prefHeight="24.0" prefWidth="209.0" />
-                        <Button layoutX="8.0" layoutY="250.0" mnemonicParsing="false" onAction="#inserirPassoAction" prefHeight="32.0" prefWidth="207.0" text="Inserir" />
+                        <TextField fx:id="descricaoInput" layoutX="6.0" layoutY="85.0" prefHeight="24.0" prefWidth="140.0" />
+                        <TextField fx:id="custoEstimadoInput" layoutX="160.0" layoutY="85.0" prefHeight="24.0" prefWidth="178.0" />
+                        <TextField fx:id="tempoEstimadoInput" layoutX="350.0" layoutY="85.0" prefHeight="24.0" prefWidth="190.0" />
+                        <Button layoutX="9.0" layoutY="123.0" mnemonicParsing="false" onAction="#inserirPassoAction" prefHeight="39.0" prefWidth="743.0" text="Inserir" />
                         <Text fill="#9fc7f8b5" layoutX="231.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*Valores do custo e tempo estimado, por omissao, serao considerados a soma dos seus sub-passos." wrappingWidth="642.42724609375">
                            <font>
                               <Font size="10.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="nPassoInput" layoutX="552.0" layoutY="85.0" prefHeight="24.0" prefWidth="199.0" />
+                        <Text fill="WHITE" layoutX="554.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero do Passo">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
                            </font>
                         </Text>
                      </children>
