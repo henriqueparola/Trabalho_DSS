@@ -34,9 +34,6 @@
                             </BorderPane.margin>
                         </TextField>
                     </left>
-               <right>
-                  <Button onAction="#arquivarEquipamentoRecusadoForm" mnemonicParsing="false" prefHeight="24.0" prefWidth="257.0" text="Arquivar equipamento recusado" BorderPane.alignment="CENTER" />
-               </right>
                 </BorderPane>
                 <BorderPane prefHeight="61.0" prefWidth="550.0">
                     <left>
