@@ -38,7 +38,7 @@ public class EquipamentosController implements Initializable {
     private ObservableList<EquipamentoObs> equipamentos = FXCollections.observableArrayList();
     ICentroReparacoesLN model = CentroReparacoesLNFacade.getInstance();
     String stateSelected = "andamento";
-    
+
     @FXML
     void porPagarAction(ActionEvent e){
         getEquipamentosPorPagar();

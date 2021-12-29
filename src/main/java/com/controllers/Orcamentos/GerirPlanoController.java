@@ -1,6 +1,7 @@
 package com.controllers.Orcamentos;
 
 import com.business.CentroReparacoesLNFacade;
+import com.business.Excecoes.EquipamentoInvalidoException;
 import com.business.Excecoes.OrcamentoInvalidoException;
 import com.business.Excecoes.PassoInvalidoException;
 import com.business.Excecoes.SemSubPassosException;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -55,8 +57,33 @@ public class GerirPlanoController implements Initializable {
     }
 
     @FXML
+    void registarOrcamentoConcluido(ActionEvent event){
+        try {
+            if (model.orcamentoConcluido(codOrcamento)){
+                model.registarOrcamentoConcluido(codOrcamento);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.close();
+                model.enviarEmailConclusao(codOrcamento);
+                Alert a = new Alert(Alert.AlertType.NONE);
+                a.setAlertType(Alert.AlertType.INFORMATION);
+                a.setContentText("E-mail de conclusão enviado ao cliente!");
+                a.show();
+            }else{
+                Alert a = new Alert(Alert.AlertType.NONE);
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Plano de trabalho incompleto");
+                a.show();
+            }
+        } catch (OrcamentoInvalidoException ex) {
+            ex.printStackTrace();
+        } catch (EquipamentoInvalidoException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @FXML
     void assinalarPassoAction(ActionEvent e){
-        System.out.println(custoRealInput.getText() + "-" + tempoRealInput.getText());
+        //System.out.println(custoRealInput.getText() + "-" + tempoRealInput.getText());
         try {
             model.assinalarPasso(
                     Double.parseDouble(tempoRealInput.getText()),
@@ -64,40 +91,13 @@ public class GerirPlanoController implements Initializable {
                     passoFmt,
                     codOrcamento
             );
-
-            if (!passoFmt.equals("")) {
-                boolean estado = model.getPasso(codOrcamento, passoFmt).isEstadoConclusao();
-                if (estado == true) {
-                    estadoTrue.setText("concluído");
-                    estadoFalse.setText("");
-                } else {
-                    estadoFalse.setText("por fazer");
-                    estadoTrue.setText("");
-                }
-
-                descricao.setText(model.getPasso(codOrcamento, passoFmt).getDescricao());
-                custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoCustoPecas()));
-                tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoDuracao()));
-                //getSubNiveis();
-            }else{
-                Orcamento o = model.getOrcamento(codOrcamento);
-                if (o instanceof OrcamentoProgramado){
-                    OrcamentoProgramado op = (OrcamentoProgramado) o;
-                    custoEstimado.setText(String.valueOf((op.getPrecoTotal())));
-                    tempoEstimado.setText(String.valueOf((op.getPrazo())));
-                }else{
-                    OrcamentoFixo of = (OrcamentoFixo) o;
-                    custoEstimado.setText(String.valueOf((of.getPrecoFixo())));
-                    tempoEstimado.setText("urgente");
-                }
-            }
+            refreshData();
         } catch (OrcamentoInvalidoException ex) {
             System.out.println("Orçamento inválido");
             // ex.printStackTrace();
         } catch (PassoInvalidoException ex) {
             ex.printStackTrace();
         }
-        getSubNiveis();
     }
 
     private void getSubNiveis() {
@@ -142,6 +142,13 @@ public class GerirPlanoController implements Initializable {
                 tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoDuracao()));
                 getSubNiveis();
             }else{
+                if (model.orcamentoConcluido(codOrcamento)){
+                    estadoTrue.setText("concluído");
+                    estadoFalse.setText("");
+                }else{
+                    estadoFalse.setText("por fazer");
+                    estadoTrue.setText("");
+                }
                 Orcamento o = model.getOrcamento(codOrcamento);
                 descricao.setText("Orçamento do cliente: " + o.getCodCliente());
                 if (o instanceof OrcamentoProgramado){
@@ -153,6 +160,7 @@ public class GerirPlanoController implements Initializable {
                     custoEstimado.setText(String.valueOf((of.getPrecoFixo())));
                     tempoEstimado.setText("urgente");
                 }
+                getSubNiveis();
             }
         } catch (OrcamentoInvalidoException e) {
             e.printStackTrace();
@@ -163,38 +171,7 @@ public class GerirPlanoController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-            if (!passoFmt.equals("")) {
-                boolean estado = model.getPasso(codOrcamento, passoFmt).isEstadoConclusao();
-                if (estado == true) {
-                    estadoTrue.setText("concluído");
-                    estadoFalse.setText("");
-                } else {
-                    estadoFalse.setText("por fazer");
-                    estadoTrue.setText("");
-                }
-
-                descricao.setText(model.getPasso(codOrcamento, passoFmt).getDescricao());
-                custoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoCustoPecas()));
-                tempoEstimado.setText(String.valueOf(model.getPasso(codOrcamento, passoFmt).getPrevisaoDuracao()));
-            }else{
-                Orcamento o = model.getOrcamento(codOrcamento);
-                descricao.setText("Orçamento do cliente: " + o.getCodCliente());
-                if (o instanceof OrcamentoProgramado){
-                    OrcamentoProgramado op = (OrcamentoProgramado) o;
-                    custoEstimado.setText(String.valueOf((op.getPrecoTotal())));
-                    tempoEstimado.setText(String.valueOf((op.getPrazo())));
-                }else{
-                    OrcamentoFixo of = (OrcamentoFixo) o;
-                    custoEstimado.setText(String.valueOf((of.getPrecoFixo())));
-                    tempoEstimado.setText("urgente");
-                }
-            }
-        } catch (OrcamentoInvalidoException e) {
-            e.printStackTrace();
-        } catch (PassoInvalidoException e) {
-            e.printStackTrace();
-        }
+        refreshData();
 
         TableColumn<PassoObs, String> nPassoColumn = new TableColumn<>("Número");
         TableColumn<PassoObs, String> custoEstColumn = new TableColumn<>("Custo Estimado");

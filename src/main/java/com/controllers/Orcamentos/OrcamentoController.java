@@ -86,6 +86,10 @@ public class OrcamentoController implements Initializable{
             model.enviarEmailConfirmacao(oCController.codOrcamento);
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+            Alert a = new Alert(Alert.AlertType.NONE);
+            a.setAlertType(Alert.AlertType.INFORMATION);
+            a.setContentText("E-mail de proposta de orçamento enviado");
+            a.show();
         } catch (OrcamentoInvalidoException e) {
             System.out.println("Orçamento inválido");
             //e.printStackTrace();

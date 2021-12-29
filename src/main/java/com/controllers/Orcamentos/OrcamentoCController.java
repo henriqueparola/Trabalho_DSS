@@ -129,6 +129,7 @@ public class OrcamentoCController implements Initializable {
                     );
                    // System.out.println("Cheguei");
                     showModalWithController("/view/orcamentos/verPasso.fxml", "Centro de Reparações", c);
+                    getSubNiveis();
                    // System.out.println("Cheguei");
                 });
             }
