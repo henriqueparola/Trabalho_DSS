@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrcamentoProgramado extends Orcamento {
-    private LocalDateTime prazo;
+    private double prazo;
     private double precoTotal;
     private PlanoTrabalho plano;
 
@@ -25,10 +25,13 @@ public class OrcamentoProgramado extends Orcamento {
         super.setCodOrcamento(Orcamento.getNextId());
         this.precoTotal = 0;
         this.plano = new PlanoTrabalho();
+        super.setDataCriacao(LocalDateTime.now());
     }
 
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCusto, String passo) {
+    public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCusto, String passo) {
         this.plano.adicionarPasso(descricao, previsaoTempo, previsaoCusto, passo);
+        this.prazo += previsaoTempo;
+        this.precoTotal += previsaoCusto;
         // Possivelmente atualizarDados
     }
 
@@ -52,7 +55,7 @@ public class OrcamentoProgramado extends Orcamento {
         return new OrcamentoProgramado(this);
     }
 
-    public LocalDateTime getPrazo() {
+    public double getPrazo() {
         return prazo;
     }
 
