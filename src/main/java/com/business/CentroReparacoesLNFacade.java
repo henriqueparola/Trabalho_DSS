@@ -208,8 +208,9 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     }
 
     @Override
-    public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico)
-            throws ClienteInvalidoException, FuncionarioInvalidoException, ProdutoInvalidoException {
+    public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc)
+            throws ClienteInvalidoException, FuncionarioInvalidoException, ProdutoInvalidoException, TecnicosIndisponiveisException {
+        String codTecnico = getTecnicoDisponivel();
         if (!validarCliente(nif)) throw new ClienteInvalidoException();
         if (!validarFuncBalcao(codFunc) || !validarTecnico(codTecnico)) throw new FuncionarioInvalidoException();
         // nomeEquipamento tem que ser igual ao produto do serviço expresso
@@ -219,8 +220,11 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     }
 
     @Override
-    public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
-            throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException {
+    public String registarOrcamentoExpresso(String nif, String codPedidoOrcamento)
+            throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException, EquipamentoInvalidoException {
+        String codEquipamento = orcamentosLN.getEquipamentoPedido(codPedidoOrcamento);
+        Equipamento e = equipamentoLN.getEquipamento(codEquipamento);
+        String produto = e.getNomeEquipamento();
         return orcamentosLN.registarOrcamentoExpresso(nif, produto, codPedidoOrcamento);
     }
 
@@ -352,6 +356,13 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
 
     public void enviarSMSConcluido(String codOrcamento) {
         //System.out.println("Reparação feita!");
+    }
+
+    private String getTecnicoDisponivel() throws TecnicosIndisponiveisException {
+        List<String> tecnicos = funcionarioLN.getTecnicos();
+        if (tecnicos.size() == 0) throw new TecnicosIndisponiveisException();
+        String tecnico = tecnicos.get(0);
+        return tecnico;
     }
 }
 

@@ -90,7 +90,6 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     // public codOrcamento txo(...);
     public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
             throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException {
-
         if (!this.precoFixos.containsKey(produto)) throw new ProdutoInvalidoException();
 
         PedidoOrcamento po = getPedidoOrcamento(codPedidoOrcamento);

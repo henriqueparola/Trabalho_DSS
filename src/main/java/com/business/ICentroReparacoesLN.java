@@ -18,8 +18,8 @@ public interface ICentroReparacoesLN {
     //public codOrcamento registarOrcamentoProgramado(...);
     public String registarOrcamentoProgramado(String nif, String codTecnico, String codPedidoOrcamento)
         throws ClienteInvalidoException, FuncionarioInvalidoException, PedidoOrcamentoInvalidoException;
-    public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento)
-            throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
+    public String registarOrcamentoExpresso(String nif, String codPedidoOrcamento)
+            throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException, EquipamentoInvalidoException;
     public void adicionarPasso(String descricao, double previsaoTempo, double custoPecas, String codOrcamento, String passo)
         throws OrcamentoInvalidoException;
     public void assinalarPasso(double duracao, double custoReal, String passo, String codOrcamento)
@@ -37,8 +37,8 @@ public interface ICentroReparacoesLN {
     public void arquivarOrcamentoRecusado(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
     public void registarPagamento(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
     public void registarOrcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
-    public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc, String codTecnico)
-            throws ClienteInvalidoException, FuncionarioInvalidoException, ProdutoInvalidoException;
+    public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc)
+            throws ClienteInvalidoException, FuncionarioInvalidoException, ProdutoInvalidoException, TecnicosIndisponiveisException;
     public boolean validarCliente(String nif);
     public void registarCliente(String nif, String nome, String email, String telemovel);
     // returns List<codCliente>
