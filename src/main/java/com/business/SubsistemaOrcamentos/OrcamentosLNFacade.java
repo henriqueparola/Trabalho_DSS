@@ -206,7 +206,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         return this.andamento.keySet().stream().collect(Collectors.toList());
     }
     public List<String> getOrcamentosPorPagar() {
-        return this.pagos.keySet().stream().collect(Collectors.toList());
+        return this.porPagar.keySet().stream().collect(Collectors.toList());
     }
     public List<String> getOrcamentosPagos() {
         return this.pagos.keySet().stream().collect(Collectors.toList());
