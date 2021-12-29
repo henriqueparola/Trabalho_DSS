@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 public class Passo {
     private int noPasso;
     private boolean estadoConclusao;
-    private LocalDateTime previsaoDuracao;
-    private LocalDateTime duracao;
+    private double previsaoDuracao;
+    private double duracao;
     private double previsaoCustoPecas;
     private double custoPecas;
     private String descricao;
@@ -36,19 +36,19 @@ public class Passo {
         this.estadoConclusao = estadoConclusao;
     }
 
-    public LocalDateTime getPrevisaoDuracao() {
+    public double getPrevisaoDuracao() {
         return previsaoDuracao;
     }
 
-    public void setPrevisaoDuracao(LocalDateTime previsaoDuracao) {
+    public void setPrevisaoDuracao(double previsaoDuracao) {
         this.previsaoDuracao = previsaoDuracao;
     }
 
-    public LocalDateTime getDuracao() {
+    public double getDuracao() {
         return duracao;
     }
 
-    public void setDuracao(LocalDateTime duracao) {
+    public void setDuracao(double duracao) {
         this.duracao = duracao;
     }
 
@@ -90,14 +90,14 @@ public class Passo {
     public int getNoPasso() {
         return this.noPasso;
     }
-    public Passo(LocalDateTime previsaoDuracao, double previsaoCustoPecas, String descricao, int noPasso) {
+    public Passo(double previsaoDuracao, double previsaoCustoPecas, String descricao, int noPasso) {
         this.previsaoDuracao = previsaoDuracao;
         this.previsaoCustoPecas = previsaoCustoPecas;
         this.descricao = descricao;
         this.noPasso = noPasso;
     }
 
-    public void adicionarPasso(String descricao, LocalDateTime previsaoTempo, double previsaoCustoPecas,
+    public void adicionarPasso(String descricao, double previsaoTempo, double previsaoCustoPecas,
                                List<Integer> parsePassos) {
         atualizarDados(previsaoTempo, previsaoCustoPecas);
         int nextPasso = parsePassos.remove(0);
@@ -133,21 +133,13 @@ public class Passo {
         return true;
     }
 
-    private void atualizarDados(LocalDateTime previsaoTempo, double previsaoCustoPecas) {
-        this.previsaoDuracao.plusMonths(previsaoTempo.getMonthValue());
-        this.previsaoDuracao.plusDays(previsaoTempo.getDayOfMonth());
-        this.previsaoDuracao.plusHours(previsaoTempo.getHour());
-        this.previsaoDuracao.plusMinutes(previsaoTempo.getMinute());
-        this.previsaoDuracao.plusSeconds(previsaoTempo.getSecond());
+    private void atualizarDados(double previsaoTempo, double previsaoCustoPecas) {
+        this.previsaoDuracao += previsaoTempo;
         this.previsaoCustoPecas += previsaoCustoPecas;
     }
 
-    private void atualizarConfirmacoes(LocalDateTime duracao, double custo) {
-        this.duracao.plusMonths(duracao.getMonthValue());
-        this.duracao.plusDays(duracao.getDayOfMonth());
-        this.duracao.plusHours(duracao.getHour());
-        this.duracao.plusMinutes(duracao.getMinute());
-        this.duracao.plusSeconds(duracao.getSecond());
+    private void atualizarConfirmacoes(double duracao, double custo) {
+        this.duracao += duracao;
         this.custoPecas += custo;
     }
 
