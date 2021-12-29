@@ -46,7 +46,7 @@ public class OrcamentosController implements Initializable {
     }
 
     public void adicionarOrcamentoFixo(ActionEvent actionEvent) {
-        Modal.showModal("/view/orcamentos/adicionarOrcamentoProgramado.fxml","Centro de Reparações");
+        Modal.showModal("/view/orcamentos/adicionarOrcamentoExpresso.fxml","Centro de Reparações");
     }
 
     public void arquivarOrcamentoRecusado(ActionEvent actionEvent) {
