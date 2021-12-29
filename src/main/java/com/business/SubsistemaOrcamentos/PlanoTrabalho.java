@@ -5,9 +5,10 @@ import com.business.Excecoes.SemSubPassosException;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PlanoTrabalho {
-    private Map<Integer, Passo> passos;
+    private Map<Integer, Passo> passos = new HashMap<>();
 
     public PlanoTrabalho(PlanoTrabalho p) {
         this.passos = p.getPassos();
@@ -50,6 +51,7 @@ public class PlanoTrabalho {
     }
 
     private List<Integer> parsePasso(String passo) {
+        if (passo.equals("")) return new ArrayList<>();
         final String delim = "#";
         String []tokens = passo.split(delim);
         List<Integer> parsedPassos = new ArrayList<>();
@@ -84,9 +86,14 @@ public class PlanoTrabalho {
     public List<Passo> getSubPassos(String passoUnparsed) throws PassoInvalidoException, SemSubPassosException {
         List<Integer> parsePassos = parsePasso(passoUnparsed);
         if (!validarPasso(parsePassos)) throw new PassoInvalidoException();
-        int nextPasso = parsePassos.remove(0);
-        Passo passo = this.passos.get(nextPasso);
-        return passo.getSubPassos(parsePassos);
+        if (parsePassos.size() > 0) {
+            int nextPasso = parsePassos.remove(0);
+            Passo passo = this.passos.get(nextPasso);
+            return passo.getSubPassos(parsePassos);
+        }
+        List<Passo> firstLevel = passos.values().stream().map(Passo::clone).collect(Collectors.toList());
+        if (firstLevel.size() == 0) throw new SemSubPassosException();
+        return firstLevel;
     }
 
     public PlanoTrabalho clone() {
