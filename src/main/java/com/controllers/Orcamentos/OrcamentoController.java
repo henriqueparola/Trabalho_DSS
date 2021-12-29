@@ -1,5 +1,10 @@
 package com.controllers.Orcamentos;
 
+import com.business.CentroReparacoesLNFacade;
+import com.business.Excecoes.ClienteInvalidoException;
+import com.business.Excecoes.FuncionarioInvalidoException;
+import com.business.Excecoes.PedidoOrcamentoInvalidoException;
+import com.business.ICentroReparacoesLN;
 import com.controllers.PedidosDeOrcamento.PedidosDeOrcamentoController;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -28,6 +33,7 @@ public class OrcamentoController implements Initializable{
     Node planoDeTrabalhoNode;
     @FXML
     Button planoDeTrabalhoButton;
+    ICentroReparacoesLN model = CentroReparacoesLNFacade.getInstance();
 
     @FXML
     private void informacoesAction(ActionEvent event) throws IOException {
@@ -43,7 +49,24 @@ public class OrcamentoController implements Initializable{
         if (oCController.nifInput.getText() != "" &&
                 oCController.codFuncionarioInput.getText() != "" &&
                 oCController.codPedidoDeOrcamentoInput.getText() != "") {
-            mainPane.setCenter(planoDeTrabalhoNode);
+            try {
+                oCController.codOrcamento = model.registarOrcamentoProgramado(
+                        oCController.nifInput.getText(),
+                        oCController.codFuncionarioInput.getText(),
+                        oCController.codPedidoDeOrcamentoInput.getText()
+                );
+                System.out.println("cod: " + oCController.codOrcamento);
+                mainPane.setCenter(planoDeTrabalhoNode);
+            } catch (ClienteInvalidoException e) {
+                System.out.println("cliente inválido");
+                //e.printStackTrace();
+            } catch (FuncionarioInvalidoException e) {
+                System.out.println("Funcionário inválido");
+                //e.printStackTrace();
+            } catch (PedidoOrcamentoInvalidoException e) {
+                System.out.println("Pedido de orçamento inválido");
+                //e.printStackTrace();
+            }
         }
     }
 

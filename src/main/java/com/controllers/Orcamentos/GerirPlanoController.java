@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GerirPlanoController implements Initializable {
+    private final String codOrcamento;
     @FXML
     public Text descricao;
     public String descricaoS;
@@ -45,8 +46,8 @@ public class GerirPlanoController implements Initializable {
             );
 
 
-    public GerirPlanoController(SimpleStringProperty codCliente) {
-        this.codCliente = codCliente.get();
+    public GerirPlanoController(String codOrcamento) {
+        this.codOrcamento = codOrcamento;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class GerirPlanoController implements Initializable {
                 seeButton.setOnAction(event -> {
                     System.out.println(this.getTableRow().getItem().getPrevisaoTempo());
                     GerirPlanoController c = new GerirPlanoController(
-                            new SimpleStringProperty(this.getTableRow().getItem().getDescricao())
+                            this.getTableRow().getItem().getDescricao()
                     );
                     showModalWithController("/view/orcamentos/gerirPlano.fxml","Centro de Reparações",c);
                 });
