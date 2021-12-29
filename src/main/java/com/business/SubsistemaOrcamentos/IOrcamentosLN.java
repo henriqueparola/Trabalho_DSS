@@ -22,7 +22,7 @@ public interface IOrcamentosLN {
     public void registarOrcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException;
     // Não me lembro do contexto desta função
     // Mas ela não deveria retornar alguma coisa?
-    public void verificarCustoUltrapassado(String codOrcamento);
+    public boolean verificarCustoUltrapassado(String codOrcamento) throws OrcamentoInvalidoException;
     // public codOrcamento registarOrcamentoFixo(...);
     public String registarOrcamentoExpresso(String nif, String produto, String codPedidoOrcamento) throws PedidoOrcamentoInvalidoException, ProdutoInvalidoException;
     public void registarOrcamentoExpressoConcluido(String codOrcamento);
@@ -55,5 +55,6 @@ public interface IOrcamentosLN {
     public List<String> getOrcamentosPagos();
     public List<String> getOrcamentosRecusados();
     public boolean validaProduto(String produto);
-
+    public OrcamentoProgramado getOrcamentoProgramado(String codOrcamento) throws OrcamentoInvalidoException;
+    public boolean orcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException;
 }

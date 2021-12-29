@@ -53,6 +53,7 @@ public interface ICentroReparacoesLN {
     public void registarOrcamentoAndamento(String codOrcamento) throws OrcamentoInvalidoException;
     public void enviarEmailConfirmacao(String codOrcamento) throws OrcamentoInvalidoException;
     boolean isTecnicoDisponivel();
+    boolean orcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException;
 
 
 
