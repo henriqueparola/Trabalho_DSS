@@ -52,4 +52,11 @@ public class OrcamentoProgramado extends Orcamento {
         return new OrcamentoProgramado(this);
     }
 
+    public LocalDateTime getPrazo() {
+        return prazo;
+    }
+
+    public double getPrecoTotal() {
+        return precoTotal;
+    }
 }
