@@ -11,6 +11,7 @@ public class OrcamentoProgramado extends Orcamento {
     private double precoTotal;
     private PlanoTrabalho plano;
     private double precoRealTotal;
+    private double tempoRealTotal;
 
     public OrcamentoProgramado(OrcamentoProgramado o) {
         super.setCodTecnico(o.getCodTecnico());
@@ -21,6 +22,7 @@ public class OrcamentoProgramado extends Orcamento {
         this.prazo = o.getPrazo();
         this.precoTotal = o.getPrecoTotal();
         this.precoRealTotal = o.getPrecoRealTotal();
+        this.tempoRealTotal = o.getTempoRealTotal();
     }
     public OrcamentoProgramado(String codTecnico, String codCliente, String codEquipamento) {
         super.setCodTecnico(codTecnico);
@@ -43,6 +45,7 @@ public class OrcamentoProgramado extends Orcamento {
     public void assinalarPasso(double duracao, double custo, String passo) throws PassoInvalidoException {
         this.plano.assinalarPasso(duracao,custo,passo);
         this.precoRealTotal += custo;
+        this.tempoRealTotal += duracao;
     }
 
     public Passo getPasso(String passo) throws PassoInvalidoException {
@@ -71,6 +74,10 @@ public class OrcamentoProgramado extends Orcamento {
 
     public double getPrecoRealTotal() {
         return precoRealTotal;
+    }
+
+    public double getTempoRealTotal() {
+        return tempoRealTotal;
     }
 
     public boolean orcamentoConcluido() {
