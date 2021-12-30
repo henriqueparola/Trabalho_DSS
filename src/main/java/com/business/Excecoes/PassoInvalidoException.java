@@ -1,6 +1,8 @@
 package com.business.Excecoes;
 
-public class PassoInvalidoException extends Exception {
+import java.io.Serializable;
+
+public class PassoInvalidoException extends Exception implements Serializable {
     public PassoInvalidoException() {
         super();
     }

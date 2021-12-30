@@ -2,12 +2,13 @@ package com.business.SubsistemaClientes;
 
 import com.business.Excecoes.ClienteInvalidoException;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class ClienteLNFacade implements IClienteLN {
+public class ClienteLNFacade implements IClienteLN, Serializable {
 
     //Map<codCLiente, Cliente>
     private Map<String, Cliente> clientes = new HashMap<>();

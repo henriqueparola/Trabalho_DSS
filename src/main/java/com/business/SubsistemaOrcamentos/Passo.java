@@ -2,6 +2,7 @@ package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.SemSubPassosException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.TemporalField;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class Passo {
+public class Passo implements Serializable {
     private int noPasso;
     private boolean estadoConclusao;
     private double previsaoDuracao;

@@ -6,10 +6,11 @@ import com.business.Excecoes.PedidoOrcamentoInvalidoException;
 import com.business.Excecoes.SemSubPassosException;
 import com.business.Excecoes.ProdutoInvalidoException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface IOrcamentosLN {
+public interface IOrcamentosLN  {
     public List<String> getOrcamentosDoTecnico(String codTecnico);
     // public List<codOrcamento> getOrcamentos();
     public List<String> getOrcamentos();

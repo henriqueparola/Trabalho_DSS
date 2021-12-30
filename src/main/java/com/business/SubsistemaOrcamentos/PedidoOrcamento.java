@@ -12,6 +12,13 @@ public class PedidoOrcamento {
     private String codCliente;
     private static int nextId = 0;
 
+    public PedidoOrcamento(PedidoOrcamento po) {
+        this.codPedidoOrcamento = po.getCodPedidoOrcamento();
+        this.data = po.getData();
+        this.registoBalcao = po.getRegistoBalcao();
+        this.codEquipamento = po.getCodEquipamento();
+        this.codCliente = po.getCodCliente();
+    }
     public PedidoOrcamento(String codEquipamento, LocalDateTime data, String registoBalcao, String codCliente) {
         this.data = data;
         this.registoBalcao = registoBalcao;
@@ -48,13 +55,6 @@ public class PedidoOrcamento {
         return codEquipamento;
     }
 
-    public PedidoOrcamento(PedidoOrcamento p) {
-        this.codCliente = p.codCliente;
-        this.codPedidoOrcamento = p.codPedidoOrcamento;
-        this.codEquipamento = p.codEquipamento;
-        this.registoBalcao = p.registoBalcao;
-        this.data = p.data;
-    }
 
     public PedidoOrcamento clone() {
         return new PedidoOrcamento(this);

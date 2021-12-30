@@ -1,6 +1,8 @@
 package com.business.Excecoes;
 
-public class SemSubPassosException extends Exception {
+import java.io.Serializable;
+
+public class SemSubPassosException extends Exception implements Serializable {
     public SemSubPassosException() {
         super();
     }

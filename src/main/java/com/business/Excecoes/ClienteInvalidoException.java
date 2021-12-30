@@ -1,6 +1,8 @@
 package com.business.Excecoes;
 
-public class ClienteInvalidoException extends Exception {
+import java.io.Serializable;
+
+public class ClienteInvalidoException extends Exception implements Serializable {
     public ClienteInvalidoException() {
         super();
     }

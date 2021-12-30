@@ -1,6 +1,8 @@
 package com.business.SubsistemaEquipamentos;
 
-public class Equipamento {
+import java.io.Serializable;
+
+public class Equipamento implements Serializable {
     private String codEquipamento;
     private String nomeEquipamento;
     private String nifCliente;

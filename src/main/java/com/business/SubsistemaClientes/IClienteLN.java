@@ -2,9 +2,10 @@ package com.business.SubsistemaClientes;
 
 import com.business.Excecoes.ClienteInvalidoException;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface IClienteLN {
+public interface IClienteLN  {
     public boolean validarCliente(String nif);
     public void registarCliente(String nif, String nome, String email, String telemovel);
     // returns List<codCliente>

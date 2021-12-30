@@ -1,6 +1,8 @@
 package com.business.SubsistemaFuncionarios;
 
-public abstract class Funcionario {
+import java.io.Serializable;
+
+public abstract class Funcionario implements Serializable {
     private String codFunc;
     private String nome;
 

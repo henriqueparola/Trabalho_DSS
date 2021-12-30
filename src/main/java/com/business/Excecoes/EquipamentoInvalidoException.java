@@ -1,6 +1,8 @@
 package com.business.Excecoes;
 
-public class EquipamentoInvalidoException extends Exception {
+import java.io.Serializable;
+
+public class EquipamentoInvalidoException extends Exception implements Serializable {
     public EquipamentoInvalidoException() {
         super();
     }

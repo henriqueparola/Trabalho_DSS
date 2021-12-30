@@ -2,9 +2,10 @@ package com.business.SubsistemaEquipamentos;
 
 import com.business.Excecoes.EquipamentoInvalidoException;
 
+import java.io.Serializable;
 import java.util.List;
 
-public interface IEquipamentoLN {
+public interface IEquipamentoLN  {
     //List<codEquipamento> getEquipamentosDoCliente(String nif);
     public List<String> getEquipamentosDoCliente(String nif);
     public void arquivarEquipamentoAbandonado(String codEquipamento);

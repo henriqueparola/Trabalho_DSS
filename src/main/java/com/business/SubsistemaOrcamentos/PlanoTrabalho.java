@@ -3,11 +3,12 @@ package com.business.SubsistemaOrcamentos;
 import com.business.Excecoes.PassoInvalidoException;
 import com.business.Excecoes.SemSubPassosException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class PlanoTrabalho {
+public class PlanoTrabalho implements Serializable {
     private Map<Integer, Passo> passos = new HashMap<>();
 
     public PlanoTrabalho(PlanoTrabalho p) {

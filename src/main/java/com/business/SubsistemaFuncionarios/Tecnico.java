@@ -2,7 +2,9 @@ package com.business.SubsistemaFuncionarios;
 
 import com.business.SubsistemaFuncionarios.Funcionario;
 
-public class Tecnico extends Funcionario {
+import java.io.Serializable;
+
+public class Tecnico extends Funcionario implements Serializable {
     public Tecnico(String codFunc, String nome) {
         super.setCodFunc(codFunc);
         super.setNome(nome);

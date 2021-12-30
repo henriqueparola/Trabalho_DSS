@@ -3,13 +3,14 @@ package com.business.SubsistemaEquipamentos;
 import com.business.Excecoes.EquipamentoInvalidoException;
 import com.business.Excecoes.PedidoOrcamentoInvalidoException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class EquipamentoLNFacade implements IEquipamentoLN {
+public class EquipamentoLNFacade implements IEquipamentoLN, Serializable {
 
     //Map<codEquipamento, Equipamento>
     private Map<String, Equipamento> andamento = new HashMap<>();

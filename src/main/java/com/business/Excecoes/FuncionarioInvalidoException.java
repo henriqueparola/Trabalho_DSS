@@ -1,6 +1,8 @@
 package com.business.Excecoes;
 
-public class FuncionarioInvalidoException extends Exception {
+import java.io.Serializable;
+
+public class FuncionarioInvalidoException extends Exception implements Serializable {
     public FuncionarioInvalidoException() {
         super();
     }
