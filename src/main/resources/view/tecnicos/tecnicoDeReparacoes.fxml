@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="../../css/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.TecnicoDeReparacoes.TecnicoDeReparacoesController">
+    <children>
+        <VBox prefHeight="408.0" prefWidth="600.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="25.0">
+            <children>
+                <Pane prefHeight="79.0" prefWidth="600.0">
+                    <children>
+                        <Text fill="WHITE" layoutX="-2.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tecnicos">
+                            <font>
+                                <Font name="System Bold" size="35.0" />
+                            </font>
+                        </Text>
+                    </children>
+                </Pane>
+                <BorderPane prefHeight="60.0" prefWidth="550.0">
+               <center>
+                  <Pane prefHeight="39.0" prefWidth="428.0" BorderPane.alignment="CENTER">
+                     <children>
+                              <TextField fx:id="codTecnicoInput" layoutX="64.0" layoutY="13.0" text="" />
+                        <Text fill="WHITE" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tecnico:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </center>
+               <right>
+                  <Pane prefHeight="39.0" prefWidth="263.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Text fill="WHITE" layoutX="179.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="total" fill="WHITE" layoutX="226.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+                     </children>
+                  </Pane>
+               </right>
+                </BorderPane>
+                <BorderPane prefHeight="61.0" prefWidth="550.0">
+               <left>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Reparaçoes realizadas (concluidas)" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold Italic" size="13.0" />
+                     </font>
+                  </Text>
+               </left>
+               <right>
+                  <Pane prefHeight="40.0" prefWidth="276.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Text fill="WHITE" layoutX="134.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Duraçao media:" />
+                        <Text fx:id="duracaoMedia" fill="WHITE" layoutX="243.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
+                     </children>
+                  </Pane>
+               </right>
+                </BorderPane>
+                <TableView fx:id="table" prefHeight="233.0" prefWidth="550.0">
+                    <columns>
+                    </columns>
+                </TableView>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
