@@ -1,6 +1,8 @@
 package com.business.SubsistemaOrcamentos;
 
-public class OrcamentoFixo extends Orcamento {
+import java.io.Serializable;
+
+public class OrcamentoFixo extends Orcamento implements Serializable {
     private double precoFixo;
     private String produto;
 

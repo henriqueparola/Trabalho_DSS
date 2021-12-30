@@ -1,6 +1,8 @@
 package com.business.Excecoes;
 
-public class PedidoOrcamentoInvalidoException extends Exception {
+import java.io.Serializable;
+
+public class PedidoOrcamentoInvalidoException extends Exception implements Serializable {
     public PedidoOrcamentoInvalidoException() {
         super();
     }

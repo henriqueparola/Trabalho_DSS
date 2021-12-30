@@ -7,6 +7,8 @@ import com.business.SubsistemaOrcamentos.Orcamento;
 import com.business.SubsistemaOrcamentos.Passo;
 import com.business.SubsistemaOrcamentos.PedidoOrcamento;
 
+import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -56,8 +58,5 @@ public interface ICentroReparacoesLN {
     boolean isTecnicoDisponivel();
     boolean orcamentoConcluido(String codOrcamento) throws OrcamentoInvalidoException;
     public void registarOrcamentoExpressoConcluido(String codOrcamento) throws OrcamentoInvalidoException, EquipamentoInvalidoException;
-
-
-
-
+    public void saveState() throws IOException;
 }

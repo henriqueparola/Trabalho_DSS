@@ -3,10 +3,11 @@ package com.business.SubsistemaOrcamentos;
 import com.business.Excecoes.PassoInvalidoException;
 import com.business.Excecoes.SemSubPassosException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class OrcamentoProgramado extends Orcamento {
+public class OrcamentoProgramado extends Orcamento implements Serializable {
     private double prazo;
     private double precoTotal;
     private PlanoTrabalho plano;

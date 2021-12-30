@@ -1,6 +1,8 @@
 package com.business.SubsistemaFuncionarios;
 
-public class FuncBalcao extends Funcionario {
+import java.io.Serializable;
+
+public class FuncBalcao extends Funcionario implements Serializable {
     public FuncBalcao(String codFunc, String nome) {
         super.setCodFunc(codFunc);
         super.setNome(nome);

@@ -2,6 +2,7 @@ package com.business.SubsistemaFuncionarios;
 
 import com.business.Excecoes.FuncionarioInvalidoException;
 
+import java.io.Serializable;
 import java.util.List;
 
 public interface IFuncionarioLN {

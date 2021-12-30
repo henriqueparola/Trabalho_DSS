@@ -1,6 +1,8 @@
 package com.business.Excecoes;
 
-public class TecnicosIndisponiveisException extends Exception {
+import java.io.Serializable;
+
+public class TecnicosIndisponiveisException extends Exception implements Serializable {
     public TecnicosIndisponiveisException() {
         super();
     }

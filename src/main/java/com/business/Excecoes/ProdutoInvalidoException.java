@@ -1,6 +1,8 @@
 package com.business.Excecoes;
 
-public class ProdutoInvalidoException extends Exception {
+import java.io.Serializable;
+
+public class ProdutoInvalidoException extends Exception implements Serializable {
     public ProdutoInvalidoException() {
     }
 

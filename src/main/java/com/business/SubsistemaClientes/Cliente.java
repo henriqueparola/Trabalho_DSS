@@ -1,6 +1,8 @@
 package com.business.SubsistemaClientes;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
     private String nif;
     private String nome;
     private String email;

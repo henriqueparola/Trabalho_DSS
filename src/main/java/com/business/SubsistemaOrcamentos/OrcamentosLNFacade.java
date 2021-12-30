@@ -2,13 +2,14 @@ package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class OrcamentosLNFacade implements IOrcamentosLN {
+public class OrcamentosLNFacade implements IOrcamentosLN, Serializable {
 
     //Map<codOrcamento, Orcamento>
     private Map<String, Orcamento> porConfirmar = new HashMap<>();

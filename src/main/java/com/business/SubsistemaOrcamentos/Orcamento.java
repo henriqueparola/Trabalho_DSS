@@ -1,8 +1,9 @@
 package com.business.SubsistemaOrcamentos;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public abstract class Orcamento {
+public abstract class Orcamento implements Serializable {
     private String codTecnico;
     private String codCliente;
     private String codEquipamento;

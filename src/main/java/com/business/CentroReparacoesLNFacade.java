@@ -10,7 +10,12 @@ import com.business.SubsistemaEquipamentos.IEquipamentoLN;
 import com.business.SubsistemaFuncionarios.FuncionarioLNFacade;
 import com.business.SubsistemaFuncionarios.IFuncionarioLN;
 import com.business.SubsistemaOrcamentos.*;
+import com.persistence.ISGCREEDL;
+import com.persistence.SGCREEDLFacade;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -21,11 +26,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Properties;
 
-public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
+public class CentroReparacoesLNFacade implements ICentroReparacoesLN, Serializable {
     IClienteLN clienteLN = new ClienteLNFacade();
     IEquipamentoLN equipamentoLN = new EquipamentoLNFacade();
     IFuncionarioLN funcionarioLN = new FuncionarioLNFacade();
     IOrcamentosLN orcamentosLN = new OrcamentosLNFacade();
+
+    private static ISGCREEDL persistencia = new SGCREEDLFacade();
 
     //
     public CentroReparacoesLNFacade() {
@@ -182,8 +189,16 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
 
     private static CentroReparacoesLNFacade single_instance = null;
     public static CentroReparacoesLNFacade getInstance() {
-        if (single_instance == null)
-            single_instance = new CentroReparacoesLNFacade();
+        if (single_instance == null) {
+            try {
+                single_instance = CentroReparacoesLNFacade.loadState();
+            } catch (IOException e) {
+                System.out.println("IOEXCEPTION");
+                single_instance = new CentroReparacoesLNFacade();
+            } catch (ClassNotFoundException e) {
+                System.out.println("ClassNOtFOUND");
+            }
+        }
         return single_instance;
     }
 
@@ -402,6 +417,14 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
         if (tecnicos.size() == 0) throw new TecnicosIndisponiveisException();
         String tecnico = tecnicos.get(0);
         return tecnico;
+    }
+
+    public static CentroReparacoesLNFacade loadState() throws IOException, ClassNotFoundException {
+       return ISGCREEDL.loadState();
+    }
+
+    public void saveState() throws IOException {
+        persistencia.saveState(this);
     }
 }
 

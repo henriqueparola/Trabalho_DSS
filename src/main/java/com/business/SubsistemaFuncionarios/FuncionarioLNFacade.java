@@ -2,12 +2,13 @@ package com.business.SubsistemaFuncionarios;
 
 import com.business.Excecoes.FuncionarioInvalidoException;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class FuncionarioLNFacade implements IFuncionarioLN {
+public class FuncionarioLNFacade implements IFuncionarioLN, Serializable {
 
     //Map<codFuncionario, Funcionario>
     private Map<String, Funcionario> funcionarios = new HashMap<>();
