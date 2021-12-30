@@ -15,4 +15,6 @@ module com.example.trabalho_dss {
     opens com.controllers.Equipamentos to javafx.fxml;
     exports com.controllers.Orcamentos;
     opens com.controllers.Orcamentos to javafx.fxml;
+    exports com.controllers.TecnicoDeReparacoes;
+    opens com.controllers.TecnicoDeReparacoes to javafx.fxml;
 }
