@@ -19,7 +19,6 @@ public class App extends Application {
         stage.setTitle("Centro de Reparações");
         stage.setScene(scene);
         stage.setOnCloseRequest(event -> {
-            System.out.println("Só depois");
             try {
                 model.saveState();
             } catch (IOException e) {

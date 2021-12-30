@@ -1,8 +1,9 @@
 package com.business.SubsistemaOrcamentos;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class PedidoOrcamentoFixo extends PedidoOrcamento {
+public class PedidoOrcamentoFixo extends PedidoOrcamento implements Serializable {
     private String responsavel;
 
     public String getResponsavel() {

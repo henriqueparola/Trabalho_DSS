@@ -17,9 +17,12 @@ public class ClienteLNFacade implements IClienteLN, Serializable {
         Cliente c = clientes.get(nif);
         return (c != null);
     }
-    public void registarCliente(String nif, String nome, String email, String telemovel) {
+    public void registarCliente(String nif, String nome, String email, String telemovel) throws ClienteInvalidoException{
         Cliente c = new Cliente(nif, nome, email, telemovel);
-        clientes.put(nif, c);
+        if (validarCliente(nif)) throw new ClienteInvalidoException();
+        else {
+            clientes.put(nif, c);
+        }
     }
 
     public List<String> getClientes() {

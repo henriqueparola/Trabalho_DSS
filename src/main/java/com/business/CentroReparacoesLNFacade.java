@@ -156,7 +156,7 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN, Serializab
         return orcamentosLN.validaProduto(produto);
     }
 
-    public void registarCliente(String nif, String nome, String email, String telemovel) {
+    public void registarCliente(String nif, String nome, String email, String telemovel) throws ClienteInvalidoException{
         clienteLN.registarCliente(nif, nome, email, telemovel);
     }
     // returns List<codCliente>

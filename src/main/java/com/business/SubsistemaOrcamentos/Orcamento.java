@@ -10,7 +10,7 @@ public abstract class Orcamento implements Serializable {
     private String codOrcamento;
     private LocalDateTime dataCriacao;
 
-    private static int nextId = 0;
+    private static int nextId;
 
     public void setCodTecnico(String codTecnico) {
         this.codTecnico = codTecnico;

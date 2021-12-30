@@ -1,5 +1,8 @@
 package com.controllers;
 
+import com.business.CentroReparacoesLNFacade;
+import com.business.ICentroReparacoesLN;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +16,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @FXML
     private BorderPane mainPane;
+    ICentroReparacoesLN model = CentroReparacoesLNFacade.getInstance();
 
     @FXML
     private void clientesAction(ActionEvent event) throws IOException {
@@ -42,6 +46,17 @@ public class MainController implements Initializable {
     private void tecnicoDeReparacoesAction(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(MainController.class.getResource("/view/tecnicos/tecnicoDeReparacoes.fxml"));
         mainPane.setCenter(fxmlLoader.load());
+    }
+
+    @FXML
+    private void sair(ActionEvent event) throws IOException {
+        try {
+            model.saveState();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("FAILED TO SAVE");
+        }
+        Platform.exit();
     }
 
     @Override

@@ -2,15 +2,16 @@ package com.business.SubsistemaOrcamentos;
 
 import com.business.Excecoes.PedidoOrcamentoInvalidoException;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-public class PedidoOrcamento {
+public class PedidoOrcamento implements Serializable {
     private String codPedidoOrcamento;
     private LocalDateTime data;
     private String registoBalcao;
     private String codEquipamento;
     private String codCliente;
-    private static int nextId = 0;
+    private static int nextId;
 
     public PedidoOrcamento(PedidoOrcamento po) {
         this.codPedidoOrcamento = po.getCodPedidoOrcamento();

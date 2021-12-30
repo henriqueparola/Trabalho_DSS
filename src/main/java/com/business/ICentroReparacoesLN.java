@@ -42,7 +42,7 @@ public interface ICentroReparacoesLN {
     public void registarPedidoOrcamentoExpresso(String nif, String nomeEquipamento, String codFunc)
             throws ClienteInvalidoException, FuncionarioInvalidoException, ProdutoInvalidoException, TecnicosIndisponiveisException;
     public boolean validarCliente(String nif);
-    public void registarCliente(String nif, String nome, String email, String telemovel);
+    public void registarCliente(String nif, String nome, String email, String telemovel) throws ClienteInvalidoException;
     // returns List<codCliente>
     public List<String> getClientes();
     public Cliente getCliente(String codCliente) throws ClienteInvalidoException;

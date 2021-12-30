@@ -6,7 +6,7 @@ public class Equipamento implements Serializable {
     private String codEquipamento;
     private String nomeEquipamento;
     private String nifCliente;
-    private static int nextId = 0;
+    private static int nextId;
 
     public Equipamento(String nomeEquipamento, String nifCliente) {
         this.nomeEquipamento = nomeEquipamento;
