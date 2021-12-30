@@ -1,6 +1,7 @@
 package com.controllers.Orcamentos;
 
 import com.business.CentroReparacoesLNFacade;
+import com.business.Excecoes.EquipamentoInvalidoException;
 import com.business.Excecoes.OrcamentoInvalidoException;
 import com.business.ICentroReparacoesLN;
 import javafx.event.ActionEvent;

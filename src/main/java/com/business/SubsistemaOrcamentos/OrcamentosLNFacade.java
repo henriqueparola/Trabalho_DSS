@@ -21,7 +21,13 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
     private Map<String, PedidoOrcamento> pedidos = new HashMap<>();
 
     //Map<produto, precoFixo>
-    private Map<String, Double> precoFixos;
+    private Map<String, Double> precoFixos = new HashMap<>(){
+        {
+            put("ecra", 45.0);
+            put("virus", 25.0);
+            put("pelicula",13.0);
+        }
+    };
     int nextId = 0;
 
 
@@ -154,7 +160,7 @@ public class OrcamentosLNFacade implements IOrcamentosLN {
         return p.clone();
     }
     public void registarPedidoOrcamentoExpresso(String nif, String codEquipamento, String codFunc, String codTecnico) {
-        PedidoOrcamento pedido = new PedidoOrcamentoFixo(codEquipamento, LocalDateTime.now(), codFunc, nif, codTecnico);
+        PedidoOrcamentoFixo pedido = new PedidoOrcamentoFixo(codEquipamento, LocalDateTime.now(), codFunc, nif, codTecnico);
         this.pedidos.put(pedido.getCodPedidoOrcamento(), pedido);
     }
 

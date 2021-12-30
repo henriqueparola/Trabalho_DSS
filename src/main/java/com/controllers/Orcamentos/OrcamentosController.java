@@ -300,7 +300,7 @@ public class OrcamentosController implements Initializable {
                             showModalWithController("/view/orcamentos/gerirPlano.fxml","Centro de Reparações",c);
                         }else{
                             OrcamentoFixoConcluidoController c2 = new OrcamentoFixoConcluidoController(this.getTableRow().getItem().getCodOrcamento());
-                            showModalWithController2("/view/orcamentos/orcamentoFixoConcluido","Centro de Reparações",c2);
+                            showModalWithController2("/view/orcamentos/orcamentoFixoConcluido.fxml","Centro de Reparações",c2);
                         }
                     } catch (OrcamentoInvalidoException e) {
                         e.printStackTrace();

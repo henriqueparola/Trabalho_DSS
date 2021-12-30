@@ -13,4 +13,13 @@ public class PedidoOrcamentoFixo extends PedidoOrcamento {
         super(codEquipamento, data, registoBalcao, codCliente);
         this.responsavel = responsavel;
     }
+
+    public PedidoOrcamentoFixo(PedidoOrcamentoFixo pedido) {
+        super(pedido.getCodEquipamento(), pedido.getData(), pedido.getRegistoBalcao(), pedido.getCodCliente());
+        this.responsavel = pedido.responsavel;
+    }
+
+    public PedidoOrcamentoFixo clone(){
+        return new PedidoOrcamentoFixo(this);
+    }
 }

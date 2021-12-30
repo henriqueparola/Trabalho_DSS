@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane prefHeight="203.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.orcamentos.OrcamentoFixoConcluido">
+<AnchorPane prefHeight="203.0" prefWidth="570.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text fill="WHITE" layoutX="36.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Orçamento Fixo">
          <font>
@@ -19,6 +19,6 @@
          </font>
       </Text>
       <Text fx:id="codOrcamentoText" fill="WHITE" layoutX="98.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="" />
-      <Button onAction="registarOrcamentoFixoConcluido" layoutX="36.0" layoutY="130.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="503.0" text="Registar Conclusao" />
+      <Button onAction="#registarOrcamentoFixoConcluido" layoutX="36.0" layoutY="130.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="503.0" text="Registar Conclusao" />
    </children>
 </AnchorPane>
