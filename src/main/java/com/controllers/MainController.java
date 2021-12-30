@@ -38,6 +38,12 @@ public class MainController implements Initializable {
         mainPane.setCenter(fxmlLoader.load());
     }
 
+    @FXML
+    private void tecnicoDeReparacoesAction(ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(MainController.class.getResource("/view/tecnicos/tecnicoDeReparacoes.fxml"));
+        mainPane.setCenter(fxmlLoader.load());
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
