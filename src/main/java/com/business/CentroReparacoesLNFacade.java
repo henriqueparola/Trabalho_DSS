@@ -234,7 +234,25 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
 
     @Override
     public void enviarEmailConfirmacao(String codOrcamento) throws OrcamentoInvalidoException {
+        String text = "";
         Orcamento o = orcamentosLN.getOrcamento(codOrcamento);
+        String nomeCliente = "";
+        try {
+            nomeCliente = clienteLN.getCliente(o.getCodCliente()).getNome();
+        } catch (ClienteInvalidoException e) {
+            e.printStackTrace();
+        }
+        text += "Olá " + nomeCliente + "! \nO grupo 11 lhe envia este e-mail com a proposta de orçamento para o seu pedido.\n";
+        text += "\nINFORMAÇÕES: \n\n";
+        if (o instanceof OrcamentoProgramado){
+            OrcamentoProgramado op = (OrcamentoProgramado) o;
+            text += "Código do Orçamento: " + op.getCodOrcamento() + "\n";
+            text += "Preço: "  + op.getPrecoTotal() + " euros\n";
+            text += "Prazo: "  + op.getPrazo() + " horas";
+        }
+
+        text += "\n\nO Código do Orçamento deve ser utilizado no momento do registo do pagamento.\n\n";
+        text += "O grupo 11 aguarda pela sua resposta!";
         Cliente c = null;
         try {
             c = clienteLN.getCliente(o.getCodCliente());
@@ -257,7 +275,7 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
                 message.setFrom(new InternetAddress(from));
                 message.addRecipient(Message.RecipientType.TO,new InternetAddress(c.getEmail()));
                 message.setSubject("Proposta de Orçamento - grupo 11");
-                message.setText("Código Orçamento: " + o.getCodOrcamento());
+                message.setText(text);
                 Transport.send(message);
 
             } catch (MessagingException e) {
@@ -270,7 +288,16 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
 
     @Override
     public void enviarEmailConclusao(String codOrcamento) throws OrcamentoInvalidoException {
+        String text = "";
         Orcamento o = orcamentosLN.getOrcamento(codOrcamento);
+        String nomeCliente = "";
+        try {
+            nomeCliente = clienteLN.getCliente(o.getCodCliente()).getNome();
+        } catch (ClienteInvalidoException e) {
+            e.printStackTrace();
+        }
+        text += "Olá " + nomeCliente + "! \nO grupo 11 lhe envia este e-mail para lhe informar que a reparação do orçamento " + o.getCodOrcamento() + " foi concluída.\n";
+        text += "Já pode vir levantar o equipamento e realizar o seu pagamento.";
         Cliente c = null;
         try {
             c = clienteLN.getCliente(o.getCodCliente());
@@ -292,8 +319,8 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
                 MimeMessage message = new MimeMessage(session);
                 message.setFrom(new InternetAddress(from));
                 message.addRecipient(Message.RecipientType.TO,new InternetAddress(c.getEmail()));
-                message.setSubject("Proposta de Orçamento - grupo 11");
-                message.setText("Código Orçamento: " + o.getCodOrcamento());
+                message.setSubject("Orçamento concluído - grupo 11");
+                message.setText(text);
                 Transport.send(message);
 
             } catch (MessagingException e) {
@@ -305,7 +332,22 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
     }
 
     public void enviarEmailCustoUltrapassado(String codOrcamento) throws OrcamentoInvalidoException {
-        OrcamentoProgramado o = orcamentosLN.getOrcamentoProgramado(codOrcamento);
+        String text = "";
+        Orcamento o = orcamentosLN.getOrcamento(codOrcamento);
+        String nomeCliente = "";
+        try {
+            nomeCliente = clienteLN.getCliente(o.getCodCliente()).getNome();
+        } catch (ClienteInvalidoException e) {
+            e.printStackTrace();
+        }
+
+        if (o instanceof OrcamentoProgramado) {
+            OrcamentoProgramado op = (OrcamentoProgramado) o;
+            text += "Olá " + nomeCliente + "! \nO grupo 11 lhe envia este e-mail para lhe informar que a reparação do orçamento" + o.getCodOrcamento() + "excedeu 120% do valor estimado.\n";
+            text += "\nO preco confirmado foi de " + op.getPrecoTotal() +
+                    " euros, no entanto, o preço da reparação atingiu o valor de " + op.getPrecoRealTotal() +
+                    " euros. Se pretender recusar responda a este email.";
+        }
         Cliente c;
         try {
             c = clienteLN.getCliente(o.getCodCliente());
@@ -328,10 +370,7 @@ public class CentroReparacoesLNFacade implements ICentroReparacoesLN {
                 message.setFrom(new InternetAddress(from));
                 message.addRecipient(Message.RecipientType.TO,new InternetAddress(c.getEmail()));
                 message.setSubject("Custo Ultrapassado 120% - grupo 11");
-                message.setText("Código Orçamento: " + o.getCodOrcamento() +
-                        "\n O preco confirmado foi de : " + o.getPrecoTotal() +
-                        "\n No entanto, o preco atingiu o valor : " +  o.getPrecoRealTotal() +
-                        "\n Se pretender recusar responda a este email.");
+                message.setText(text);
 
                 Transport.send(message);
 
